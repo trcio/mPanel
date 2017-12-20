@@ -39,11 +39,11 @@
             this.hardwareBox = new System.Windows.Forms.GroupBox();
             this.actionBox = new System.Windows.Forms.GroupBox();
             this.rainbowButton = new System.Windows.Forms.Button();
-            this.colorComboBox = new Control_Panel.ColorComboBox();
             this.rainbowUpDown = new System.Windows.Forms.NumericUpDown();
             this.rainbowTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
             this.panelPreview = new Control_Panel.Matrix.PanelPreview();
+            this.colorComboBox = new Control_Panel.ColorComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
             this.hardwareBox.SuspendLayout();
             this.actionBox.SuspendLayout();
@@ -148,9 +148,58 @@
             this.rainbowButton.Name = "rainbowButton";
             this.rainbowButton.Size = new System.Drawing.Size(150, 23);
             this.rainbowButton.TabIndex = 13;
-            this.rainbowButton.Text = "Rainbow Fade";
+            this.rainbowButton.Text = "Rainbow Cycle - On";
             this.rainbowButton.UseVisualStyleBackColor = true;
             this.rainbowButton.Click += new System.EventHandler(this.rainbowButton_Click);
+            // 
+            // rainbowUpDown
+            // 
+            this.rainbowUpDown.Location = new System.Drawing.Point(300, 102);
+            this.rainbowUpDown.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.rainbowUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.rainbowUpDown.Name = "rainbowUpDown";
+            this.rainbowUpDown.Size = new System.Drawing.Size(53, 22);
+            this.rainbowUpDown.TabIndex = 12;
+            this.rainbowUpDown.Value = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.rainbowUpDown.ValueChanged += new System.EventHandler(this.rainbowUpDown_ValueChanged);
+            // 
+            // rainbowTimer
+            // 
+            this.rainbowTimer.Interval = 40;
+            this.rainbowTimer.Tick += new System.EventHandler(this.rainbowTimer_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(22, 127);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 11;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panelPreview
+            // 
+            this.panelPreview.GapSize = 1;
+            this.panelPreview.Location = new System.Drawing.Point(23, 156);
+            this.panelPreview.Name = "panelPreview";
+            this.panelPreview.PanelHeight = 15;
+            this.panelPreview.PanelWidth = 15;
+            this.panelPreview.PixelSize = 10;
+            this.panelPreview.Size = new System.Drawing.Size(164, 164);
+            this.panelPreview.TabIndex = 12;
             // 
             // colorComboBox
             // 
@@ -307,64 +356,16 @@
             this.colorComboBox.Size = new System.Drawing.Size(128, 23);
             this.colorComboBox.TabIndex = 5;
             // 
-            // rainbowUpDown
-            // 
-            this.rainbowUpDown.Location = new System.Drawing.Point(300, 102);
-            this.rainbowUpDown.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.rainbowUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.rainbowUpDown.Name = "rainbowUpDown";
-            this.rainbowUpDown.Size = new System.Drawing.Size(53, 22);
-            this.rainbowUpDown.TabIndex = 12;
-            this.rainbowUpDown.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            this.rainbowUpDown.ValueChanged += new System.EventHandler(this.rainbowUpDown_ValueChanged);
-            // 
-            // rainbowTimer
-            // 
-            this.rainbowTimer.Interval = 40;
-            this.rainbowTimer.Tick += new System.EventHandler(this.rainbowTimer_Tick);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(22, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // panelPreview
-            // 
-            this.panelPreview.GapSize = 1;
-            this.panelPreview.Location = new System.Drawing.Point(23, 156);
-            this.panelPreview.Name = "panelPreview";
-            this.panelPreview.PanelHeight = 15;
-            this.panelPreview.PanelWidth = 15;
-            this.panelPreview.PixelSize = 5;
-            this.panelPreview.Size = new System.Drawing.Size(89, 89);
-            this.panelPreview.TabIndex = 12;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(514, 276);
+            this.ClientSize = new System.Drawing.Size(514, 333);
             this.Controls.Add(this.panelPreview);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.actionBox);
             this.Controls.Add(this.hardwareBox);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;

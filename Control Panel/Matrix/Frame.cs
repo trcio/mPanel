@@ -13,7 +13,7 @@ namespace Control_Panel.Matrix
         public Bitmap Bitmap { get; }
         public static int Width => MatrixPanel.Width;
         public static int Height => MatrixPanel.Height;
-        public Rectangle Rectangle => new Rectangle(0, 0, Width, Height);
+        public static Rectangle Rectangle => new Rectangle(0, 0, Width, Height);
 
         public Frame()
         {

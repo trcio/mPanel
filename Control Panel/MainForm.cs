@@ -18,6 +18,12 @@ namespace Control_Panel
         {
             InitializeComponent();
             Matrix = new MatrixPanel(15, 15);
+            Matrix.FrameHook += Matrix_FrameHook;
+        }
+
+        private void Matrix_FrameHook(object sender, byte[] e)
+        {
+            panelPreview.UpdatePreview(e);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -89,6 +95,8 @@ namespace Control_Panel
         private void rainbowButton_Click(object sender, EventArgs e)
         {
             rainbowTimer.Enabled = !rainbowTimer.Enabled;
+
+            rainbowButton.Text = rainbowTimer.Enabled ? "Rainbow Cycle - Off" : "Rainbow Cycle - On";
         }
 
         private void rainbowTimer_Tick(object sender, EventArgs e)
@@ -113,14 +121,11 @@ namespace Control_Panel
             {
                 var g = frame.Graphics;
 
-                g.FillRectangle(new LinearGradientBrush(frame.Rectangle, Color.Green, Color.Red, LinearGradientMode.Vertical), frame.Rectangle);
-//                g.FillRectangle(Brushes.Blue, frame.Rectangle);
+                g.FillRectangle(new LinearGradientBrush(Frame.Rectangle, Color.Red, Color.Green, LinearGradientMode.Vertical), Frame.Rectangle);
 
-                g.DrawRectangle(Pens.Green, frame.Rectangle);
+                g.DrawRectangle(Pens.Blue, 0, 0, Frame.Width - 1, Frame.Height - 1);
 
-                var bytes = frame.GetBytes();
-                Matrix.SendFrame(bytes);
-                panelPreview.UpdatePreview(bytes);
+                Matrix.SendFrame(frame);
             }
         }
     }

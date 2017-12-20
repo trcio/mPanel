@@ -4,7 +4,7 @@ using System.Windows.Forms;
 
 namespace Control_Panel.Matrix
 {
-    public class PanelPreview : Panel
+    public sealed class PanelPreview : Panel
     {
         private const int PixelDataLength = 3;
 
@@ -12,11 +12,13 @@ namespace Control_Panel.Matrix
         public int PanelHeight { get; set; }
         public int PixelSize { get; set; }
         public int GapSize { get; set; }
-        public byte[] FrameBuffer { get; }
 
+        private readonly byte[] FrameBuffer;
         
         public PanelPreview()
         {
+            DoubleBuffered = true;
+
             PanelWidth = 15;
             PanelHeight = 15;
             PixelSize = 3;
@@ -39,9 +41,6 @@ namespace Control_Panel.Matrix
             Width = PanelWidth * PixelSize + 14 * GapSize;
             Height = PanelHeight * PixelSize + 14 * GapSize;
 
-            if (FrameBuffer == null)
-                return;
-
             var g = e.Graphics;
 
             var count = 0;
@@ -51,7 +50,6 @@ namespace Control_Panel.Matrix
             for (var i = 0; i < FrameBuffer.Length; i += PixelDataLength)
             {
                 count++;
-
                 
                 var brush = new SolidBrush(Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]));
                 g.FillRectangle(brush, x, y, PixelSize, PixelSize);

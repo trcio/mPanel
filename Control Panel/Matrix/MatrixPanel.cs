@@ -17,6 +17,8 @@ namespace Control_Panel.Matrix
 
         private SerialPort Arduino;
 
+        public event EventHandler<byte[]> FrameHook; 
+
         public static int Width, Height;
 
         public bool Connected => Arduino.IsOpen;
@@ -72,6 +74,8 @@ namespace Control_Panel.Matrix
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
+
+            OnFrameHook(new byte[Width * Height * PixelDataLength]);
         }
 
         public void SendFrame(byte[] buffer)
@@ -84,6 +88,8 @@ namespace Control_Panel.Matrix
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
             Arduino.Write(buffer, 0, buffer.Length);
+
+            OnFrameHook(buffer);
         }
 
         public void SendFrame(Frame frame)
@@ -100,6 +106,11 @@ namespace Control_Panel.Matrix
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
+        }
+
+        protected virtual void OnFrameHook(byte[] e)
+        {
+            FrameHook?.Invoke(this, e);
         }
 
         public void Dispose()
