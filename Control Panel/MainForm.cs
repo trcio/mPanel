@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
@@ -31,12 +32,16 @@ namespace Control_Panel
             ToggleActions(false);
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Matrix.Disconnect();
+        }
+
         private void ToggleActions(bool state)
         {
             foreach (Control control in actionBox.Controls)
                 control.Enabled = state;
         }
-
 
         private void connectButton_Click(object sender, EventArgs e)
         {
@@ -57,22 +62,13 @@ namespace Control_Panel
             }
         }
 
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Matrix.Clear();
-            Matrix.Disconnect();
-        }
-
         private void colorButton_Click(object sender, EventArgs e)
         {
-            Matrix.SetFrame(colorComboBox.SelectedColor);
-            Matrix.PushFrame();
-//            MatrixPanel.Clear(colorComboBox.SelectedColor);
-        }
-
-        private void brightnessButton_Click(object sender, EventArgs e)
-        {
-            Matrix.SetBrightness((byte) brightnessBar.Value);
+            using (var frame = new Frame())
+            {
+                frame.Clear(colorComboBox.SelectedColor);
+                Matrix.SendFrame(frame);
+            }
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -85,6 +81,11 @@ namespace Control_Panel
             brightnessButton.Text = $"Set Brightness - {brightnessBar.Value}";
         }
 
+        private void brightnessButton_Click(object sender, EventArgs e)
+        {
+            Matrix.SetBrightness((byte) brightnessBar.Value);
+        }
+
         private void rainbowButton_Click(object sender, EventArgs e)
         {
             rainbowTimer.Enabled = !rainbowTimer.Enabled;
@@ -92,12 +93,11 @@ namespace Control_Panel
 
         private void rainbowTimer_Tick(object sender, EventArgs e)
         {
-//            var c = new Spectrum.Color.HSV(RainbowHue,1.0, 1.0).ToRGB();
-//
-//            MatrixPanel.SetFrame(Color.FromArgb(c.R, c.G, c.B));
-
-            Matrix.SetFrame(ColorUtils.HsvToColor(RainbowHue/255.0, 1.0, 1.0));
-            Matrix.PushFrame();
+            using (var frame = new Frame())
+            {
+                frame.Clear(ColorUtils.HsvToColor(RainbowHue / 255.0, 1.0, 1.0));
+                Matrix.SendFrame(frame);
+            }
 
             RainbowHue++;
         }
@@ -111,19 +111,16 @@ namespace Control_Panel
         {
             using (var frame = new Frame())
             {
-                var g = frame.G;
+                var g = frame.Graphics;
 
-//            g.FillRectangle(new LinearGradientBrush(frame.Rectangle, Color.Green, Color.Red, LinearGradientMode.Vertical), frame.Rectangle);
-                g.FillRectangle(Brushes.Blue, frame.Rectangle);
+                g.FillRectangle(new LinearGradientBrush(frame.Rectangle, Color.Green, Color.Red, LinearGradientMode.Vertical), frame.Rectangle);
+//                g.FillRectangle(Brushes.Blue, frame.Rectangle);
 
                 g.DrawRectangle(Pens.Green, frame.Rectangle);
 
                 var bytes = frame.GetBytes();
-
-                Matrix.SetFrame(bytes);
-                panelPreview1.UpdatePreview(bytes);
-
-                Matrix.PushFrame();
+                Matrix.SendFrame(bytes);
+                panelPreview.UpdatePreview(bytes);
             }
         }
     }

@@ -9,13 +9,13 @@ namespace Control_Panel.Matrix
     {
         private const int PixelDataLength = 3;
         private const int BaudRate = 1000000;
+        private const byte ClearHeader = 0xC1;
+        private const byte FrameHeader = 0xC2;
+        private const byte BrightnessHeader = 0xC3;
 
         private static readonly byte[] PacketHeader = { 0xDE, 0xAD, 0xBE, 0xEF };
-        private static readonly byte[] FrameHeader = { 0xDE, 0xAD, 0xBE, 0xEF, 0xC1 };
-        private static readonly byte[] BrightnessHeader = { 0xDE, 0xAD, 0xBE, 0xEF, 0xC3 };
 
         private SerialPort Arduino;
-        private byte[] FrameBuffer;
 
         public static int Width, Height;
 
@@ -28,7 +28,11 @@ namespace Control_Panel.Matrix
             Width = width;
             Height = height;
 
-            Clear();
+        }
+
+        private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            Console.Write(Arduino.ReadExisting());
         }
 
         public bool Connect(string port)
@@ -52,36 +56,39 @@ namespace Control_Panel.Matrix
 
         public void Disconnect()
         {
-            if (Connected)
-                Arduino.Close();
-        }
-
-        private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            Console.Write(Arduino.ReadExisting());
-        }
-
-        public void SetFrame(byte[] buffer)
-        {
-            if (buffer == null)
+            if (!Connected)
                 return;
 
-            Buffer.BlockCopy(buffer, 0, FrameBuffer, 0, buffer.Length);
+            Clear();
+            Arduino.Close();
         }
 
-        public void SetFrame(Frame frame)
+        public void Clear()
         {
-            SetFrame(frame.GetBytes());
+            if (!Connected)
+                return;
+
+            var data = new [] { ClearHeader, (byte) 0, (byte) 0, (byte) 0 };
+
+            Arduino.Write(PacketHeader, 0, PacketHeader.Length);
+            Arduino.Write(data, 0, data.Length);
         }
 
-        public void SetFrame(Color color)
+        public void SendFrame(byte[] buffer)
         {
-            for (var i = 0; i < FrameBuffer.Length; i += PixelDataLength)
-            {
-                Buffer.SetByte(FrameBuffer, i, color.R);
-                Buffer.SetByte(FrameBuffer, i + 1, color.G);
-                Buffer.SetByte(FrameBuffer, i + 2, color.B);
-            }
+            if (!Connected || buffer == null)
+                return;
+
+            var data = new[] { FrameHeader };
+
+            Arduino.Write(PacketHeader, 0, PacketHeader.Length);
+            Arduino.Write(data, 0, data.Length);
+            Arduino.Write(buffer, 0, buffer.Length);
+        }
+
+        public void SendFrame(Frame frame)
+        {
+            SendFrame(frame.GetBytes());
         }
 
         public void SetBrightness(byte value)
@@ -89,36 +96,7 @@ namespace Control_Panel.Matrix
             if (!Connected)
                 return;
 
-            var data = new[] { value };
-
-            Arduino.Write(BrightnessHeader, 0, BrightnessHeader.Length);
-            Arduino.Write(data, 0, data.Length);
-        }
-
-        public void PushFrame()
-        {
-            if (!Connected)
-                return;
-
-            Arduino.Write(FrameHeader, 0, FrameHeader.Length);
-            Arduino.Write(FrameBuffer, 0, FrameBuffer.Length);
-        }
-
-        public void Clear()
-        {
-            Clear(Color.Black);
-        }
-
-        public void Clear(Color background)
-        {
-            FrameBuffer = new byte[Width * Height * PixelDataLength];
-
-            SetFrame(background);
-
-            if (!Connected)
-                return;
-
-            var data = new byte[] { 0xC2, background.R, background.G, background.B };
+            var data = new [] { BrightnessHeader, value };
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);

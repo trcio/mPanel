@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -10,7 +9,7 @@ namespace Control_Panel.Matrix
     {
         private const int PixelDataLength = 3;
 
-        public Graphics G { get; }
+        public Graphics Graphics { get; }
         public Bitmap Bitmap { get; }
         public static int Width => MatrixPanel.Width;
         public static int Height => MatrixPanel.Height;
@@ -19,7 +18,12 @@ namespace Control_Panel.Matrix
         public Frame()
         {
             Bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
-            G = Graphics.FromImage(Bitmap);
+            Graphics = Graphics.FromImage(Bitmap);
+        }
+
+        public void Clear(Color color)
+        {
+            Graphics.FillRectangle(new SolidBrush(color), Rectangle);
         }
 
         public byte[] GetBytes()
@@ -59,7 +63,7 @@ namespace Control_Panel.Matrix
 
         public void Dispose()
         {
-            G?.Dispose();
+            Graphics?.Dispose();
             Bitmap?.Dispose();
         }
     }

@@ -12,7 +12,7 @@ namespace Control_Panel.Matrix
         public int PanelHeight { get; set; }
         public int PixelSize { get; set; }
         public int GapSize { get; set; }
-        public byte[] FrameBuffer { get; set; }
+        public byte[] FrameBuffer { get; }
 
         
         public PanelPreview()
@@ -22,7 +22,7 @@ namespace Control_Panel.Matrix
             PixelSize = 3;
             GapSize = 1;
 
-            FrameBuffer = new byte[PanelWidth * PanelHeight];
+            FrameBuffer = new byte[PanelWidth * PanelHeight * PixelDataLength];
         }
 
         public void UpdatePreview(byte[] data)
@@ -52,6 +52,7 @@ namespace Control_Panel.Matrix
             {
                 count++;
 
+                
                 var brush = new SolidBrush(Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]));
                 g.FillRectangle(brush, x, y, PixelSize, PixelSize);
 
