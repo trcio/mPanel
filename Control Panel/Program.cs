@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using Control_Panel.Forms;
 
 namespace Control_Panel
 {
@@ -13,7 +14,8 @@ namespace Control_Panel
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+//            Application.Run(new MainForm());
+            Application.Run(new ContainerForm());
         }
     }
 }

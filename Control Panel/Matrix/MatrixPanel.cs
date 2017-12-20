@@ -17,11 +17,9 @@ namespace Control_Panel.Matrix
 
         private SerialPort Arduino;
 
-        public event EventHandler<byte[]> FrameHook; 
-
-        public static int Width, Height;
-
         public bool Connected => Arduino.IsOpen;
+        public static int Width, Height;
+        public event EventHandler<byte[]> FrameHook;
 
         public MatrixPanel(int width, int height)
         {

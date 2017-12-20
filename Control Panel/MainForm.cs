@@ -17,6 +17,7 @@ namespace Control_Panel
         public MainForm()
         {
             InitializeComponent();
+
             Matrix = new MatrixPanel(15, 15);
             Matrix.FrameHook += Matrix_FrameHook;
         }
@@ -59,7 +60,7 @@ namespace Control_Panel
             }
             else
             {
-                if (!Matrix.Connect(serialPorts.Text))
+                if (string.IsNullOrWhiteSpace(serialPorts.Text) || !Matrix.Connect(serialPorts.Text))
                     return;
 
                 Matrix.Clear();

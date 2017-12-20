@@ -1,0 +1,92 @@
+﻿namespace Control_Panel.Forms
+{
+    partial class ContainerForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.connectButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.portComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.menuStrip.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // menuStrip
+            // 
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.portComboBox,
+            this.connectButton});
+            this.menuStrip.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip.Name = "menuStrip";
+            this.menuStrip.Size = new System.Drawing.Size(784, 27);
+            this.menuStrip.TabIndex = 1;
+            this.menuStrip.Text = "menuStrip1";
+            // 
+            // connectButton
+            // 
+            this.connectButton.Name = "connectButton";
+            this.connectButton.Size = new System.Drawing.Size(64, 23);
+            this.connectButton.Text = "Connect";
+            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
+            // 
+            // portComboBox
+            // 
+            this.portComboBox.BackColor = System.Drawing.SystemColors.Window;
+            this.portComboBox.DropDownWidth = 50;
+            this.portComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
+            this.portComboBox.IntegralHeight = false;
+            this.portComboBox.Name = "portComboBox";
+            this.portComboBox.Size = new System.Drawing.Size(121, 23);
+            // 
+            // ContainerForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.menuStrip);
+            this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip;
+            this.Name = "ContainerForm";
+            this.ShowIcon = false;
+            this.Text = "Matrix Panel";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ContainerForm_FormClosing);
+            this.Load += new System.EventHandler(this.ContainerForm_Load);
+            this.menuStrip.ResumeLayout(false);
+            this.menuStrip.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.MenuStrip menuStrip;
+        private System.Windows.Forms.ToolStripComboBox portComboBox;
+        private System.Windows.Forms.ToolStripMenuItem connectButton;
+    }
+}
