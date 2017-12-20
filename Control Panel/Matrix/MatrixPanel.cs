@@ -10,15 +10,14 @@ namespace Control_Panel.Matrix
         private const int PixelDataLength = 3;
         private const int BaudRate = 1000000;
 
-        public static int Width, Height;
-
         private static readonly byte[] PacketHeader = { 0xDE, 0xAD, 0xBE, 0xEF };
         private static readonly byte[] FrameHeader = { 0xDE, 0xAD, 0xBE, 0xEF, 0xC1 };
-        private static readonly byte[] ClearHeader = { 0xDE, 0xAD, 0xBE, 0xEF, 0xC2 };
         private static readonly byte[] BrightnessHeader = { 0xDE, 0xAD, 0xBE, 0xEF, 0xC3 };
 
         private SerialPort Arduino;
         private byte[] FrameBuffer;
+
+        public static int Width, Height;
 
         public bool Connected => Arduino.IsOpen;
 
@@ -73,15 +72,6 @@ namespace Control_Panel.Matrix
         public void SetFrame(Frame frame)
         {
             SetFrame(frame.GetBytes());
-//            if (bytes == null)
-//                return;
-//
-//            for (var i = 0; i < bytes.Length; i += PixelDataLength)
-//            {
-//                Buffer.SetByte(FrameBuffer, i, bytes[i + 2]);
-//                Buffer.SetByte(FrameBuffer, i + 1, bytes[i + 1]);
-//                Buffer.SetByte(FrameBuffer, i + 2, bytes[i]);
-//            }
         }
 
         public void SetFrame(Color color)
@@ -99,7 +89,7 @@ namespace Control_Panel.Matrix
             if (!Connected)
                 return;
 
-            var data = new [] { value };
+            var data = new[] { value };
 
             Arduino.Write(BrightnessHeader, 0, BrightnessHeader.Length);
             Arduino.Write(data, 0, data.Length);
@@ -128,9 +118,9 @@ namespace Control_Panel.Matrix
             if (!Connected)
                 return;
 
-            var data = new [] { background.R, background.G, background.B };
+            var data = new byte[] { 0xC2, background.R, background.G, background.B };
 
-            Arduino.Write(ClearHeader, 0, ClearHeader.Length);
+            Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
         }
 

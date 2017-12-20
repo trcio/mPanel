@@ -42,8 +42,8 @@
             this.rainbowUpDown = new System.Windows.Forms.NumericUpDown();
             this.rainbowTimer = new System.Windows.Forms.Timer(this.components);
             this.button1 = new System.Windows.Forms.Button();
-            this.colorComboBox = new Control_Panel.ColorComboBox();
             this.panelPreview1 = new Control_Panel.Matrix.PanelPreview();
+            this.colorComboBox = new Control_Panel.ColorComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
             this.hardwareBox.SuspendLayout();
             this.actionBox.SuspendLayout();
@@ -182,13 +182,25 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(36, 158);
+            this.button1.Location = new System.Drawing.Point(22, 127);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 11;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // panelPreview1
+            // 
+            this.panelPreview1.FrameBuffer = null;
+            this.panelPreview1.GapSize = 1;
+            this.panelPreview1.Location = new System.Drawing.Point(23, 156);
+            this.panelPreview1.Name = "panelPreview1";
+            this.panelPreview1.PanelHeight = 15;
+            this.panelPreview1.PanelWidth = 15;
+            this.panelPreview1.PixelSize = 5;
+            this.panelPreview1.Size = new System.Drawing.Size(129, 117);
+            this.panelPreview1.TabIndex = 12;
             // 
             // colorComboBox
             // 
@@ -344,18 +356,6 @@
             this.colorComboBox.ShowAllColors = true;
             this.colorComboBox.Size = new System.Drawing.Size(128, 23);
             this.colorComboBox.TabIndex = 5;
-            // 
-            // panelPreview1
-            // 
-            this.panelPreview1.FrameBuffer = null;
-            this.panelPreview1.GapSize = 1;
-            this.panelPreview1.Location = new System.Drawing.Point(36, 187);
-            this.panelPreview1.Name = "panelPreview1";
-            this.panelPreview1.PanelHeight = 15;
-            this.panelPreview1.PanelWidth = 15;
-            this.panelPreview1.PixelSize = 3;
-            this.panelPreview1.Size = new System.Drawing.Size(59, 59);
-            this.panelPreview1.TabIndex = 12;
             // 
             // MainForm
             // 

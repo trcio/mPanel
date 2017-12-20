@@ -37,9 +37,9 @@ namespace Control_Panel.Matrix
                 {
                     var ptr = (IntPtr) ((long) data.Scan0 + y * data.Stride);
 
-                    var index = y * data.Width * PixelDataLength;
+                    var row0 = y * data.Width * PixelDataLength;
 
-                    for (var x = index; x < index + data.Width * PixelDataLength; x += PixelDataLength)
+                    for (var x = row0; x < row0 + data.Width * PixelDataLength; x += PixelDataLength)
                     {
                         Marshal.Copy(ptr, bytes, x + 2, 1);
                         Marshal.Copy(IntPtr.Add(ptr, 1), bytes, x + 1, 1);
@@ -47,17 +47,12 @@ namespace Control_Panel.Matrix
 
                         ptr = IntPtr.Add(ptr, PixelDataLength);
                     }
-
-//                    // normal BGR
-//                    Marshal.Copy(ptr, bytes, y * data.Width * 3, data.Width * 3);
                 }
             }
             finally
             {
                 Bitmap.UnlockBits(data);
             }
-
-
 
             return bytes;
         }

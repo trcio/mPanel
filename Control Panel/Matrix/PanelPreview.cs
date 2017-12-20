@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace Control_Panel.Matrix
@@ -21,42 +22,47 @@ namespace Control_Panel.Matrix
             PixelSize = 3;
             GapSize = 1;
 
-            Width = PanelWidth * PixelSize + 14 * GapSize;
-            Height = PanelHeight * PixelSize + 14 * GapSize;
+            FrameBuffer = new byte[PanelWidth * PanelHeight];
         }
 
-        public void SetPreview(byte[] data)
+        public void UpdatePreview(byte[] data)
         {
             if (data?.Length != PanelWidth * PanelHeight * 3)
                 return;
 
-            FrameBuffer = data;
+            Buffer.BlockCopy(data, 0, FrameBuffer, 0, data.Length);
             Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            var g = e.Graphics;
-
-            var x = 0;
-            var y = 0;
+            Width = PanelWidth * PixelSize + 14 * GapSize;
+            Height = PanelHeight * PixelSize + 14 * GapSize;
 
             if (FrameBuffer == null)
                 return;
 
+            var g = e.Graphics;
+
+            var count = 0;
+            var x = 0;
+            var y = 0;
+
             for (var i = 0; i < FrameBuffer.Length; i += PixelDataLength)
             {
-                // draw pixel
+                count++;
+
                 var brush = new SolidBrush(Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]));
                 g.FillRectangle(brush, x, y, PixelSize, PixelSize);
 
                 x += PixelSize + GapSize;
 
-                if (i % PanelWidth * PixelDataLength != 0)
+                if (count < 15)
                     continue;
 
-                y += PixelSize + GapSize;
+                count = 0;
                 x = 0;
+                y += PixelSize + GapSize;
             }
         }
     }

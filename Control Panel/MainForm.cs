@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
@@ -110,16 +109,22 @@ namespace Control_Panel
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var frame = new Frame();
-            var g = frame.G;
+            using (var frame = new Frame())
+            {
+                var g = frame.G;
 
 //            g.FillRectangle(new LinearGradientBrush(frame.Rectangle, Color.Green, Color.Red, LinearGradientMode.Vertical), frame.Rectangle);
-            g.FillRectangle(Brushes.Blue, frame.Rectangle);
+                g.FillRectangle(Brushes.Blue, frame.Rectangle);
 
-            g.DrawRectangle(Pens.Green, frame.Rectangle);
+                g.DrawRectangle(Pens.Green, frame.Rectangle);
 
-            Matrix.SetFrame(frame);
-            Matrix.PushFrame();
+                var bytes = frame.GetBytes();
+
+                Matrix.SetFrame(bytes);
+                panelPreview1.UpdatePreview(bytes);
+
+                Matrix.PushFrame();
+            }
         }
     }
 }
