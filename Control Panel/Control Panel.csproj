@@ -50,16 +50,22 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ColorUtils.cs" />
+    <Compile Include="Forms\Actions\BasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Actions\BasicForm.Designer.cs">
+      <DependentUpon>BasicForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ContainerForm.Designer.cs">
       <DependentUpon>ContainerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PreviewForm.cs">
+    <Compile Include="Forms\Actions\PreviewForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PreviewForm.Designer.cs">
+    <Compile Include="Forms\Actions\PreviewForm.Designer.cs">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Matrix\Frame.cs" />
@@ -75,10 +81,13 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Actions\BasicForm.resx">
+      <DependentUpon>BasicForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContainerForm.resx">
       <DependentUpon>ContainerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PreviewForm.resx">
+    <EmbeddedResource Include="Forms\Actions\PreviewForm.resx">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">

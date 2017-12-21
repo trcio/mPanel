@@ -53,6 +53,7 @@ namespace Control_Panel.Matrix
                 
                 var brush = new SolidBrush(Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]));
                 g.FillRectangle(brush, x, y, PixelSize, PixelSize);
+                g.DrawRectangle(Pens.Black, x, y, PixelSize - 1, PixelSize - 1);
 
                 x += PixelSize + GapSize;
 

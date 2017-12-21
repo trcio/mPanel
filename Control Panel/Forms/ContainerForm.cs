@@ -1,20 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
+using Control_Panel.Forms.Actions;
 using Control_Panel.Matrix;
 
 namespace Control_Panel.Forms
 {
     public partial class ContainerForm : Form
     {
-        private readonly MatrixPanel Matrix;      
+        private readonly Dictionary<string, Type> ActionForms;
+
+        public MatrixPanel Matrix { get; }
 
         public ContainerForm()
         {
             InitializeComponent();
 
             Matrix = new MatrixPanel(15, 15);
+
+            ActionForms = new Dictionary<string, Type>
+            {
+                { "Basic", typeof(BasicForm) }
+            };
         }
 
         #region Form Events
@@ -25,6 +34,22 @@ namespace Control_Panel.Forms
 
             if (portComboBox.Items.Count > 0)
                 portComboBox.SelectedIndex = 0;
+
+            foreach (var action in ActionForms)
+            {
+                var item = actionsToolStripMenuItem.DropDownItems.Add(action.Key);
+                item.Tag = action.Value;
+                item.Click += ActionItem_Click;
+            }
+        }
+
+        private void ActionItem_Click(object sender, EventArgs eventArgs)
+        {
+            var item = (ToolStripMenuItem) sender;
+            var instance = (Form) Activator.CreateInstance((Type) item.Tag);
+
+            instance.MdiParent = this;
+            instance.Show();
         }
 
         private void ContainerForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -32,22 +57,22 @@ namespace Control_Panel.Forms
             Matrix.Disconnect();
         }
 
-        private void connectButton_Click(object sender, EventArgs e)
+        private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (Matrix.Connected)
             {
-                CloseChildrenForms();
+                ClearActions();
                 Matrix.Disconnect();
-                connectButton.Text = "Connect";
+                connectToolStripMenuItem.Text = "Connect";
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(portComboBox.Text) || !Matrix.Connect(portComboBox.Text))
                     return;
 
-                AddInitialForms();
+                InitializeActions();
                 Matrix.Clear();
-                connectButton.Text = "Disconnect";
+                connectToolStripMenuItem.Text = "Disconnect";
             }
         }
 
@@ -55,17 +80,20 @@ namespace Control_Panel.Forms
 
         #region Methods
 
-        private void CloseChildrenForms()
+        private void ClearActions()
         {
             foreach (var form in MdiChildren)
                 form.Close();
+
+            actionsToolStripMenuItem.Visible = false;
         }
 
-        private void AddInitialForms()
+        private void InitializeActions()
         {
             var preview = new PreviewForm { MdiParent = this };
-            Matrix.FrameHook += preview.Matrix_FrameHook;
             preview.Show();
+
+            actionsToolStripMenuItem.Visible = true;
         }
 
         #endregion

@@ -29,8 +29,9 @@
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.connectButton = new System.Windows.Forms.ToolStripMenuItem();
             this.portComboBox = new System.Windows.Forms.ToolStripComboBox();
+            this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -38,19 +39,13 @@
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.portComboBox,
-            this.connectButton});
+            this.connectToolStripMenuItem,
+            this.actionsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(784, 27);
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
-            // 
-            // connectButton
-            // 
-            this.connectButton.Name = "connectButton";
-            this.connectButton.Size = new System.Drawing.Size(64, 23);
-            this.connectButton.Text = "Connect";
-            this.connectButton.Click += new System.EventHandler(this.connectButton_Click);
             // 
             // portComboBox
             // 
@@ -60,6 +55,20 @@
             this.portComboBox.IntegralHeight = false;
             this.portComboBox.Name = "portComboBox";
             this.portComboBox.Size = new System.Drawing.Size(121, 23);
+            // 
+            // connectToolStripMenuItem
+            // 
+            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(64, 23);
+            this.connectToolStripMenuItem.Text = "Connect";
+            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            // 
+            // actionsToolStripMenuItem
+            // 
+            this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
+            this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
+            this.actionsToolStripMenuItem.Text = "Actions";
+            this.actionsToolStripMenuItem.Visible = false;
             // 
             // ContainerForm
             // 
@@ -87,6 +96,7 @@
 
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripComboBox portComboBox;
-        private System.Windows.Forms.ToolStripMenuItem connectButton;
+        private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem actionsToolStripMenuItem;
     }
 }

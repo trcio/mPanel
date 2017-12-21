@@ -1,4 +1,4 @@
-﻿namespace Control_Panel.Forms
+﻿namespace Control_Panel.Forms.Actions
 {
     partial class PreviewForm
     {
@@ -39,7 +39,7 @@
             this.panel.PanelHeight = 15;
             this.panel.PanelWidth = 15;
             this.panel.PixelSize = 15;
-            this.panel.Size = new System.Drawing.Size(239, 239);
+            this.panel.Size = new System.Drawing.Size(267, 267);
             this.panel.TabIndex = 0;
             // 
             // PreviewForm
@@ -54,6 +54,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "PreviewForm";
             this.Text = "Preview";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);
+            this.Load += new System.EventHandler(this.PreviewForm_Load);
             this.ResumeLayout(false);
 
         }

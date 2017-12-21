@@ -81,7 +81,7 @@ namespace Control_Panel.Matrix
             if (!Connected || buffer == null)
                 return;
 
-            var data = new[] { FrameHeader };
+            var data = new [] { FrameHeader };
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
