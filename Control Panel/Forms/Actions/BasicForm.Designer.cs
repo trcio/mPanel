@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BasicForm));
             this.clearButton = new System.Windows.Forms.Button();
             this.brightnessButton = new System.Windows.Forms.Button();
             this.brightnessBar = new System.Windows.Forms.TrackBar();
-            this.colorComboBox1 = new Control_Panel.ColorComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.colorButton = new System.Windows.Forms.Button();
+            this.divider1 = new System.Windows.Forms.Label();
+            this.divider2 = new System.Windows.Forms.Label();
+            this.colorComboBox = new Control_Panel.ColorComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,7 +43,7 @@
             this.clearButton.Location = new System.Drawing.Point(12, 189);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(150, 30);
-            this.clearButton.TabIndex = 5;
+            this.clearButton.TabIndex = 4;
             this.clearButton.Text = "Clear Panel";
             this.clearButton.UseVisualStyleBackColor = true;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
@@ -54,7 +53,7 @@
             this.brightnessButton.Location = new System.Drawing.Point(12, 51);
             this.brightnessButton.Name = "brightnessButton";
             this.brightnessButton.Size = new System.Drawing.Size(150, 30);
-            this.brightnessButton.TabIndex = 2;
+            this.brightnessButton.TabIndex = 1;
             this.brightnessButton.Text = "Set Brightness - 64";
             this.brightnessButton.UseVisualStyleBackColor = true;
             this.brightnessButton.Click += new System.EventHandler(this.brightnessButton_Click);
@@ -65,18 +64,43 @@
             this.brightnessBar.Maximum = 255;
             this.brightnessBar.Name = "brightnessBar";
             this.brightnessBar.Size = new System.Drawing.Size(150, 45);
-            this.brightnessBar.TabIndex = 1;
+            this.brightnessBar.TabIndex = 0;
             this.brightnessBar.TickFrequency = 64;
             this.brightnessBar.Value = 64;
             this.brightnessBar.Scroll += new System.EventHandler(this.brightnessBar_Scroll);
             // 
-            // colorComboBox1
+            // colorButton
             // 
-            this.colorComboBox1.Colors = ((System.Collections.Generic.List<System.Drawing.Color>)(resources.GetObject("colorComboBox1.Colors")));
-            this.colorComboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.colorComboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.colorComboBox1.FormattingEnabled = true;
-            this.colorComboBox1.Items.AddRange(new object[] {
+            this.colorButton.Location = new System.Drawing.Point(12, 134);
+            this.colorButton.Name = "colorButton";
+            this.colorButton.Size = new System.Drawing.Size(150, 30);
+            this.colorButton.TabIndex = 3;
+            this.colorButton.Text = "Set Color";
+            this.colorButton.UseVisualStyleBackColor = true;
+            this.colorButton.Click += new System.EventHandler(this.colorButton_Click);
+            // 
+            // divider1
+            // 
+            this.divider1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.divider1.Location = new System.Drawing.Point(12, 92);
+            this.divider1.Name = "divider1";
+            this.divider1.Size = new System.Drawing.Size(151, 2);
+            this.divider1.TabIndex = 7;
+            // 
+            // divider2
+            // 
+            this.divider2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.divider2.Location = new System.Drawing.Point(12, 176);
+            this.divider2.Name = "divider2";
+            this.divider2.Size = new System.Drawing.Size(151, 2);
+            this.divider2.TabIndex = 8;
+            // 
+            // colorComboBox
+            // 
+            this.colorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.colorComboBox.FormattingEnabled = true;
+            this.colorComboBox.Items.AddRange(new object[] {
             "Transparent",
             "AliceBlue",
             "AntiqueWhite",
@@ -218,46 +242,21 @@
             "WhiteSmoke",
             "Yellow",
             "YellowGreen"});
-            this.colorComboBox1.Location = new System.Drawing.Point(13, 141);
-            this.colorComboBox1.Name = "colorComboBox1";
-            this.colorComboBox1.ShowAllColors = true;
-            this.colorComboBox1.Size = new System.Drawing.Size(148, 23);
-            this.colorComboBox1.TabIndex = 4;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(12, 105);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(150, 30);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Set Color";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // label2
-            // 
-            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label2.Location = new System.Drawing.Point(12, 92);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 2);
-            this.label2.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(12, 176);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(151, 2);
-            this.label1.TabIndex = 8;
+            this.colorComboBox.Location = new System.Drawing.Point(13, 105);
+            this.colorComboBox.Name = "colorComboBox";
+            this.colorComboBox.Size = new System.Drawing.Size(148, 23);
+            this.colorComboBox.TabIndex = 2;
             // 
             // BasicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(174, 231);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.colorComboBox1);
+            this.ControlBox = false;
+            this.Controls.Add(this.colorComboBox);
+            this.Controls.Add(this.divider2);
+            this.Controls.Add(this.divider1);
+            this.Controls.Add(this.colorButton);
             this.Controls.Add(this.brightnessButton);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.brightnessBar);
@@ -269,6 +268,7 @@
             this.Name = "BasicForm";
             this.ShowIcon = false;
             this.Text = "Basic Actions";
+            this.Load += new System.EventHandler(this.BasicForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -280,9 +280,9 @@
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button brightnessButton;
         private System.Windows.Forms.TrackBar brightnessBar;
-        private ColorComboBox colorComboBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button colorButton;
+        private System.Windows.Forms.Label divider1;
+        private System.Windows.Forms.Label divider2;
+        private ColorComboBox colorComboBox;
     }
 }

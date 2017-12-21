@@ -203,7 +203,6 @@
             // 
             // colorComboBox
             // 
-            this.colorComboBox.Colors = ((System.Collections.Generic.List<System.Drawing.Color>)(resources.GetObject("colorComboBox.Colors")));
             this.colorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.colorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.colorComboBox.FormattingEnabled = true;

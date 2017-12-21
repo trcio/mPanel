@@ -36,11 +36,16 @@ namespace Control_Panel.Matrix
             Invalidate();
         }
 
-        protected override void OnPaint(PaintEventArgs e)
+        protected override void OnMove(EventArgs e)
         {
             Width = PanelWidth * PixelSize + 14 * GapSize;
             Height = PanelHeight * PixelSize + 14 * GapSize;
 
+            base.OnMove(e);
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
             var g = e.Graphics;
 
             var count = 0;
@@ -50,9 +55,14 @@ namespace Control_Panel.Matrix
             for (var i = 0; i < FrameBuffer.Length; i += PixelDataLength)
             {
                 count++;
+
+                var color = Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]);
                 
-                var brush = new SolidBrush(Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]));
-                g.FillRectangle(brush, x, y, PixelSize, PixelSize);
+                using (var brush = new SolidBrush(color))
+                {
+                    g.FillRectangle(brush, x, y, PixelSize, PixelSize);
+                }
+
                 g.DrawRectangle(Pens.Black, x, y, PixelSize - 1, PixelSize - 1);
 
                 x += PixelSize + GapSize;

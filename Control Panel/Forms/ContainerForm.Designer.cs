@@ -38,8 +38,8 @@
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.portComboBox,
             this.connectToolStripMenuItem,
+            this.portComboBox,
             this.actionsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
@@ -50,21 +50,22 @@
             // portComboBox
             // 
             this.portComboBox.BackColor = System.Drawing.SystemColors.Window;
-            this.portComboBox.DropDownWidth = 50;
+            this.portComboBox.DropDownWidth = 75;
             this.portComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.portComboBox.IntegralHeight = false;
             this.portComboBox.Name = "portComboBox";
-            this.portComboBox.Size = new System.Drawing.Size(121, 23);
+            this.portComboBox.Size = new System.Drawing.Size(75, 23);
             // 
             // connectToolStripMenuItem
             // 
             this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(64, 23);
-            this.connectToolStripMenuItem.Text = "Connect";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(78, 23);
+            this.connectToolStripMenuItem.Text = "Connect to";
             this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
             // actionsToolStripMenuItem
             // 
+            this.actionsToolStripMenuItem.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.actionsToolStripMenuItem.Name = "actionsToolStripMenuItem";
             this.actionsToolStripMenuItem.Size = new System.Drawing.Size(59, 23);
             this.actionsToolStripMenuItem.Text = "Actions";
@@ -82,7 +83,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.Name = "ContainerForm";
             this.ShowIcon = false;
-            this.Text = "Matrix Panel";
+            this.Text = "mPanel";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ContainerForm_FormClosing);
             this.Load += new System.EventHandler(this.ContainerForm_Load);
             this.menuStrip.ResumeLayout(false);

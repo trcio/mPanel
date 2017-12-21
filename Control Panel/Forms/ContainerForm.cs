@@ -22,7 +22,7 @@ namespace Control_Panel.Forms
 
             ActionForms = new Dictionary<string, Type>
             {
-                { "Basic", typeof(BasicForm) }
+//                { "Basic", typeof(BasicForm) }
             };
         }
 
@@ -63,7 +63,9 @@ namespace Control_Panel.Forms
             {
                 ClearActions();
                 Matrix.Disconnect();
-                connectToolStripMenuItem.Text = "Connect";
+
+                portComboBox.Enabled = true;
+                connectToolStripMenuItem.Text = "Connect to";
             }
             else
             {
@@ -72,7 +74,9 @@ namespace Control_Panel.Forms
 
                 InitializeActions();
                 Matrix.Clear();
-                connectToolStripMenuItem.Text = "Disconnect";
+
+                portComboBox.Enabled = false;
+                connectToolStripMenuItem.Text = "Disconnect from";
             }
         }
 
@@ -92,6 +96,9 @@ namespace Control_Panel.Forms
         {
             var preview = new PreviewForm { MdiParent = this };
             preview.Show();
+
+            var basic = new BasicForm { MdiParent = this };
+            basic.Show();
 
             actionsToolStripMenuItem.Visible = true;
         }

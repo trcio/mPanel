@@ -39,7 +39,7 @@
             this.panel.PanelHeight = 15;
             this.panel.PanelWidth = 15;
             this.panel.PixelSize = 15;
-            this.panel.Size = new System.Drawing.Size(267, 267);
+            this.panel.Size = new System.Drawing.Size(239, 239);
             this.panel.TabIndex = 0;
             // 
             // PreviewForm

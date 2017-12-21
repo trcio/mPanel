@@ -27,7 +27,6 @@ namespace Control_Panel.Matrix
 
             Width = width;
             Height = height;
-
         }
 
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
