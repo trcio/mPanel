@@ -2,6 +2,8 @@
 using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Threading.Tasks;
 
 namespace Control_Panel.Matrix
 {
@@ -9,6 +11,7 @@ namespace Control_Panel.Matrix
     {
         private const int PixelDataLength = 3;
         private const int BaudRate = 1000000;
+        private const byte StandbyHeader = 0xC0;
         private const byte ClearHeader = 0xC1;
         private const byte FrameHeader = 0xC2;
         private const byte BrightnessHeader = 0xC3;
@@ -17,16 +20,19 @@ namespace Control_Panel.Matrix
 
         private SerialPort Arduino;
 
-        public bool Connected => Arduino.IsOpen;
+        public bool Connected => Arduino?.IsOpen ?? false;
         public static int Width, Height;
         public event EventHandler<byte[]> FrameHook;
 
         public MatrixPanel(int width, int height)
         {
-            Arduino = new SerialPort();
-
             Width = width;
             Height = height;
+        }
+
+        protected virtual void OnFrameHook(byte[] e)
+        {
+            FrameHook?.Invoke(this, e);
         }
 
         private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
@@ -58,8 +64,17 @@ namespace Control_Panel.Matrix
             if (!Connected)
                 return;
 
-            Clear();
+            Standby();
             Arduino.Close();
+        }
+
+        public void Standby()
+        {
+            if (!Connected)
+                return;
+
+            Arduino.Write(PacketHeader, 0, PacketHeader.Length);
+            Arduino.Write(new [] { StandbyHeader }, 0, 1);
         }
 
         public void Clear()
@@ -103,11 +118,6 @@ namespace Control_Panel.Matrix
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);
-        }
-
-        protected virtual void OnFrameHook(byte[] e)
-        {
-            FrameHook?.Invoke(this, e);
         }
 
         public void Dispose()
