@@ -56,6 +56,12 @@
     <Compile Include="Forms\Actions\BasicForm.Designer.cs">
       <DependentUpon>BasicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Actions\SnakeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Actions\SnakeForm.Designer.cs">
+      <DependentUpon>SnakeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\Actions\BasicForm.resx">
       <DependentUpon>BasicForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Actions\SnakeForm.resx">
+      <DependentUpon>SnakeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ContainerForm.resx">
       <DependentUpon>ContainerForm.cs</DependentUpon>
