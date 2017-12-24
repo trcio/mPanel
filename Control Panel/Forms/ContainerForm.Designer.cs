@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.menuStrip = new System.Windows.Forms.MenuStrip();
-            this.portComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.portComboBox = new System.Windows.Forms.ToolStripComboBox();
             this.actionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -47,6 +47,13 @@
             this.menuStrip.TabIndex = 1;
             this.menuStrip.Text = "menuStrip1";
             // 
+            // connectToolStripMenuItem
+            // 
+            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
+            this.connectToolStripMenuItem.Size = new System.Drawing.Size(78, 23);
+            this.connectToolStripMenuItem.Text = "Connect to";
+            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            // 
             // portComboBox
             // 
             this.portComboBox.BackColor = System.Drawing.SystemColors.Window;
@@ -55,13 +62,6 @@
             this.portComboBox.IntegralHeight = false;
             this.portComboBox.Name = "portComboBox";
             this.portComboBox.Size = new System.Drawing.Size(75, 23);
-            // 
-            // connectToolStripMenuItem
-            // 
-            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(78, 23);
-            this.connectToolStripMenuItem.Text = "Connect to";
-            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
             // actionsToolStripMenuItem
             // 
@@ -73,8 +73,7 @@
             // 
             // ContainerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.menuStrip);
             this.DoubleBuffered = true;
