@@ -22,7 +22,7 @@ namespace Control_Panel.Forms
 
             ActionForms = new Dictionary<string, Type>
             {
-//                { "Basic", typeof(BasicForm) }
+                { "Snake", typeof(SnakeForm) }
             };
         }
 

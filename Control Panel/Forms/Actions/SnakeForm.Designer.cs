@@ -44,6 +44,7 @@
             this.enableButton.TabIndex = 0;
             this.enableButton.Text = "Enable";
             this.enableButton.UseVisualStyleBackColor = true;
+            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
             // upButton
             // 
@@ -54,6 +55,7 @@
             this.upButton.TabIndex = 1;
             this.upButton.Text = "UP";
             this.upButton.UseVisualStyleBackColor = true;
+            this.upButton.Click += new System.EventHandler(this.upButton_Click);
             // 
             // downButton
             // 
@@ -64,6 +66,7 @@
             this.downButton.TabIndex = 2;
             this.downButton.Text = "DOWN";
             this.downButton.UseVisualStyleBackColor = true;
+            this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
             // leftButton
             // 
@@ -74,6 +77,7 @@
             this.leftButton.TabIndex = 3;
             this.leftButton.Text = "LEFT";
             this.leftButton.UseVisualStyleBackColor = true;
+            this.leftButton.Click += new System.EventHandler(this.leftButton_Click);
             // 
             // rightButton
             // 
@@ -84,6 +88,7 @@
             this.rightButton.TabIndex = 4;
             this.rightButton.Text = "RIGHT";
             this.rightButton.UseVisualStyleBackColor = true;
+            this.rightButton.Click += new System.EventHandler(this.rightButton_Click);
             // 
             // divider1
             // 
@@ -96,7 +101,7 @@
             // SnakeForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(174, 271);
+            this.ClientSize = new System.Drawing.Size(174, 127);
             this.Controls.Add(this.divider1);
             this.Controls.Add(this.rightButton);
             this.Controls.Add(this.leftButton);
@@ -106,11 +111,14 @@
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SnakeForm";
             this.ShowIcon = false;
             this.Text = "Snake";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SnakeForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SnakeForm_KeyDown);
             this.ResumeLayout(false);
 
         }
