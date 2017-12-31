@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using Control_Panel.Matrix;
 using Timer = System.Timers.Timer;
 
-namespace Control_Panel.Forms.Actions
+namespace Control_Panel.Actions.Snake
 {
     public partial class SnakeForm : Form
     {
@@ -18,7 +18,7 @@ namespace Control_Panel.Forms.Actions
         private readonly Frame Frame;
         private readonly FoodPiece FoodPiece;
         private readonly List<SnakePiece> SnakePieces;
-        private Direction Direction;
+        private Direction Direction, PreviousDirection;
 
         public SnakeForm()
         {
@@ -30,11 +30,12 @@ namespace Control_Panel.Forms.Actions
             Frame = new Frame();
 
             Direction = Direction.Left;
+            PreviousDirection = Direction.None;
 
             FoodPiece = new FoodPiece(Frame);
             SnakePieces = new List<SnakePiece>
             {
-                new SnakePiece(7, 7, Color.White, Frame)
+                new SnakePiece(Frame, Color.White, 7, 7)
             };
         }
 
@@ -42,20 +43,30 @@ namespace Control_Panel.Forms.Actions
         {
             Frame.Graphics.Clear(Color.Black);
 
+            // draw food
             FoodPiece.Draw();
 
+            // cascade tail pieces
             for (var i = SnakePieces.Count - 1; i > 0; i--)
                 SnakePieces[i].CopyCoordinates(SnakePieces[i - 1]);
 
+            // move snake head
             SnakePieces[0].Move(Direction);
 
+            // check reverse direction
+            if (SnakePieces.Count > 1 && Direction.IsOpposite(PreviousDirection))
+                ResetSnake();
+
+            // check tail collision
             for (var i = 1; i < SnakePieces.Count; i++)
                 if (SnakePieces[0].DistanceFrom(SnakePieces[i]) < 1)
                     ResetSnake();
 
+            // draw snake pieces
             foreach (var piece in SnakePieces)
                 piece.Draw();
 
+            // add food piece if collision
             if (SnakePieces[0].DistanceFrom(FoodPiece) < 1)
                 AddPiece();
 
@@ -67,7 +78,7 @@ namespace Control_Panel.Forms.Actions
         {
             var last = SnakePieces[SnakePieces.Count - 1];
 
-            SnakePieces.Add(new SnakePiece(last.X, last.Y, FoodPiece.Fill, Frame));
+            SnakePieces.Add(new SnakePiece(Frame, FoodPiece.Fill, last.X, last.Y));
 
             FoodPiece.Randomize();
 
@@ -88,6 +99,12 @@ namespace Control_Panel.Forms.Actions
             {
                 Text = "Snake";
             }));
+        }
+
+        private void SnakeForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            GameTimer.Stop();
+            Matrix.Clear();
         }
 
         private void SnakeForm_KeyDown(object sender, KeyEventArgs e)
@@ -125,142 +142,26 @@ namespace Control_Panel.Forms.Actions
 
         private void upButton_Click(object sender, EventArgs e)
         {
+            PreviousDirection = Direction;
             Direction = Direction.Up;
         }
 
         private void downButton_Click(object sender, EventArgs e)
         {
+            PreviousDirection = Direction;
             Direction = Direction.Down;
         }
 
         private void leftButton_Click(object sender, EventArgs e)
         {
+            PreviousDirection = Direction;
             Direction = Direction.Left;
         }
 
         private void rightButton_Click(object sender, EventArgs e)
         {
+            PreviousDirection = Direction;
             Direction = Direction.Right;
-        }
-
-        private void SnakeForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            GameTimer.Stop();
-            Matrix.Clear();
-        }
-    }
-
-    class SnakePiece
-    {
-        private readonly Frame Frame;
-
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Color Fill { get; set; }
-
-        public SnakePiece(int x, int y, Color fill, Frame frame)
-        {
-            X = x;
-            Y = y;
-            Fill = fill;
-            Frame = frame;
-
-            FixCoordinates();
-        }
-
-        private void FixCoordinates()
-        {
-            if (X > MatrixPanel.Width - 1)
-                X = 0;
-            else if (X < 0)
-                X = MatrixPanel.Width - 1;
-
-            if (Y > MatrixPanel.Height - 1)
-                Y = 0;
-            else if (Y < 0)
-                Y = MatrixPanel.Height - 1;
-        }
-
-        public void CopyCoordinates(SnakePiece piece)
-        {
-            X = piece.X;
-            Y = piece.Y;
-
-            FixCoordinates();
-        }
-
-        public void Move(Direction direction)
-        {
-            X += direction.X;
-            Y += direction.Y;
-
-            FixCoordinates();
-        }
-
-        public double DistanceFrom(SnakePiece piece)
-        {
-            return Math.Sqrt(Math.Pow(piece.X - X, 2) + Math.Pow(piece.Y - Y, 2));
-        }
-
-        public double DistanceFrom(FoodPiece piece)
-        {
-            return Math.Sqrt(Math.Pow(piece.X - X, 2) + Math.Pow(piece.Y - Y, 2));
-        }
-
-        public void Draw()
-        {
-            using (var fill = new SolidBrush(Fill))
-            {
-                Frame.Graphics.FillRectangle(fill, X, Y, 1, 1);
-            }
-        }
-    }
-
-    class FoodPiece
-    {
-        private static readonly Random Random = new Random();
-        private readonly Frame Frame;
-
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Color Fill { get; set; }
-
-        public FoodPiece(Frame frame)
-        {
-            Frame = frame;
-            Randomize();
-        }
-
-        public void Randomize()
-        {
-            X = Random.Next(0, MatrixPanel.Width);
-            Y = Random.Next(0, MatrixPanel.Height);
-            Fill = ColorUtils.HsvToColor(Random.NextDouble(), 1.0, 1.0);
-        }
-
-        public void Draw()
-        {
-            using (var fill = new SolidBrush(Fill))
-            {
-                Frame.Graphics.FillRectangle(fill, X, Y, 1, 1);
-            }
-        }
-    }
-
-    class Direction
-    {
-        public static Direction Up = new Direction(0, -1);
-        public static Direction Down = new Direction(0, 1);
-        public static Direction Left = new Direction(-1, 0);
-        public static Direction Right = new Direction(1, 0);
-
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public Direction(int x, int y)
-        {
-            X = x;
-            Y = y;
         }
     }
 }

@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Control_Panel.Matrix;
 
-namespace Control_Panel.Forms.Actions
+namespace Control_Panel.Actions
 {
     public partial class PreviewForm : Form
     {

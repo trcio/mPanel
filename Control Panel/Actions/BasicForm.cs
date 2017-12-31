@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Control_Panel.Matrix;
 
-namespace Control_Panel.Forms.Actions
+namespace Control_Panel.Actions
 {
     public partial class BasicForm : Form
     {
@@ -41,6 +43,18 @@ namespace Control_Panel.Forms.Actions
         private void clearButton_Click(object sender, EventArgs e)
         {
             Matrix.Clear();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var frame = new Frame())
+            using (var gradient = new LinearGradientBrush(frame.Rectangle, Color.Purple, Color.Yellow, LinearGradientMode.Horizontal))
+            {
+                frame.Graphics.FillRectangle(gradient, frame.Rectangle);
+
+                Matrix.SendFrame(frame);
+            }
+
         }
     }
 }

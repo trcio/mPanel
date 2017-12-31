@@ -1,6 +1,6 @@
-﻿namespace Control_Panel.Forms.Actions
+﻿namespace Control_Panel.Actions
 {
-    partial class PreviewForm
+    partial class PongForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,39 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel = new Control_Panel.Matrix.PanelPreview();
+            this.enableButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // panel
+            // enableButton
             // 
-            this.panel.GapSize = 1;
-            this.panel.Location = new System.Drawing.Point(12, 12);
-            this.panel.Name = "panel";
-            this.panel.PanelHeight = 15;
-            this.panel.PanelWidth = 15;
-            this.panel.PixelSize = 15;
-            this.panel.Size = new System.Drawing.Size(239, 239);
-            this.panel.TabIndex = 0;
+            this.enableButton.Location = new System.Drawing.Point(12, 83);
+            this.enableButton.Name = "enableButton";
+            this.enableButton.Size = new System.Drawing.Size(150, 30);
+            this.enableButton.TabIndex = 9;
+            this.enableButton.Text = "Enable";
+            this.enableButton.UseVisualStyleBackColor = true;
             // 
-            // PreviewForm
+            // PongForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(263, 263);
-            this.ControlBox = false;
-            this.Controls.Add(this.panel);
+            this.ClientSize = new System.Drawing.Size(174, 127);
+            this.Controls.Add(this.enableButton);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "PreviewForm";
-            this.Text = "Preview";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);
-            this.Load += new System.EventHandler(this.PreviewForm_Load);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "PongForm";
+            this.ShowIcon = false;
+            this.Text = "Pong";
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private Matrix.PanelPreview panel;
+        private System.Windows.Forms.Button enableButton;
     }
 }

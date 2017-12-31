@@ -46,33 +46,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\BasicForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\BasicForm.Designer.cs">
+      <DependentUpon>BasicForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\PongForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\PongForm.Designer.cs">
+      <DependentUpon>PongForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\PreviewForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\PreviewForm.Designer.cs">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\Snake\Direction.cs" />
+    <Compile Include="Actions\Snake\FoodPiece.cs" />
+    <Compile Include="Actions\Snake\SnakeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Snake\SnakeForm.Designer.cs">
+      <DependentUpon>SnakeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\Snake\SnakePiece.cs" />
     <Compile Include="ColorComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ColorUtils.cs" />
-    <Compile Include="Forms\Actions\BasicForm.cs">
+    <Compile Include="ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Actions\BasicForm.Designer.cs">
-      <DependentUpon>BasicForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Actions\SnakeForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Actions\SnakeForm.Designer.cs">
-      <DependentUpon>SnakeForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ContainerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ContainerForm.Designer.cs">
+    <Compile Include="ContainerForm.Designer.cs">
       <DependentUpon>ContainerForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Actions\PreviewForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Actions\PreviewForm.Designer.cs">
-      <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Matrix\Frame.cs" />
     <Compile Include="Matrix\MatrixPanel.cs" />
@@ -81,17 +90,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\Actions\BasicForm.resx">
+    <EmbeddedResource Include="Actions\BasicForm.resx">
       <DependentUpon>BasicForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Actions\SnakeForm.resx">
+    <EmbeddedResource Include="Actions\PongForm.resx">
+      <DependentUpon>PongForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\PreviewForm.resx">
+      <DependentUpon>PreviewForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Snake\SnakeForm.resx">
       <DependentUpon>SnakeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ContainerForm.resx">
+    <EmbeddedResource Include="ContainerForm.resx">
       <DependentUpon>ContainerForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Actions\PreviewForm.resx">
-      <DependentUpon>PreviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

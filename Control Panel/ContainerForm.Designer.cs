@@ -1,4 +1,4 @@
-﻿namespace Control_Panel.Forms
+﻿namespace Control_Panel
 {
     partial class ContainerForm
     {

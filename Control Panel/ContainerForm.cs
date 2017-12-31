@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Linq;
 using System.Windows.Forms;
-using Control_Panel.Forms.Actions;
+using Control_Panel.Actions;
+using Control_Panel.Actions.Snake;
 using Control_Panel.Matrix;
 
-namespace Control_Panel.Forms
+namespace Control_Panel
 {
     public partial class ContainerForm : Form
     {
@@ -22,7 +23,8 @@ namespace Control_Panel.Forms
 
             ActionForms = new Dictionary<string, Type>
             {
-                { "Snake", typeof(SnakeForm) }
+                { "Snake", typeof(SnakeForm) },
+                { "Pong", typeof(PongForm) }
             };
         }
 

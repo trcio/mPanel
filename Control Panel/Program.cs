@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using Control_Panel.Forms;
 
 namespace Control_Panel
 {

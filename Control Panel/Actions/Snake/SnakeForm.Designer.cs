@@ -1,4 +1,4 @@
-﻿namespace Control_Panel.Forms.Actions
+﻿namespace Control_Panel.Actions.Snake
 {
     partial class SnakeForm
     {

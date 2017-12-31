@@ -11,9 +11,9 @@ namespace Control_Panel.Matrix
 
         public Graphics Graphics { get; }
         public Bitmap Bitmap { get; }
-        public static int Width => MatrixPanel.Width;
-        public static int Height => MatrixPanel.Height;
-        public static Rectangle Rectangle => new Rectangle(0, 0, Width, Height);
+        public int Width => MatrixPanel.Width;
+        public int Height => MatrixPanel.Height;
+        public Rectangle Rectangle => new Rectangle(0, 0, Width, Height);
 
         public Frame()
         {
