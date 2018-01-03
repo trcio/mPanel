@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Control_Panel.Actions;
 using Control_Panel.Actions.Snake;
+using Control_Panel.Actions.Pong;
 using Control_Panel.Matrix;
 
 namespace Control_Panel

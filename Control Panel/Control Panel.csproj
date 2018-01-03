@@ -52,10 +52,12 @@
     <Compile Include="Actions\BasicForm.Designer.cs">
       <DependentUpon>BasicForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Actions\PongForm.cs">
+    <Compile Include="Actions\Pong\Ball.cs" />
+    <Compile Include="Actions\Pong\Paddle.cs" />
+    <Compile Include="Actions\Pong\PongForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Actions\PongForm.Designer.cs">
+    <Compile Include="Actions\Pong\PongForm.Designer.cs">
       <DependentUpon>PongForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Actions\PreviewForm.cs">
@@ -93,7 +95,7 @@
     <EmbeddedResource Include="Actions\BasicForm.resx">
       <DependentUpon>BasicForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Actions\PongForm.resx">
+    <EmbeddedResource Include="Actions\Pong\PongForm.resx">
       <DependentUpon>PongForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\PreviewForm.resx">

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 
 namespace Control_Panel
@@ -70,9 +69,10 @@ namespace Control_Panel
                     b = q;
                     break;
                 default:
-                    // not possible - if we get here it is an internal error
-                    throw new ArgumentException();
-
+                    r = 0;
+                    g = 0;
+                    b = 0;
+                    break;
             }
 
             return Color.FromArgb((int)(r * 255), (int)(g * 255), (int)(b * 255));

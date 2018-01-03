@@ -8,6 +8,7 @@ namespace Control_Panel.Actions.Snake
     {
         private static readonly Random Random = new Random();
         private readonly Frame Frame;
+        private byte Hue;
 
         public Color Fill { get; set; }
         public int X { get; set; }
@@ -16,12 +17,14 @@ namespace Control_Panel.Actions.Snake
         public FoodPiece(Frame frame)
         {
             Frame = frame;
+
             Randomize();
         }
 
         public void Randomize()
         {
-            Fill = ColorUtils.HsvToColor(Random.NextDouble(), 1.0, 1.0);
+            Hue += 16;
+            Fill = ColorUtils.HsvToColor(Hue / 255.0, 1.0, 1.0);
             X = Random.Next(0, MatrixPanel.Width);
             Y = Random.Next(0, MatrixPanel.Height);
         }
