@@ -23,7 +23,7 @@ namespace Control_Panel.Actions.Snake
 
         public void Randomize()
         {
-            Hue += 16;
+            Hue += 255 / 13;
             Fill = ColorUtils.HsvToColor(Hue / 255.0, 1.0, 1.0);
             X = Random.Next(0, MatrixPanel.Width);
             Y = Random.Next(0, MatrixPanel.Height);

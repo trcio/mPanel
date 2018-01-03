@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Drawing;
 using System.IO.Ports;
-using System.Linq;
-using System.Runtime.Remoting.Metadata.W3cXsd2001;
-using System.Threading.Tasks;
 
 namespace Control_Panel.Matrix
 {
@@ -53,7 +49,7 @@ namespace Control_Panel.Matrix
             }
             catch
             {
-                Console.WriteLine("Could not open port");
+                Console.WriteLine($"Could not open connection on port {port}");
             }
 
             return Connected;
@@ -64,7 +60,6 @@ namespace Control_Panel.Matrix
             if (!Connected)
                 return;
 
-            Standby();
             Arduino.Close();
         }
 
@@ -75,6 +70,8 @@ namespace Control_Panel.Matrix
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(new [] { StandbyHeader }, 0, 1);
+
+            OnFrameHook(new byte[Width * Height * PixelDataLength]);
         }
 
         public void Clear()

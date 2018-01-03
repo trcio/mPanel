@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
 using Control_Panel.Matrix;
+using Control_Panel.Misc;
 using Timer = System.Timers.Timer;
 
 namespace Control_Panel.Actions.Snake
@@ -41,7 +42,7 @@ namespace Control_Panel.Actions.Snake
 
         private void GameTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
-            Frame.Graphics.Clear(Color.Black);
+            Frame.Clear(Color.Black);
 
             // draw food
             FoodPiece.Draw();

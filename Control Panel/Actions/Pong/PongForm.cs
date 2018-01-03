@@ -34,32 +34,30 @@ namespace Control_Panel.Actions.Pong
 
         private void GameTimerOnElapsed(object sender, ElapsedEventArgs e)
         {
-            Frame.Graphics.Clear(Color.Black);
+            Frame.Clear(Color.Black);
 
             if (GameOver)
             {
+                Ball.Draw();
                 TopPaddle.Draw();
                 BottomPaddle.Draw();
-                Ball.Draw();
             }
             else
             {
                 TopPaddle.Move();
                 BottomPaddle.Move();
 
-                TopPaddle.Draw();
-                BottomPaddle.Draw();
+                BounceBall();
 
                 if (FrameCount % 3 == 0)
-                {
-                    Bounce();
                     Ball.Move();
 
-                    if (Ball.Y < 1 || Ball.Y > MatrixPanel.Height - 2)
-                        NewGame();
-                }
+                if (Ball.Y < 0 || Ball.Y > MatrixPanel.Height - 1)
+                    NewGame();
 
                 Ball.Draw();
+                TopPaddle.Draw();
+                BottomPaddle.Draw();
             }
 
             // push frame to matrix
@@ -71,20 +69,19 @@ namespace Control_Panel.Actions.Pong
         private void NewGame()
         {
             Ball = new Ball(Frame, MatrixPanel.Width / 2, MatrixPanel.Height / 2);
-            TopPaddle = new Paddle(Frame, Color.White, 5, 0, 5);
-            BottomPaddle = new Paddle(Frame, Color.White, 5, 14, 5);
+            TopPaddle = new Paddle(Frame, Color.White, 6, 0, 3);
+            BottomPaddle = new Paddle(Frame, Color.White, 6, 14, 3);
 
             GameOver = true;
         }
 
-        private void Bounce()
+        private void BounceBall()
         {
             if (Ball.X < 1)
                 Ball.Direction.DeltaX = 1;
             else if (Ball.X > MatrixPanel.Width - 2)
                 Ball.Direction.DeltaX = -1;
 
-            // bounce down
             if (Ball.Y == TopPaddle.Y + 1 && PaddleCollision(TopPaddle, Ball))
             {
                 Ball.Direction.DeltaY = 1;
@@ -107,9 +104,9 @@ namespace Control_Panel.Actions.Pong
 
         private static bool PaddleCollision(Paddle paddle, Ball ball)
         {
-            for (var i = 0; i < paddle.Width; i++)
+            for (var i = paddle.X; i < paddle.X + paddle.Width; i++)
             {
-                if (paddle.X + i == ball.X)
+                if (i == ball.X)
                     return true;
             }
 
@@ -138,7 +135,7 @@ namespace Control_Panel.Actions.Pong
                 case Keys.K:
                     BottomPaddle.DeltaX = 1;
                     break;
-                case Keys.S:
+                case Keys.Space:
                     GameOver = false;
                     break;
             }
@@ -149,19 +146,22 @@ namespace Control_Panel.Actions.Pong
             switch (e.KeyCode)
             {
                 case Keys.D:
+                    if (TopPaddle.DeltaX < 0)
+                        TopPaddle.DeltaX = 0;
+                    break;
                 case Keys.F:
-                    TopPaddle.DeltaX = 0;
+                    if (TopPaddle.DeltaX > 0)
+                        TopPaddle.DeltaX = 0;
                     break;
                 case Keys.J:
+                    if (BottomPaddle.DeltaX < 0)
+                        BottomPaddle.DeltaX = 0;
+                    break;
                 case Keys.K:
-                    BottomPaddle.DeltaX = 0;
+                    if (BottomPaddle.DeltaX > 0)
+                        BottomPaddle.DeltaX = 0;
                     break;
             }
-        }
-
-        private void button1_Click(object sender, System.EventArgs e)
-        {
-            GameOver = false;
         }
 
         private void enableButton_Click(object sender, System.EventArgs e)
@@ -176,6 +176,7 @@ namespace Control_Panel.Actions.Pong
                 FrameCount = 0;
                 GameTimer.Start();
                 enableButton.Text = "Disable";
+                label1.Focus();
             }
         }
     }

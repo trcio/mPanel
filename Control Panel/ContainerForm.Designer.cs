@@ -80,6 +80,7 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(800, 600);
             this.Name = "ContainerForm";
             this.ShowIcon = false;
             this.Text = "mPanel";

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Drawing;
-using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using Control_Panel.Matrix;
 
@@ -10,14 +8,25 @@ namespace Control_Panel.Actions
     {
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
+        private readonly Frame Frame;
+
         public BasicForm()
         {
             InitializeComponent();
+
+            Frame = new Frame();
         }
 
         private void BasicForm_Load(object sender, EventArgs e)
         {
+            Matrix.Clear();
+
             colorComboBox.SelectedIndex = 3;
+        }
+
+        private void BasicForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Matrix.Standby();
         }
 
         private void brightnessBar_Scroll(object sender, EventArgs e)
@@ -32,12 +41,9 @@ namespace Control_Panel.Actions
 
         private void colorButton_Click(object sender, EventArgs e)
         {
-            using (var frame = new Frame())
-            {
-                frame.Clear(colorComboBox.SelectedColor);
+            Frame.Clear(colorComboBox.SelectedColor);
 
-                Matrix.SendFrame(frame);
-            }
+            Matrix.SendFrame(Frame);
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -45,16 +51,9 @@ namespace Control_Panel.Actions
             Matrix.Clear();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void standbyButton_Click(object sender, EventArgs e)
         {
-            using (var frame = new Frame())
-            using (var gradient = new LinearGradientBrush(frame.Rectangle, Color.Purple, Color.Yellow, LinearGradientMode.Horizontal))
-            {
-                frame.Graphics.FillRectangle(gradient, frame.Rectangle);
-
-                Matrix.SendFrame(frame);
-            }
-
+            Matrix.Standby();
         }
     }
 }

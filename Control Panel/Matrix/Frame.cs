@@ -23,7 +23,7 @@ namespace Control_Panel.Matrix
 
         public void Clear(Color color)
         {
-            Graphics.FillRectangle(new SolidBrush(color), Rectangle);
+            Graphics.Clear(color);
         }
 
         public byte[] GetBytes()

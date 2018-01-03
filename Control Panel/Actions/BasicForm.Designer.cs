@@ -34,8 +34,8 @@
             this.colorButton = new System.Windows.Forms.Button();
             this.divider1 = new System.Windows.Forms.Label();
             this.divider2 = new System.Windows.Forms.Label();
+            this.standbyButton = new System.Windows.Forms.Button();
             this.colorComboBox = new Control_Panel.ColorComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,6 +95,16 @@
             this.divider2.Name = "divider2";
             this.divider2.Size = new System.Drawing.Size(151, 2);
             this.divider2.TabIndex = 8;
+            // 
+            // standbyButton
+            // 
+            this.standbyButton.Location = new System.Drawing.Point(12, 225);
+            this.standbyButton.Name = "standbyButton";
+            this.standbyButton.Size = new System.Drawing.Size(150, 30);
+            this.standbyButton.TabIndex = 9;
+            this.standbyButton.Text = "Standby";
+            this.standbyButton.UseVisualStyleBackColor = true;
+            this.standbyButton.Click += new System.EventHandler(this.standbyButton_Click);
             // 
             // colorComboBox
             // 
@@ -1370,28 +1380,159 @@
             "White",
             "WhiteSmoke",
             "Yellow",
+            "YellowGreen",
+            "Transparent",
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
             "YellowGreen"});
             this.colorComboBox.Location = new System.Drawing.Point(13, 105);
             this.colorComboBox.Name = "colorComboBox";
             this.colorComboBox.Size = new System.Drawing.Size(148, 23);
             this.colorComboBox.TabIndex = 2;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(25, 229);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // BasicForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(184, 264);
+            this.ClientSize = new System.Drawing.Size(174, 267);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.standbyButton);
             this.Controls.Add(this.colorComboBox);
             this.Controls.Add(this.divider2);
             this.Controls.Add(this.divider1);
@@ -1402,11 +1543,13 @@
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(190, 306);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(190, 270);
+            this.MinimumSize = new System.Drawing.Size(190, 306);
             this.Name = "BasicForm";
             this.ShowIcon = false;
             this.Text = "Basic Actions";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BasicForm_FormClosing);
             this.Load += new System.EventHandler(this.BasicForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).EndInit();
             this.ResumeLayout(false);
@@ -1423,6 +1566,6 @@
         private System.Windows.Forms.Label divider1;
         private System.Windows.Forms.Label divider2;
         private ColorComboBox colorComboBox;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button standbyButton;
     }
 }

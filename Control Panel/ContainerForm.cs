@@ -76,7 +76,6 @@ namespace Control_Panel
                     return;
 
                 InitializeActions();
-                Matrix.Clear();
 
                 portComboBox.Enabled = false;
                 connectToolStripMenuItem.Text = "Disconnect from";

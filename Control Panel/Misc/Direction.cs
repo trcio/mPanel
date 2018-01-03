@@ -1,4 +1,4 @@
-﻿namespace Control_Panel.Actions.Snake
+﻿namespace Control_Panel.Misc
 {
     public class Direction
     {

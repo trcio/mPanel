@@ -53,7 +53,7 @@
             this.upButton.Name = "upButton";
             this.upButton.Size = new System.Drawing.Size(48, 20);
             this.upButton.TabIndex = 1;
-            this.upButton.Text = "UP";
+            this.upButton.Text = "W";
             this.upButton.UseVisualStyleBackColor = true;
             this.upButton.Click += new System.EventHandler(this.upButton_Click);
             // 
@@ -64,7 +64,7 @@
             this.downButton.Name = "downButton";
             this.downButton.Size = new System.Drawing.Size(48, 20);
             this.downButton.TabIndex = 2;
-            this.downButton.Text = "DOWN";
+            this.downButton.Text = "S";
             this.downButton.UseVisualStyleBackColor = true;
             this.downButton.Click += new System.EventHandler(this.downButton_Click);
             // 
@@ -75,7 +75,7 @@
             this.leftButton.Name = "leftButton";
             this.leftButton.Size = new System.Drawing.Size(45, 20);
             this.leftButton.TabIndex = 3;
-            this.leftButton.Text = "LEFT";
+            this.leftButton.Text = "A";
             this.leftButton.UseVisualStyleBackColor = true;
             this.leftButton.Click += new System.EventHandler(this.leftButton_Click);
             // 
@@ -86,7 +86,7 @@
             this.rightButton.Name = "rightButton";
             this.rightButton.Size = new System.Drawing.Size(45, 20);
             this.rightButton.TabIndex = 4;
-            this.rightButton.Text = "RIGHT";
+            this.rightButton.Text = "D";
             this.rightButton.UseVisualStyleBackColor = true;
             this.rightButton.Click += new System.EventHandler(this.rightButton_Click);
             // 

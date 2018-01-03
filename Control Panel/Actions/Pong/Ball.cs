@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
-using Control_Panel.Actions.Snake;
 using Control_Panel.Matrix;
+using Control_Panel.Misc;
 
 namespace Control_Panel.Actions.Pong
 {
