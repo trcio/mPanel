@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using Control_Panel.Matrix;
+using Control_Panel.Misc;
 
 namespace Control_Panel.Actions.Snake
 {
@@ -24,7 +25,7 @@ namespace Control_Panel.Actions.Snake
         public void Randomize()
         {
             Hue += 255 / 13;
-            Fill = ColorUtils.HsvToColor(Hue / 255.0, 1.0, 1.0);
+            Fill = ColorHelper.HsvToColor(Hue / 255.0, 1.0, 1.0);
             X = Random.Next(0, MatrixPanel.Width);
             Y = Random.Next(0, MatrixPanel.Height);
         }

@@ -16,45 +16,50 @@ namespace Control_Panel.Actions.Pong
         private readonly Frame Frame;
         private Ball Ball;
         private Paddle TopPaddle, BottomPaddle;
-
         private long FrameCount;
-        private bool GameOver;
+        private bool AwaitingStart;
 
         public PongForm()
         {
             InitializeComponent();
 
             GameTimer = new Timer(1000.0 / FramesPerSecond);
-            GameTimer.Elapsed += GameTimerOnElapsed;
+            GameTimer.Elapsed += GameTimer_Elapsed;
 
             Frame = new Frame();
 
             NewGame();
         }
 
-        private void GameTimerOnElapsed(object sender, ElapsedEventArgs e)
+        private void GameTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             Frame.Clear(Color.Black);
 
-            if (GameOver)
+            if (AwaitingStart)
             {
+                // draw objects in default position
                 Ball.Draw();
                 TopPaddle.Draw();
                 BottomPaddle.Draw();
             }
             else
             {
+                // move the paddles
                 TopPaddle.Move();
                 BottomPaddle.Move();
 
+                // perform ball collision
                 BounceBall();
 
+                // move ball periodically
                 if (FrameCount % 3 == 0)
                     Ball.Move();
 
+                // check if ball was scored
                 if (Ball.Y < 0 || Ball.Y > MatrixPanel.Height - 1)
                     NewGame();
 
+                // draw objects
                 Ball.Draw();
                 TopPaddle.Draw();
                 BottomPaddle.Draw();
@@ -72,7 +77,7 @@ namespace Control_Panel.Actions.Pong
             TopPaddle = new Paddle(Frame, Color.White, 6, 0, 3);
             BottomPaddle = new Paddle(Frame, Color.White, 6, 14, 3);
 
-            GameOver = true;
+            AwaitingStart = true;
         }
 
         private void BounceBall()
@@ -136,7 +141,7 @@ namespace Control_Panel.Actions.Pong
                     BottomPaddle.DeltaX = 1;
                     break;
                 case Keys.Space:
-                    GameOver = false;
+                    AwaitingStart = false;
                     break;
             }
         }

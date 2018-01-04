@@ -9,12 +9,12 @@ namespace Control_Panel.Actions.Pong
     {
         private static readonly Random Random = new Random();
         private readonly Frame Frame;
+        private double DeltaV;
 
         public Color Fill { get; set; }
         public Direction Direction { get; set; }
         public int X { get; set; }
         public int Y { get; set; }
-        public double DeltaV { get; set; }
 
         public Ball(Frame frame, int x, int y)
         {
@@ -29,16 +29,16 @@ namespace Control_Panel.Actions.Pong
 
         public void Randomize()
         {
-            Fill = ColorUtils.HsvToColor(Random.NextDouble(), 1.0, 1.0);
+            Fill = ColorHelper.HsvToColor(Random.NextDouble(), 1.0, 1.0);
             DeltaV = Random.Next(2);
         }
 
         public void Move()
         {
             if (Direction.DeltaX < 0)
-                X = X - 1 - (int)(DeltaV / 2);
+                X = X - 1 - (int) (DeltaV / 2);
             else
-                X = X + 1 + (int)(DeltaV / 2);
+                X = X + 1 + (int) (DeltaV / 2);
 
             if (Direction.DeltaY < 0)
                 Y = Y - 1 - (int) (DeltaV / 2);

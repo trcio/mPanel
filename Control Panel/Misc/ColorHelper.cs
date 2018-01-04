@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Control_Panel
+namespace Control_Panel.Misc
 {
-    public class ColorUtils
+    public class ColorHelper
     {
         //        public static List<Color> GetRainbowColors(int colorCount)
         //        {

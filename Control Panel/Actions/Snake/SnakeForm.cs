@@ -26,7 +26,7 @@ namespace Control_Panel.Actions.Snake
             InitializeComponent();
 
             GameTimer = new Timer(1000.0 / FramesPerSecond);
-            GameTimer.Elapsed += GameTimerOnElapsed;
+            GameTimer.Elapsed += GameTimer_Elapsed;
 
             Frame = new Frame();
 
@@ -40,7 +40,7 @@ namespace Control_Panel.Actions.Snake
             };
         }
 
-        private void GameTimerOnElapsed(object sender, ElapsedEventArgs elapsedEventArgs)
+        private void GameTimer_Elapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             Frame.Clear(Color.Black);
 

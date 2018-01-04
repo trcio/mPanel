@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using Control_Panel.Actions;
 using Control_Panel.Actions.Snake;
 using Control_Panel.Actions.Pong;
+using Control_Panel.Actions.Visualizer;
 using Control_Panel.Matrix;
 
 namespace Control_Panel
@@ -25,7 +26,8 @@ namespace Control_Panel
             ActionForms = new Dictionary<string, Type>
             {
                 { "Snake", typeof(SnakeForm) },
-                { "Pong", typeof(PongForm) }
+                { "Pong", typeof(PongForm) },
+                { "Visualizer", typeof(VisualizerForm) }
             };
         }
 

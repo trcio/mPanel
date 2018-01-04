@@ -33,6 +33,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CSCore, Version=1.2.1.2, Culture=neutral, PublicKeyToken=5a08f2b6f4415dea, processorArchitecture=MSIL">
+      <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -66,6 +70,15 @@
     <Compile Include="Actions\PreviewForm.Designer.cs">
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Actions\Visualizer\BasicSpectrumProvider.cs" />
+    <Compile Include="Actions\Visualizer\LineSpectrum.cs" />
+    <Compile Include="Actions\Visualizer\Spectrum.cs" />
+    <Compile Include="Actions\Visualizer\VisualizerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Visualizer\VisualizerForm.Designer.cs">
+      <DependentUpon>VisualizerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Misc\Direction.cs" />
     <Compile Include="Actions\Snake\FoodPiece.cs" />
     <Compile Include="Actions\Snake\SnakeForm.cs">
@@ -78,7 +91,7 @@
     <Compile Include="ColorComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Misc\ColorUtils.cs" />
+    <Compile Include="Misc\ColorHelper.cs" />
     <Compile Include="ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +116,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\Snake\SnakeForm.resx">
       <DependentUpon>SnakeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Visualizer\VisualizerForm.resx">
+      <DependentUpon>VisualizerForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContainerForm.resx">
       <DependentUpon>ContainerForm.cs</DependentUpon>
