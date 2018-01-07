@@ -4,30 +4,16 @@ using System.Drawing;
 namespace mPanel.Misc
 {
     public class ColorHelper
-    {
-        //        public static List<Color> GetRainbowColors(int colorCount)
-        //        {
-        //            List<Color> ret = new List<Color>(colorCount);
-        //
-        //            double p = 360.0 / (double)colorCount;
-        //
-        //            for (int n = 0; n < colorCount; n++)
-        //            {
-        //                ret.Add(HsvToRgb(n * p, 1.0, 1.0));
-        //            }
-        //
-        //            return ret;
-        //        }
-
+    { 
         public static Color HsvToColor(double hue, double saturation, double val)
         {
-            if (hue == 1.0)
+            if (hue > 0.999)
                 hue = 0.0;
 
             const double step = 1.0 / 6.0;
             var vh = hue / step;
 
-            var i = (int)Math.Floor(vh);
+            var i = (int) Math.Floor(vh);
 
             var f = vh - i;
             var p = val * (1.0 - saturation);

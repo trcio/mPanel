@@ -62,6 +62,7 @@
             this.portComboBox.IntegralHeight = false;
             this.portComboBox.Name = "portComboBox";
             this.portComboBox.Size = new System.Drawing.Size(75, 23);
+            this.portComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.portComboBox_KeyDown);
             // 
             // actionsToolStripMenuItem
             // 

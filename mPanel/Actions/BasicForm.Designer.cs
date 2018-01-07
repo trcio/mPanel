@@ -30,14 +30,14 @@
         {
             this.clearButton = new System.Windows.Forms.Button();
             this.brightnessButton = new System.Windows.Forms.Button();
-            this.brightnessBar = new System.Windows.Forms.TrackBar();
+            this.brightnessTrackBar = new System.Windows.Forms.TrackBar();
             this.colorButton = new System.Windows.Forms.Button();
             this.divider1 = new System.Windows.Forms.Label();
             this.divider2 = new System.Windows.Forms.Label();
             this.standbyButton = new System.Windows.Forms.Button();
-            this.colorComboBox = new ColorComboBox();
+            this.colorComboBox = new mPanel.ColorComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brightnessTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
             // clearButton
@@ -60,16 +60,16 @@
             this.brightnessButton.UseVisualStyleBackColor = true;
             this.brightnessButton.Click += new System.EventHandler(this.brightnessButton_Click);
             // 
-            // brightnessBar
+            // brightnessTrackBar
             // 
-            this.brightnessBar.Location = new System.Drawing.Point(12, 12);
-            this.brightnessBar.Maximum = 255;
-            this.brightnessBar.Name = "brightnessBar";
-            this.brightnessBar.Size = new System.Drawing.Size(150, 45);
-            this.brightnessBar.TabIndex = 0;
-            this.brightnessBar.TickFrequency = 64;
-            this.brightnessBar.Value = 64;
-            this.brightnessBar.Scroll += new System.EventHandler(this.brightnessBar_Scroll);
+            this.brightnessTrackBar.Location = new System.Drawing.Point(12, 12);
+            this.brightnessTrackBar.Maximum = 255;
+            this.brightnessTrackBar.Name = "brightnessTrackBar";
+            this.brightnessTrackBar.Size = new System.Drawing.Size(150, 45);
+            this.brightnessTrackBar.TabIndex = 0;
+            this.brightnessTrackBar.TickFrequency = 64;
+            this.brightnessTrackBar.Value = 64;
+            this.brightnessTrackBar.Scroll += new System.EventHandler(this.brightnessBar_Scroll);
             // 
             // colorButton
             // 
@@ -1663,6 +1663,147 @@
             "White",
             "WhiteSmoke",
             "Yellow",
+            "YellowGreen",
+            "Transparent",
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
             "YellowGreen"});
             this.colorComboBox.Location = new System.Drawing.Point(13, 105);
             this.colorComboBox.Name = "colorComboBox";
@@ -1692,7 +1833,7 @@
             this.Controls.Add(this.colorButton);
             this.Controls.Add(this.brightnessButton);
             this.Controls.Add(this.clearButton);
-            this.Controls.Add(this.brightnessBar);
+            this.Controls.Add(this.brightnessTrackBar);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -1704,7 +1845,7 @@
             this.Text = "Basic Actions";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BasicForm_FormClosing);
             this.Load += new System.EventHandler(this.BasicForm_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.brightnessBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brightnessTrackBar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1714,7 +1855,7 @@
 
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button brightnessButton;
-        private System.Windows.Forms.TrackBar brightnessBar;
+        private System.Windows.Forms.TrackBar brightnessTrackBar;
         private System.Windows.Forms.Button colorButton;
         private System.Windows.Forms.Label divider1;
         private System.Windows.Forms.Label divider2;

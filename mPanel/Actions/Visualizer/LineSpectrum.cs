@@ -53,8 +53,6 @@ namespace mPanel.Actions.Visualizer
 
             var spectrumPoints = CalculateSpectrumPoints(MatrixPanel.Height, fftBuffer);
 
-            byte hue = 0;
-
             for (var x = 0; x < spectrumPoints.Count; x++)
             {
                 var height = (int) Math.Round(spectrumPoints[x].Value * Amplifier);
@@ -63,10 +61,7 @@ namespace mPanel.Actions.Visualizer
                 {
                     Frame.Graphics.FillRectangle(brush, x, MatrixPanel.Height - height, 1, height);
                 }
-
-                hue += 255 / 15;
             }
-            
         }
     }
 }

@@ -65,13 +65,15 @@ namespace mPanel.Matrix
             Arduino.Close();
         }
 
-        public void Standby()
+        public void Standby(byte brightness)
         {
             if (!Connected)
                 return;
 
+            var data = new [] { StandbyHeader, brightness };
+
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
-            Arduino.Write(new [] { StandbyHeader }, 0, 1);
+            Arduino.Write(data, 0, data.Length);
 
             OnFrameHook(new byte[Width * Height * PixelDataLength]);
         }
@@ -108,12 +110,12 @@ namespace mPanel.Matrix
             SendFrame(frame.GetBytes());
         }
 
-        public void SetBrightness(byte value)
+        public void SetBrightness(byte brightness)
         {
             if (!Connected)
                 return;
 
-            var data = new [] { BrightnessHeader, value };
+            var data = new [] { BrightnessHeader, brightness };
 
             Arduino.Write(PacketHeader, 0, PacketHeader.Length);
             Arduino.Write(data, 0, data.Length);

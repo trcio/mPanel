@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Ports;
-using System.Linq;
 using System.Windows.Forms;
 using mPanel.Actions;
 using mPanel.Actions.Pong;
@@ -35,7 +34,7 @@ namespace mPanel
 
         private void ContainerForm_Load(object sender, EventArgs e)
         {
-            portComboBox.Items.AddRange((object[]) SerialPort.GetPortNames().AsEnumerable());
+            portComboBox.Items.AddRange(SerialPort.GetPortNames());
 
             if (portComboBox.Items.Count > 0)
                 portComboBox.SelectedIndex = 0;
@@ -82,6 +81,12 @@ namespace mPanel
                 portComboBox.Enabled = false;
                 connectToolStripMenuItem.Text = "Disconnect from";
             }
+        }
+
+        private void portComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+                connectToolStripMenuItem_Click(sender, e);
         }
 
         #endregion

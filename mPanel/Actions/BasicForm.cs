@@ -27,17 +27,17 @@ namespace mPanel.Actions
 
         private void BasicForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Matrix.Standby();
+            standbyButton_Click(sender, e);
         }
 
         private void brightnessBar_Scroll(object sender, EventArgs e)
         {
-            brightnessButton.Text = $"Set Brightness - {brightnessBar.Value}";
+            brightnessButton.Text = $"Set Brightness - {brightnessTrackBar.Value}";
         }
 
         private void brightnessButton_Click(object sender, EventArgs e)
         {
-            Matrix.SetBrightness((byte) brightnessBar.Value);
+            Matrix.SetBrightness((byte) brightnessTrackBar.Value);
         }
 
         private void colorButton_Click(object sender, EventArgs e)
@@ -54,7 +54,7 @@ namespace mPanel.Actions
 
         private void standbyButton_Click(object sender, EventArgs e)
         {
-            Matrix.Standby();
+            Matrix.Standby((byte) Math.Max(brightnessTrackBar.Value, 32));
         }
 
         private void button1_Click(object sender, EventArgs e)
