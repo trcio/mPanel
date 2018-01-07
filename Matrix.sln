@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Matrix", "Matrix\Matrix.csproj", "{1CF92A90-9A1A-47D6-9F5B-C0D1E57AD395}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control Panel", "Control Panel\Control Panel.csproj", "{2010A832-A533-40A0-A57A-D02B46572130}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mPanel", "mPanel\mPanel.csproj", "{2010A832-A533-40A0-A57A-D02B46572130}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
