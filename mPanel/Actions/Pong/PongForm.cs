@@ -134,10 +134,10 @@ namespace mPanel.Actions.Pong
                 case Keys.F:
                     TopPaddle.DeltaX = 1;
                     break;
-                case Keys.NumPad1:
+                case Keys.J:
                     BottomPaddle.DeltaX = -1;
                     break;
-                case Keys.NumPad3:
+                case Keys.K:
                     BottomPaddle.DeltaX = 1;
                     break;
                 case Keys.Space:
@@ -158,11 +158,11 @@ namespace mPanel.Actions.Pong
                     if (TopPaddle.DeltaX > 0)
                         TopPaddle.DeltaX = 0;
                     break;
-                case Keys.NumPad1:
+                case Keys.J:
                     if (BottomPaddle.DeltaX < 0)
                         BottomPaddle.DeltaX = 0;
                     break;
-                case Keys.NumPad3:
+                case Keys.K:
                     if (BottomPaddle.DeltaX > 0)
                         BottomPaddle.DeltaX = 0;
                     break;

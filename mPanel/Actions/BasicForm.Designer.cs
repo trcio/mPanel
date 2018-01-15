@@ -36,7 +36,6 @@
             this.divider2 = new System.Windows.Forms.Label();
             this.standbyButton = new System.Windows.Forms.Button();
             this.colorComboBox = new mPanel.ColorComboBox();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessTrackBar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +55,7 @@
             this.brightnessButton.Name = "brightnessButton";
             this.brightnessButton.Size = new System.Drawing.Size(150, 30);
             this.brightnessButton.TabIndex = 1;
-            this.brightnessButton.Text = "Set Brightness - 64";
+            this.brightnessButton.Text = "Set Brightness - 32";
             this.brightnessButton.UseVisualStyleBackColor = true;
             this.brightnessButton.Click += new System.EventHandler(this.brightnessButton_Click);
             // 
@@ -68,7 +67,7 @@
             this.brightnessTrackBar.Size = new System.Drawing.Size(150, 45);
             this.brightnessTrackBar.TabIndex = 0;
             this.brightnessTrackBar.TickFrequency = 64;
-            this.brightnessTrackBar.Value = 64;
+            this.brightnessTrackBar.Value = 32;
             this.brightnessTrackBar.Scroll += new System.EventHandler(this.brightnessBar_Scroll);
             // 
             // colorButton
@@ -101,7 +100,7 @@
             // 
             this.standbyButton.Location = new System.Drawing.Point(12, 225);
             this.standbyButton.Name = "standbyButton";
-            this.standbyButton.Size = new System.Drawing.Size(89, 30);
+            this.standbyButton.Size = new System.Drawing.Size(150, 30);
             this.standbyButton.TabIndex = 9;
             this.standbyButton.Text = "Standby";
             this.standbyButton.UseVisualStyleBackColor = true;
@@ -1804,28 +1803,158 @@
             "White",
             "WhiteSmoke",
             "Yellow",
+            "YellowGreen",
+            "Transparent",
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
             "YellowGreen"});
             this.colorComboBox.Location = new System.Drawing.Point(13, 105);
             this.colorComboBox.Name = "colorComboBox";
             this.colorComboBox.Size = new System.Drawing.Size(148, 23);
             this.colorComboBox.TabIndex = 2;
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(108, 226);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // BasicForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(174, 267);
             this.ControlBox = false;
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.standbyButton);
             this.Controls.Add(this.colorComboBox);
             this.Controls.Add(this.divider2);
@@ -1861,6 +1990,5 @@
         private System.Windows.Forms.Label divider2;
         private ColorComboBox colorComboBox;
         private System.Windows.Forms.Button standbyButton;
-        private System.Windows.Forms.Button button1;
     }
 }
