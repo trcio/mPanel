@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Windows.Forms;
+using mPanel.Matrix;
 using mPanel.Actions;
 using mPanel.Actions.Snake;
 using mPanel.Actions.Pong;
 using mPanel.Actions.Visualizer;
 using mPanel.Actions.Weather;
-using mPanel.Matrix;
 
 namespace mPanel
 {
@@ -31,6 +32,31 @@ namespace mPanel
                 { "Weather", typeof(WeatherForm) }
             };
         }
+
+        #region Methods
+
+        private void ClearActions()
+        {
+            foreach (var form in MdiChildren)
+                form.Close();
+
+            actionsToolStripMenuItem.Visible = false;
+        }
+
+        private void InitializeActions()
+        {
+            var preview = new PreviewForm { MdiParent = this };
+            preview.Show();
+            preview.Location = new Point(0, 0);
+
+            var basic = new BasicForm { MdiParent = this };
+            basic.Show();
+            basic.Location = new Point(preview.Right, 0);
+
+            actionsToolStripMenuItem.Visible = true;
+        }
+
+        #endregion
 
         #region Form Events
 
@@ -89,29 +115,6 @@ namespace mPanel
         {
             if (e.KeyCode == Keys.Enter)
                 connectToolStripMenuItem_Click(sender, e);
-        }
-
-        #endregion
-
-        #region Methods
-
-        private void ClearActions()
-        {
-            foreach (var form in MdiChildren)
-                form.Close();
-
-            actionsToolStripMenuItem.Visible = false;
-        }
-
-        private void InitializeActions()
-        {
-            var preview = new PreviewForm { MdiParent = this };
-            preview.Show();
-
-            var basic = new BasicForm { MdiParent = this };
-            basic.Show();
-
-            actionsToolStripMenuItem.Visible = true;
         }
 
         #endregion

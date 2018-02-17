@@ -39,8 +39,6 @@ namespace mPanel.Actions
             this.panel.GapSize = 1;
             this.panel.Location = new System.Drawing.Point(12, 12);
             this.panel.Name = "panel";
-            this.panel.PanelHeight = 15;
-            this.panel.PanelWidth = 15;
             this.panel.PixelSize = 15;
             this.panel.Size = new System.Drawing.Size(239, 239);
             this.panel.TabIndex = 0;

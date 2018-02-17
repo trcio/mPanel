@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace mPanel.Extra.Yahoo
@@ -224,7 +223,7 @@ namespace mPanel.Extra.Yahoo
         public int Count { get; set; }
 
         [DataMember(Name = "created")]
-        public DateTime Created { get; set; }
+        public string Created { get; set; }
 
         [DataMember(Name = "lang")]
         public string Lang { get; set; }

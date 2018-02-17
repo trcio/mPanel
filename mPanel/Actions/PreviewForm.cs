@@ -13,6 +13,8 @@ namespace mPanel.Actions
             InitializeComponent();
         }
 
+        #region Form Events
+
         private void PreviewForm_Load(object sender, EventArgs e)
         {
             Matrix.FrameHook += Matrix_FrameHook;
@@ -27,5 +29,7 @@ namespace mPanel.Actions
         {
             panel.UpdatePreview(e);
         }
+
+        #endregion
     }
 }

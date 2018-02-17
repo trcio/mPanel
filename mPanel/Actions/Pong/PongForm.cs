@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
-using System.Timers;
 using System.Windows.Forms;
-using mPanel.Matrix;
+using System.Timers;
 using Timer = System.Timers.Timer;
+using mPanel.Matrix;
 
 namespace mPanel.Actions.Pong
 {
@@ -12,8 +12,8 @@ namespace mPanel.Actions.Pong
 
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
-        private readonly Timer GameTimer;
         private readonly Frame Frame;
+        private readonly Timer GameTimer;
         private Ball Ball;
         private Paddle TopPaddle, BottomPaddle;
         private long FrameCount;
@@ -23,13 +23,15 @@ namespace mPanel.Actions.Pong
         {
             InitializeComponent();
 
+            Frame = new Frame();
+
             GameTimer = new Timer(1000.0 / FramesPerSecond);
             GameTimer.Elapsed += GameTimer_Elapsed;
 
-            Frame = new Frame();
-
             NewGame();
         }
+
+        #region Methods
 
         private void GameTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -118,6 +120,10 @@ namespace mPanel.Actions.Pong
             return false;
         }
 
+        #endregion
+
+        #region Form Events
+
         private void PongForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             GameTimer.Stop();
@@ -184,5 +190,7 @@ namespace mPanel.Actions.Pong
                 label1.Focus();
             }
         }
+
+        #endregion
     }
 }

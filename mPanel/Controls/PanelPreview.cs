@@ -8,24 +8,21 @@ namespace mPanel.Controls
     public sealed class PanelPreview : Panel
     {
         private static int PixelDataLength => MatrixPanel.PixelDataLength;
+        private readonly byte[] FrameBuffer;
 
-        public int PanelWidth { get; set; }
-        public int PanelHeight { get; set; }
+        public int PanelWidth => MatrixPanel.Width;
+        public int PanelHeight => MatrixPanel.Height;
         public int PixelSize { get; set; }
         public int GapSize { get; set; }
 
-        private readonly byte[] FrameBuffer;
-        
         public PanelPreview()
         {
             DoubleBuffered = true;
 
-            PanelWidth = 15;
-            PanelHeight = 15;
+            FrameBuffer = new byte[PanelWidth * PanelHeight * PixelDataLength];
+
             PixelSize = 3;
             GapSize = 1;
-
-            FrameBuffer = new byte[PanelWidth * PanelHeight * PixelDataLength];
         }
 
         public void UpdatePreview(byte[] data)

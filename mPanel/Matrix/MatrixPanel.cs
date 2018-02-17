@@ -17,11 +17,11 @@ namespace mPanel.Matrix
 
         private SerialPort Arduino;
 
+        public event EventHandler<byte[]> FrameHook;
+
         public static int Width { get; private set; }
         public static int Height { get; private set; }
         public bool Connected => Arduino?.IsOpen ?? false;
-
-        public event EventHandler<byte[]> FrameHook;
 
         public MatrixPanel(int width, int height)
         {
@@ -29,14 +29,14 @@ namespace mPanel.Matrix
             Height = height;
         }
 
-        private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            Console.Write(Arduino.ReadExisting());
-        }
-
         protected virtual void OnFrameHook(byte[] e)
         {
             FrameHook?.Invoke(this, e);
+        }
+
+        private void Arduino_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            Console.Write(Arduino.ReadExisting());
         }
 
         public bool Connect(string port)

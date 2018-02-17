@@ -17,6 +17,8 @@ namespace mPanel.Actions
             Frame = new Frame();
         }
 
+        #region Form Events
+
         private void BasicForm_Load(object sender, EventArgs e)
         {
             Matrix.Clear();
@@ -55,5 +57,7 @@ namespace mPanel.Actions
         {
             Matrix.Standby((byte) brightnessTrackBar.Value);
         }
+
+        #endregion
     }
 }

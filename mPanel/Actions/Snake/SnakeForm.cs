@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Timers;
 using System.Windows.Forms;
-using mPanel.Extra;
-using mPanel.Matrix;
+using System.Timers;
 using Timer = System.Timers.Timer;
+using mPanel.Matrix;
+using mPanel.Extra;
 
 namespace mPanel.Actions.Snake
 {
@@ -15,8 +15,8 @@ namespace mPanel.Actions.Snake
 
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
-        private readonly Timer GameTimer;
         private readonly Frame Frame;
+        private readonly Timer GameTimer;
         private readonly FoodPiece FoodPiece;
         private readonly List<SnakePiece> SnakePieces;
         private Direction Direction, PreviousDirection;
@@ -25,10 +25,10 @@ namespace mPanel.Actions.Snake
         {
             InitializeComponent();
 
+            Frame = new Frame();
+
             GameTimer = new Timer(1000.0 / FramesPerSecond);
             GameTimer.Elapsed += GameTimer_Elapsed;
-
-            Frame = new Frame();
 
             Direction = Direction.Left;
             PreviousDirection = Direction.None;
@@ -39,6 +39,8 @@ namespace mPanel.Actions.Snake
                 new SnakePiece(Frame, Color.White, FoodPiece.Random.Next(0, MatrixPanel.Width), FoodPiece.Random.Next(0, MatrixPanel.Height))
             };
         }
+
+        #region Methods
 
         private void GameTimer_Elapsed(object sender, ElapsedEventArgs elapsedEventArgs)
         {
@@ -105,6 +107,10 @@ namespace mPanel.Actions.Snake
             }));
         }
 
+        #endregion
+
+        #region Form Events
+
         private void SnakeForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             GameTimer.Stop();
@@ -167,5 +173,7 @@ namespace mPanel.Actions.Snake
             PreviousDirection = Direction;
             Direction = Direction.Right;
         }
+
+        #endregion
     }
 }

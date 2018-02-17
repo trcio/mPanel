@@ -57,9 +57,9 @@
             this.averageCheckBox.AutoSize = true;
             this.averageCheckBox.Location = new System.Drawing.Point(12, 12);
             this.averageCheckBox.Name = "averageCheckBox";
-            this.averageCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.averageCheckBox.Size = new System.Drawing.Size(88, 17);
             this.averageCheckBox.TabIndex = 1;
-            this.averageCheckBox.Text = "Use Average";
+            this.averageCheckBox.Text = "Use average";
             this.averageCheckBox.UseVisualStyleBackColor = true;
             this.averageCheckBox.CheckedChanged += new System.EventHandler(this.averageCheckBox_CheckedChanged);
             // 
@@ -114,9 +114,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 38);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 13);
+            this.label1.Size = new System.Drawing.Size(109, 13);
             this.label1.TabIndex = 4;
-            this.label1.Text = "Minimum Frequency";
+            this.label1.Text = "Minimum frequency";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label2
@@ -124,9 +124,9 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 87);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 13);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 5;
-            this.label2.Text = "Maximum Frequency";
+            this.label2.Text = "Maximum frequency";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // amplifierUpDown
@@ -163,9 +163,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 136);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(84, 13);
+            this.label3.Size = new System.Drawing.Size(83, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Amplifier Value";
+            this.label3.Text = "Amplifier value";
             // 
             // VisualizerForm
             // 

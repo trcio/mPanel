@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using CSCore.DSP;
-using mPanel.Extra;
 using mPanel.Matrix;
+using mPanel.Extra;
+using CSCore.DSP;
 
 // LineSpectrum repurposed from a CSCore sample project
 
@@ -12,7 +12,6 @@ namespace mPanel.Actions.Visualizer
     public sealed class LineSpectrum : Spectrum
     {
         private readonly Frame Frame;
-
         private byte Hue;
 
         public double Amplifier { get; set; }

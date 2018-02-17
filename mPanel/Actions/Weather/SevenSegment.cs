@@ -4,12 +4,12 @@ namespace mPanel.Actions.Weather
 {
     public class SevenSegment
     {
-        public Size SegmentSize { get; set; }
-        public Brush Color { get; set; } = Brushes.White;
-        public Point Location { get; set; }
-
         private readonly int[][] DigitSegments;
         private int Digit;
+
+        public Size SegmentSize { get; set; }
+        public Brush Color { get; set; }
+        public Point Location { get; set; }
 
         public SevenSegment()
         {
@@ -28,6 +28,7 @@ namespace mPanel.Actions.Weather
             };
 
             SegmentSize = new Size(3, 1);
+            Color = Brushes.White;
         }
 
         public void SetDigit(int digit)

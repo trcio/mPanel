@@ -104,9 +104,9 @@
             this.endlessCheckBox.AutoSize = true;
             this.endlessCheckBox.Location = new System.Drawing.Point(13, 120);
             this.endlessCheckBox.Name = "endlessCheckBox";
-            this.endlessCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.endlessCheckBox.Size = new System.Drawing.Size(97, 17);
             this.endlessCheckBox.TabIndex = 9;
-            this.endlessCheckBox.Text = "Endless Mode";
+            this.endlessCheckBox.Text = "Endless mode";
             this.endlessCheckBox.UseVisualStyleBackColor = true;
             // 
             // SnakeForm

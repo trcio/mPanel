@@ -1,21 +1,19 @@
-﻿using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Drawing;
 
 namespace mPanel.Actions.Weather
 {
-    class NumberGrid
+    public class NumberSegment
     {
-        public Brush Color { get; set; }
-        public Point Location { get; set; }
-
         private readonly Size Size;
         private readonly string[] Numbers;
         private int Digit;
 
-        public NumberGrid()
+        public Brush Fill { get; set; }
+        public Point Location { get; set; }
+
+        public NumberSegment()
         {
-            Color = Brushes.White;
+            Fill = Brushes.White;
             Size = new Size(3, 5);
             Numbers = new[]
             {
@@ -44,7 +42,7 @@ namespace mPanel.Actions.Weather
         {
             for (var row = 0; row < Size.Height; row++)
                 for (var col = 0; col < Size.Width; col++)
-                    g.FillRectangle(Numbers[Digit][col + row * Size.Width] == '0' ? Brushes.Black : Color, X(col), Y(row), 1, 1);
+                    g.FillRectangle(Numbers[Digit][col + row * Size.Width] == '0' ? Brushes.Black : Fill, X(col), Y(row), 1, 1);
         }
 
         private int X(int x)

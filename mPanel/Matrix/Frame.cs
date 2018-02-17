@@ -9,11 +9,10 @@ namespace mPanel.Matrix
     {
         private static int PixelDataLength => MatrixPanel.PixelDataLength;
 
-        public Graphics Graphics { get; }
         public Bitmap Bitmap { get; }
+        public Graphics Graphics { get; }
         public int Width => MatrixPanel.Width;
         public int Height => MatrixPanel.Height;
-        public Rectangle Rectangle => new Rectangle(0, 0, Width, Height);
 
         public Frame()
         {

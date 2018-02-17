@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Drawing;
-using mPanel.Extra;
 using mPanel.Matrix;
+using mPanel.Extra;
 
 namespace mPanel.Actions.Snake
 {
     public class FoodPiece
     {
         public static readonly Random Random = new Random();
+
         private readonly Frame Frame;
         private byte Hue;
 
