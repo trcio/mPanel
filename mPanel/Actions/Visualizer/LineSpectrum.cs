@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using CSCore.DSP;
+using mPanel.Extra;
 using mPanel.Matrix;
 
 // LineSpectrum repurposed from a CSCore sample project
@@ -11,6 +12,8 @@ namespace mPanel.Actions.Visualizer
     public sealed class LineSpectrum : Spectrum
     {
         private readonly Frame Frame;
+
+        private byte Hue;
 
         public double Amplifier { get; set; }
 
@@ -56,12 +59,21 @@ namespace mPanel.Actions.Visualizer
             for (var x = 0; x < spectrumPoints.Count; x++)
             {
                 var height = (int) Math.Round(spectrumPoints[x].Value * Amplifier);
-
-                using (var brush = new LinearGradientBrush(new Rectangle(x, 0, 1, MatrixPanel.Height), Color.Red, Color.Green, LinearGradientMode.Vertical))
+                
+                using (var brush = new LinearGradientBrush(new Rectangle(x, 0, 1, MatrixPanel.Height), ColorHelper.HsvToColor((byte) (Hue + 32)) , ColorHelper.HsvToColor(Hue), LinearGradientMode.Vertical))
                 {
                     Frame.Graphics.FillRectangle(brush, x, MatrixPanel.Height - height, 1, height);
                 }
+
+                
+
+                //                using (var brush = new LinearGradientBrush(new Rectangle(x, 0, 1, MatrixPanel.Height), Color.Red, Color.Green, LinearGradientMode.Vertical))
+                //                {
+                //                    Frame.Graphics.FillRectangle(brush, x, MatrixPanel.Height - height, 1, height);
+                //                }
             }
+
+            Hue++;
         }
     }
 }

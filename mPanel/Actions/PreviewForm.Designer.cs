@@ -1,4 +1,5 @@
-﻿using mPanel.Matrix;
+﻿using mPanel.Controls;
+using mPanel.Matrix;
 
 namespace mPanel.Actions
 {
@@ -63,6 +64,6 @@ namespace mPanel.Actions
 
         #endregion
 
-        private Matrix.PanelPreview panel;
+        private PanelPreview panel;
     }
 }

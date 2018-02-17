@@ -5,7 +5,8 @@ namespace mPanel.Matrix
 {
     public class MatrixPanel : IDisposable
     {
-        private const int PixelDataLength = 3;
+        public const int PixelDataLength = 3;
+
         private const int BaudRate = 1000000;
         private const byte StandbyHeader = 0xC0;
         private const byte ClearHeader = 0xC1;

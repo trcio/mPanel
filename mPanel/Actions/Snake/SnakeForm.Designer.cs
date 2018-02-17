@@ -34,11 +34,12 @@
             this.leftButton = new System.Windows.Forms.Button();
             this.rightButton = new System.Windows.Forms.Button();
             this.divider1 = new System.Windows.Forms.Label();
+            this.endlessCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // enableButton
             // 
-            this.enableButton.Location = new System.Drawing.Point(12, 83);
+            this.enableButton.Location = new System.Drawing.Point(12, 81);
             this.enableButton.Name = "enableButton";
             this.enableButton.Size = new System.Drawing.Size(150, 30);
             this.enableButton.TabIndex = 0;
@@ -98,10 +99,21 @@
             this.divider1.Size = new System.Drawing.Size(151, 2);
             this.divider1.TabIndex = 8;
             // 
+            // endlessCheckBox
+            // 
+            this.endlessCheckBox.AutoSize = true;
+            this.endlessCheckBox.Location = new System.Drawing.Point(13, 120);
+            this.endlessCheckBox.Name = "endlessCheckBox";
+            this.endlessCheckBox.Size = new System.Drawing.Size(98, 17);
+            this.endlessCheckBox.TabIndex = 9;
+            this.endlessCheckBox.Text = "Endless Mode";
+            this.endlessCheckBox.UseVisualStyleBackColor = true;
+            // 
             // SnakeForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(174, 127);
+            this.ClientSize = new System.Drawing.Size(174, 146);
+            this.Controls.Add(this.endlessCheckBox);
             this.Controls.Add(this.divider1);
             this.Controls.Add(this.rightButton);
             this.Controls.Add(this.leftButton);
@@ -120,6 +132,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SnakeForm_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SnakeForm_KeyDown);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -131,5 +144,6 @@
         private System.Windows.Forms.Button leftButton;
         private System.Windows.Forms.Button rightButton;
         private System.Windows.Forms.Label divider1;
+        private System.Windows.Forms.CheckBox endlessCheckBox;
     }
 }

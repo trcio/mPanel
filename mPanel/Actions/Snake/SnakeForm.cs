@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Timers;
 using System.Windows.Forms;
+using mPanel.Extra;
 using mPanel.Matrix;
-using mPanel.Misc;
 using Timer = System.Timers.Timer;
 
 namespace mPanel.Actions.Snake
@@ -36,7 +36,7 @@ namespace mPanel.Actions.Snake
             FoodPiece = new FoodPiece(Frame);
             SnakePieces = new List<SnakePiece>
             {
-                new SnakePiece(Frame, Color.White, 7, 7)
+                new SnakePiece(Frame, Color.White, FoodPiece.Random.Next(0, MatrixPanel.Width), FoodPiece.Random.Next(0, MatrixPanel.Height))
             };
         }
 
@@ -45,7 +45,10 @@ namespace mPanel.Actions.Snake
             Frame.Clear(Color.Black);
 
             // draw food
-            FoodPiece.Draw();
+            if (endlessCheckBox.Checked)
+                AddPiece();
+            else
+                FoodPiece.Draw();
 
             // cascade tail pieces
             for (var i = SnakePieces.Count - 1; i > 0; i--)

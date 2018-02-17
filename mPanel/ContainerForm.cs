@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.IO.Ports;
 using System.Windows.Forms;
 using mPanel.Actions;
-using mPanel.Actions.Pong;
 using mPanel.Actions.Snake;
+using mPanel.Actions.Pong;
 using mPanel.Actions.Visualizer;
+using mPanel.Actions.Weather;
 using mPanel.Matrix;
 
 namespace mPanel
@@ -26,7 +27,8 @@ namespace mPanel
             {
                 { "Snake", typeof(SnakeForm) },
                 { "Pong", typeof(PongForm) },
-                { "Visualizer", typeof(VisualizerForm) }
+                { "Visualizer", typeof(VisualizerForm) },
+                { "Weather", typeof(WeatherForm) }
             };
         }
 

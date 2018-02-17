@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using mPanel.Matrix;
 
-namespace mPanel.Matrix
+namespace mPanel.Controls
 {
     public sealed class PanelPreview : Panel
     {
-        private const int PixelDataLength = 3;
+        private static int PixelDataLength => MatrixPanel.PixelDataLength;
 
         public int PanelWidth { get; set; }
         public int PanelHeight { get; set; }
@@ -38,8 +39,8 @@ namespace mPanel.Matrix
 
         protected override void OnMove(EventArgs e)
         {
-            Width = PanelWidth * PixelSize + 14 * GapSize;
-            Height = PanelHeight * PixelSize + 14 * GapSize;
+            Width = PanelWidth * PixelSize + (PanelWidth - 1) * GapSize;
+            Height = PanelHeight * PixelSize + (PanelHeight - 1) * GapSize;
 
             base.OnMove(e);
         }

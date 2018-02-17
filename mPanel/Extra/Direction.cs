@@ -1,4 +1,4 @@
-﻿namespace mPanel.Misc
+﻿namespace mPanel.Extra
 {
     public class Direction
     {

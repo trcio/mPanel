@@ -39,8 +39,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Actions\BasicForm.cs">
@@ -72,7 +75,18 @@
     <Compile Include="Actions\Visualizer\VisualizerForm.Designer.cs">
       <DependentUpon>VisualizerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Misc\Direction.cs" />
+    <Compile Include="Actions\Weather\NumberGrid.cs" />
+    <Compile Include="Actions\Weather\SevenSegment.cs" />
+    <Compile Include="Actions\Weather\WeatherForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Weather\WeatherForm.Designer.cs">
+      <DependentUpon>WeatherForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Extra\JsonUtil.cs" />
+    <Compile Include="Extra\Yahoo\WeatherResponse.cs" />
+    <Compile Include="Extra\Yahoo\YahooProvider.cs" />
+    <Compile Include="Extra\Direction.cs" />
     <Compile Include="Actions\Snake\FoodPiece.cs" />
     <Compile Include="Actions\Snake\SnakeForm.cs">
       <SubType>Form</SubType>
@@ -81,10 +95,10 @@
       <DependentUpon>SnakeForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Actions\Snake\SnakePiece.cs" />
-    <Compile Include="ColorComboBox.cs">
+    <Compile Include="Controls\ColorComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Misc\ColorHelper.cs" />
+    <Compile Include="Extra\ColorHelper.cs" />
     <Compile Include="ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,7 +107,7 @@
     </Compile>
     <Compile Include="Matrix\Frame.cs" />
     <Compile Include="Matrix\MatrixPanel.cs" />
-    <Compile Include="Matrix\PanelPreview.cs">
+    <Compile Include="Controls\PanelPreview.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Program.cs" />
@@ -112,6 +126,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\Visualizer\VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Weather\WeatherForm.resx">
+      <DependentUpon>WeatherForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ContainerForm.resx">
       <DependentUpon>ContainerForm.cs</DependentUpon>

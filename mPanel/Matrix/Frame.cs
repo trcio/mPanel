@@ -7,7 +7,7 @@ namespace mPanel.Matrix
 {
     public class Frame : IDisposable
     {
-        private const int PixelDataLength = 3;
+        private static int PixelDataLength => MatrixPanel.PixelDataLength;
 
         public Graphics Graphics { get; }
         public Bitmap Bitmap { get; }

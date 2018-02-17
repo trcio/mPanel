@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using mPanel.Extra;
 using mPanel.Matrix;
-using mPanel.Misc;
 
 namespace mPanel.Actions.Pong
 {

@@ -1,4 +1,6 @@
-﻿namespace mPanel.Actions
+﻿using mPanel.Controls;
+
+namespace mPanel.Actions
 {
     partial class BasicForm
     {
@@ -35,7 +37,7 @@
             this.divider1 = new System.Windows.Forms.Label();
             this.divider2 = new System.Windows.Forms.Label();
             this.standbyButton = new System.Windows.Forms.Button();
-            this.colorComboBox = new mPanel.ColorComboBox();
+            this.colorComboBox = new ColorComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.brightnessTrackBar)).BeginInit();
             this.SuspendLayout();
             // 

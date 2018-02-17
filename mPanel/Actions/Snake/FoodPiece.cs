@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Drawing;
+using mPanel.Extra;
 using mPanel.Matrix;
-using mPanel.Misc;
 
 namespace mPanel.Actions.Snake
 {
     public class FoodPiece
     {
-        private static readonly Random Random = new Random();
+        public static readonly Random Random = new Random();
         private readonly Frame Frame;
         private byte Hue;
 
@@ -24,8 +24,8 @@ namespace mPanel.Actions.Snake
 
         public void Randomize()
         {
-            Hue += 255 / 13;
-            Fill = ColorHelper.HsvToColor(Hue / 255.0, 1.0, 1.0);
+            Hue += 255 / 14;
+            Fill = ColorHelper.HsvToColor(Hue);
             X = Random.Next(0, MatrixPanel.Width);
             Y = Random.Next(0, MatrixPanel.Height);
         }

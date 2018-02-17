@@ -152,10 +152,10 @@
             this.amplifierUpDown.Size = new System.Drawing.Size(54, 22);
             this.amplifierUpDown.TabIndex = 6;
             this.amplifierUpDown.Value = new decimal(new int[] {
-            100,
+            1,
             0,
             0,
-            131072});
+            0});
             this.amplifierUpDown.ValueChanged += new System.EventHandler(this.amplifierUpDown_ValueChanged);
             // 
             // label3
@@ -184,7 +184,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(190, 93);
+            this.MinimumSize = new System.Drawing.Size(190, 273);
             this.Name = "VisualizerForm";
             this.ShowIcon = false;
             this.Text = "Visualizer";

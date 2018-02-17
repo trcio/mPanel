@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Reflection;
 using System.Windows.Forms;
 
-namespace mPanel
+namespace mPanel.Controls
 {
     public sealed class ColorComboBox : ComboBox
     {
