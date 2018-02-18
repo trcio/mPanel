@@ -94,7 +94,7 @@ namespace mPanel.Actions.Weather
             locationTextBox.SelectAll();
         }
 
-        private void findButton_Click(object sender, System.EventArgs e)
+        private void findButton_Click(object sender, EventArgs e)
         {
             UpdateWeather();
         }

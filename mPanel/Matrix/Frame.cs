@@ -62,8 +62,8 @@ namespace mPanel.Matrix
 
         public void Dispose()
         {
-            Graphics?.Dispose();
             Bitmap?.Dispose();
+            Graphics?.Dispose();
         }
     }
 }
