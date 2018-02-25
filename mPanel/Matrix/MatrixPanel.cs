@@ -18,7 +18,7 @@ namespace mPanel.Matrix
             Height = height;
         }
 
-        protected virtual void OnFrameHook(byte[] e)
+        protected void OnFrameHook(byte[] e)
         {
             FrameHook?.Invoke(this, e);
         }

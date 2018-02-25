@@ -25,6 +25,14 @@ namespace mPanel.Matrix
             Graphics.Clear(color);
         }
 
+        public void SetPixel(Point pixel, Color color)
+        {
+            using (var brush = new SolidBrush(color))
+            {
+                Graphics.FillRectangle(brush, pixel.X, pixel.Y, 1, 1);
+            }
+        }
+
         public byte[] GetBytes()
         {
             var rect = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);

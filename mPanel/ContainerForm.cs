@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 using mPanel.Matrix;
 using mPanel.Actions;
+using mPanel.Actions.Animator;
 using mPanel.Actions.Snake;
 using mPanel.Actions.Pong;
 using mPanel.Actions.Visualizer;
@@ -24,6 +25,7 @@ namespace mPanel
 
             ActionForms = new Dictionary<string, Type>
             {
+                { "Animator", typeof(AnimatorForm) },
                 { "Snake", typeof(SnakeForm) },
                 { "Pong", typeof(PongForm) },
                 { "Visualizer", typeof(VisualizerForm) },

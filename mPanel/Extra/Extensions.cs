@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace mPanel.Extra
@@ -21,6 +22,15 @@ namespace mPanel.Extra
             const uint emSetCueBanner = 0x1501;
 
             NativeMethods.SendMessage(t.Handle, emSetCueBanner, true, cue);
+        }
+
+        public static void ExInvoke<T>(this T t, Action<T> action) where T : ISynchronizeInvoke
+        {
+            try
+            {
+                t.Invoke(action, new object[] {t});
+            }
+            catch (ObjectDisposedException) { }
         }
     }
 }

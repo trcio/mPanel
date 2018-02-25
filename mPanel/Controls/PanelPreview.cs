@@ -5,7 +5,7 @@ using mPanel.Matrix;
 
 namespace mPanel.Controls
 {
-    public sealed class PanelPreview : Panel
+    public sealed class PanelPreview : Control
     {
         private static int PixelDataLength => MatrixPanel.PixelDataLength;
         private readonly byte[] FrameBuffer;
@@ -20,9 +20,6 @@ namespace mPanel.Controls
             DoubleBuffered = true;
 
             FrameBuffer = new byte[PanelWidth * PanelHeight * PixelDataLength];
-
-            PixelSize = 3;
-            GapSize = 1;
         }
 
         public void UpdatePreview(byte[] data)
@@ -30,7 +27,7 @@ namespace mPanel.Controls
             if (data?.Length != PanelWidth * PanelHeight * 3)
                 return;
 
-            Buffer.BlockCopy(data, 0, FrameBuffer, 0, data.Length);
+            Array.Copy(data, 0, FrameBuffer, 0, data.Length);
             Invalidate();
         }
 
@@ -52,15 +49,14 @@ namespace mPanel.Controls
         protected override void OnPaint(PaintEventArgs e)
         {
             var g = e.Graphics;
+            g.Clear(BackColor);
 
-            var count = 0;
+            var index = 0;
             var x = 0;
             var y = 0;
 
             for (var i = 0; i < FrameBuffer.Length; i += PixelDataLength)
             {
-                count++;
-
                 var color = Color.FromArgb(FrameBuffer[i], FrameBuffer[i + 1], FrameBuffer[i + 2]);
                 
                 using (var brush = new SolidBrush(color))
@@ -71,11 +67,11 @@ namespace mPanel.Controls
                 g.DrawRectangle(Pens.Black, x, y, PixelSize - 1, PixelSize - 1);
 
                 x += PixelSize + GapSize;
+                index++;
 
-                if (count < 15)
+                if (index % PanelWidth != 0)
                     continue;
 
-                count = 0;
                 x = 0;
                 y += PixelSize + GapSize;
             }

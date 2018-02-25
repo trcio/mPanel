@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Animator\AnimatorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Animator\AnimatorForm.Designer.cs">
+      <DependentUpon>AnimatorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Actions\BasicForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +93,9 @@
     <Compile Include="Actions\Weather\WeatherForm.Designer.cs">
       <DependentUpon>WeatherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FrameEditor.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Extra\JsonUtil.cs" />
     <Compile Include="Extra\Extensions.cs" />
     <Compile Include="Extra\NativeMethods.cs" />
@@ -120,6 +129,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Actions\Animator\AnimatorForm.resx">
+      <DependentUpon>AnimatorForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Actions\BasicForm.resx">
       <DependentUpon>BasicForm.cs</DependentUpon>
       <SubType>Designer</SubType>

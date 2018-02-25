@@ -88,10 +88,7 @@ namespace mPanel.Actions.Snake
 
             FoodPiece.Randomize();
 
-            Invoke(new Action(() =>
-            {
-                Text = $"Snake - {SnakePieces.Count - 1}";
-            }));
+            this.ExInvoke(f => f.Text = $"Snake - {SnakePieces.Count - 1}");
         }
 
         private void ResetSnake()
@@ -101,10 +98,7 @@ namespace mPanel.Actions.Snake
             SnakePieces.Clear();
             SnakePieces.Add(head);
 
-            Invoke(new Action(() =>
-            {
-                Text = "Snake";
-            }));
+            this.ExInvoke(f => f.Text = "Snake");
         }
 
         #endregion
