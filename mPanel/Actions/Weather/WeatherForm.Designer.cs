@@ -182,6 +182,7 @@
             this.Name = "WeatherForm";
             this.ShowIcon = false;
             this.Text = "Weather";
+            this.Load += new System.EventHandler(this.WeatherForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.conditionPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

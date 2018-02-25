@@ -80,6 +80,11 @@ namespace mPanel.Actions.Weather
 
         #region Form Events
 
+        private void WeatherForm_Load(object sender, EventArgs e)
+        {
+            locationTextBox.SetCue("zipcode or place");
+        }
+
         private void locationTextBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode != Keys.Enter)

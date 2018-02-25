@@ -58,6 +58,7 @@
             // portComboBox
             // 
             this.portComboBox.BackColor = System.Drawing.SystemColors.Window;
+            this.portComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.portComboBox.DropDownWidth = 75;
             this.portComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Standard;
             this.portComboBox.IntegralHeight = false;

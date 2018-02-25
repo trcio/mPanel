@@ -88,7 +88,8 @@
       <DependentUpon>WeatherForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Extra\JsonUtil.cs" />
-    <Compile Include="Extra\StringExtensions.cs" />
+    <Compile Include="Extra\Extensions.cs" />
+    <Compile Include="Extra\NativeMethods.cs" />
     <Compile Include="Extra\Yahoo\WeatherResponse.cs" />
     <Compile Include="Extra\Yahoo\YahooProvider.cs" />
     <Compile Include="Extra\Direction.cs" />
@@ -111,7 +112,9 @@
       <DependentUpon>ContainerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Matrix\Frame.cs" />
+    <Compile Include="Matrix\GuiPanel.cs" />
     <Compile Include="Matrix\MatrixPanel.cs" />
+    <Compile Include="Matrix\SerialPanel.cs" />
     <Compile Include="Controls\PanelPreview.cs">
       <SubType>Component</SubType>
     </Compile>

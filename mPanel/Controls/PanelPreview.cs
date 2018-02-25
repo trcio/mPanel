@@ -34,12 +34,19 @@ namespace mPanel.Controls
             Invalidate();
         }
 
-        protected override void OnMove(EventArgs e)
+        protected override void OnResize(EventArgs eventargs)
         {
-            Width = PanelWidth * PixelSize + (PanelWidth - 1) * GapSize;
-            Height = PanelHeight * PixelSize + (PanelHeight - 1) * GapSize;
+            base.OnResize(eventargs);
 
-            base.OnMove(e);
+            if (DesignMode)
+                return;
+
+            var size = Math.Min(Width, Height);
+            var dim = Math.Max(PanelWidth, PanelHeight);
+
+            PixelSize = (size - (dim - 1) * GapSize) / dim;
+
+            Invalidate();
         }
 
         protected override void OnPaint(PaintEventArgs e)

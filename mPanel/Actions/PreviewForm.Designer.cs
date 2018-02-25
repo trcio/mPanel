@@ -31,13 +31,17 @@ namespace mPanel.Actions
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel = new PanelPreview();
+            this.panel = new mPanel.Controls.PanelPreview();
             this.SuspendLayout();
             // 
             // panel
             // 
+            this.panel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.panel.GapSize = 1;
             this.panel.Location = new System.Drawing.Point(12, 12);
+            this.panel.MinimumSize = new System.Drawing.Size(239, 239);
             this.panel.Name = "panel";
             this.panel.PixelSize = 15;
             this.panel.Size = new System.Drawing.Size(239, 239);
@@ -51,7 +55,9 @@ namespace mPanel.Actions
             this.Controls.Add(this.panel);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(279, 302);
             this.Name = "PreviewForm";
             this.Text = "Preview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);

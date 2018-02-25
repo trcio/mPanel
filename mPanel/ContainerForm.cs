@@ -16,13 +16,11 @@ namespace mPanel
     {
         private readonly Dictionary<string, Type> ActionForms;
 
-        public MatrixPanel Matrix { get; }
+        public MatrixPanel Matrix { get; private set; }
 
         public ContainerForm()
         {
             InitializeComponent();
-
-            Matrix = new MatrixPanel(15, 15);
 
             ActionForms = new Dictionary<string, Type>
             {
@@ -62,7 +60,15 @@ namespace mPanel
 
         private void ContainerForm_Load(object sender, EventArgs e)
         {
-            portComboBox.Items.AddRange(SerialPort.GetPortNames());
+            foreach (var port in SerialPort.GetPortNames())
+            {
+                portComboBox.Items.Add(new SerialPanel(15, 15)
+                {
+                    Port = port
+                });
+            }
+
+            portComboBox.Items.Add(new GuiPanel(15, 15));
 
             if (portComboBox.Items.Count > 0)
                 portComboBox.SelectedIndex = 0;
@@ -86,22 +92,31 @@ namespace mPanel
 
         private void ContainerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Matrix.Disconnect();
+            Matrix?.Disconnect();
         }
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (Matrix.Connected)
+            if (Matrix != null)
             {
                 ClearActions();
                 Matrix.Disconnect();
+                Matrix = null;
 
                 portComboBox.Enabled = true;
                 connectToolStripMenuItem.Text = "Connect to";
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(portComboBox.Text) || !Matrix.Connect(portComboBox.Text))
+                if (string.IsNullOrWhiteSpace(portComboBox.Text))
+                    return;
+
+                Matrix = (MatrixPanel) portComboBox.SelectedItem;
+
+                if (Matrix == null)
+                    return;
+
+                if (!Matrix.Connect())
                     return;
 
                 InitializeActions();
