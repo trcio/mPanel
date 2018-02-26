@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace mPanel.Extra
@@ -30,7 +31,15 @@ namespace mPanel.Extra
             {
                 t.Invoke(action, new object[] {t});
             }
-            catch (ObjectDisposedException) { }
+            catch (Exception) { }
+        }
+
+        public static void Extract(this Bitmap b, Image other)
+        {
+            using (var g = Graphics.FromImage(b))
+            {
+                g.DrawImage(other, 0, 0);
+            }
         }
     }
 }

@@ -39,6 +39,7 @@
             this.loadAnimationButton = new System.Windows.Forms.Button();
             this.saveAnimationButton = new System.Windows.Forms.Button();
             this.clearAllButton = new System.Windows.Forms.Button();
+            this.importButton = new System.Windows.Forms.Button();
             this.editor = new mPanel.Controls.FrameEditor();
             ((System.ComponentModel.ISupportInitialize)(this.delayUpDown)).BeginInit();
             this.SuspendLayout();
@@ -131,6 +132,7 @@
             this.upFrameButton.TabIndex = 9;
             this.upFrameButton.Text = "Up";
             this.upFrameButton.UseVisualStyleBackColor = true;
+            this.upFrameButton.Click += new System.EventHandler(this.upFrameButton_Click);
             // 
             // downFrameButton
             // 
@@ -141,6 +143,7 @@
             this.downFrameButton.TabIndex = 10;
             this.downFrameButton.Text = "Down";
             this.downFrameButton.UseVisualStyleBackColor = true;
+            this.downFrameButton.Click += new System.EventHandler(this.downFrameButton_Click);
             // 
             // loadAnimationButton
             // 
@@ -175,6 +178,17 @@
             this.clearAllButton.UseVisualStyleBackColor = true;
             this.clearAllButton.Click += new System.EventHandler(this.clearAllButton_Click);
             // 
+            // importButton
+            // 
+            this.importButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.importButton.Location = new System.Drawing.Point(526, 300);
+            this.importButton.Name = "importButton";
+            this.importButton.Size = new System.Drawing.Size(100, 30);
+            this.importButton.TabIndex = 14;
+            this.importButton.Text = "Import Image";
+            this.importButton.UseVisualStyleBackColor = true;
+            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            // 
             // editor
             // 
             this.editor.BackColor = System.Drawing.Color.White;
@@ -193,6 +207,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(638, 414);
+            this.Controls.Add(this.importButton);
             this.Controls.Add(this.clearAllButton);
             this.Controls.Add(this.saveAnimationButton);
             this.Controls.Add(this.loadAnimationButton);
@@ -235,5 +250,6 @@
         private System.Windows.Forms.Button loadAnimationButton;
         private System.Windows.Forms.Button saveAnimationButton;
         private System.Windows.Forms.Button clearAllButton;
+        private System.Windows.Forms.Button importButton;
     }
 }

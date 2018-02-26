@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Media;
 using System.Windows.Forms;
 using System.Timers;
@@ -102,6 +103,7 @@ namespace mPanel.Actions.Animator
         {
             treeView.Enabled = state;
             delayUpDown.Enabled = state;
+            importButton.Enabled = state;
             saveAnimationButton.Enabled = state;
             loadAnimationButton.Enabled = state;
             addFrameButton.Enabled = state;
@@ -193,12 +195,40 @@ namespace mPanel.Actions.Animator
             }
         }
 
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            using (var fd = new OpenFileDialog())
+            {
+                fd.CheckFileExists = true;
+                fd.Filter = "Image files (*.gif, *.png, *.jpg, *.jpeg)|*.gif;*.png;*.jpg;*.jpeg";
+                fd.Title = "Import image into animation";
+
+                if (fd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                var image = Image.FromFile(fd.FileName);
+                var dim = new FrameDimension(image.FrameDimensionsList[0]);
+                var frames = image.GetFrameCount(dim);
+
+                // TODO complete implementation
+                for (var i = 1; i <= frames; i++)
+                {
+                    var b = new Bitmap(MatrixPanel.Width, MatrixPanel.Height, PixelFormat.Format24bppRgb);
+                    b.Extract(image);
+                    AddFrame(new Frame(b));
+
+                    if (i < frames)
+                        image.SelectActiveFrame(dim, i);
+                }
+            }
+        }
+
         private void saveAnimationButton_Click(object sender, EventArgs e)
         {
             using (var fd = new SaveFileDialog())
             {
                 fd.OverwritePrompt = true;
-                fd.Filter = "Animation files (*.ma)|*.ma";
+                fd.Filter = "Animation file (*.ma)|*.ma";
                 fd.Title = "Save animation file";
 
                 if (fd.ShowDialog() != DialogResult.OK)
@@ -208,12 +238,39 @@ namespace mPanel.Actions.Animator
             }
         }
 
+        private void upFrameButton_Click(object sender, EventArgs e)
+        {
+            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == 0)
+                return;
+
+            var node = treeView.SelectedNode;
+            var index = treeView.Nodes.IndexOf(node);
+            var other = treeView.Nodes[index - 1];
+
+            treeView.Nodes.Remove(other);
+            treeView.Nodes.Insert(index, other);
+            treeView.SelectedNode = node;
+        }
+
+        private void downFrameButton_Click(object sender, EventArgs e)
+        {
+            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == treeView.Nodes.Count - 1)
+                return;
+
+            var node = treeView.SelectedNode;
+            var index = treeView.Nodes.IndexOf(node);
+
+            treeView.Nodes.Remove(node);
+            treeView.Nodes.Insert(index + 1, node);
+            treeView.SelectedNode = node;
+        }
+
         private void loadAnimationButton_Click(object sender, EventArgs e)
         {
             using (var fd = new OpenFileDialog())
             {
                 fd.CheckFileExists = true;
-                fd.Filter = "Animation files (*.ma)|*.ma";
+                fd.Filter = "Animation file (*.ma)|*.ma";
                 fd.Title = "Load animation file";
 
                 if (fd.ShowDialog() != DialogResult.OK)
