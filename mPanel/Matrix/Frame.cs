@@ -20,6 +20,12 @@ namespace mPanel.Matrix
             Graphics = Graphics.FromImage(Bitmap);
         }
 
+        public Frame(Bitmap bitmap)
+        {
+            Bitmap = bitmap;
+            Graphics = Graphics.FromImage(Bitmap);
+        }
+
         public void Clear(Color color)
         {
             Graphics.Clear(color);

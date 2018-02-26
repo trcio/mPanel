@@ -8,9 +8,15 @@ namespace mPanel.Actions
     {
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
-        public PreviewForm()
+        public PreviewForm(bool zoom)
         {
             InitializeComponent();
+
+            if (!zoom)
+                return;
+
+            Width = 549;
+            Height = 573;
         }
 
         #region Form Events

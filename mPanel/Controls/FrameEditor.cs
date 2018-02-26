@@ -16,7 +16,7 @@ namespace mPanel.Controls
         public int PanelHeight => MatrixPanel.Height;
         public int PixelSize { get; set; }
         public int GapSize { get; set; }
-        public Frame CurrentFrame { get; set; }
+        public Frame SelectedFrame { get; set; }
 
         public event EventHandler<ChangeArgs> PixelChanged;
 
@@ -29,17 +29,17 @@ namespace mPanel.Controls
 
         private void OnPixelChanged(ChangeArgs e)
         {
-            if (CurrentFrame == null)
+            if (SelectedFrame == null)
                 return;
 
             PixelChanged?.Invoke(this, e);
-            FrameBuffer = CurrentFrame.GetBytes();
+            FrameBuffer = SelectedFrame.GetBytes();
             Invalidate();
         }
 
         public void SetFrame(Frame frame)
         {
-            CurrentFrame = frame;
+            SelectedFrame = frame;
             FrameBuffer = frame.GetBytes();
             Invalidate();
         }

@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actions\Animator\AnimationFile.cs" />
     <Compile Include="Actions\Animator\AnimatorForm.cs">
       <SubType>Form</SubType>
     </Compile>

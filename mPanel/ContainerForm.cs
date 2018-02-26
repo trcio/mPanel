@@ -45,7 +45,7 @@ namespace mPanel
 
         private void InitializeActions()
         {
-            var preview = new PreviewForm { MdiParent = this };
+            var preview = new PreviewForm(Matrix is GuiPanel) { MdiParent = this };
             preview.Show();
             preview.Location = new Point(0, 0);
 
