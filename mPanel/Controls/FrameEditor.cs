@@ -11,6 +11,7 @@ namespace mPanel.Controls
 
         private byte[] FrameBuffer;
         private int SelectedIndex;
+        private KeyEventArgs KeyArgs;
 
         public int PanelWidth => MatrixPanel.Width;
         public int PanelHeight => MatrixPanel.Height;
@@ -18,21 +19,22 @@ namespace mPanel.Controls
         public int GapSize { get; set; }
         public Frame SelectedFrame { get; set; }
 
-        public event EventHandler<ChangeArgs> PixelChanged;
+        public event EventHandler<ActionEventArgs> Action;
 
         public FrameEditor()
         {
             DoubleBuffered = true;
 
             FrameBuffer = new byte[PanelWidth * PanelHeight * PixelDataLength];
+            KeyArgs = new KeyEventArgs(Keys.None);
         }
 
-        private void OnPixelChanged(ChangeArgs e)
+        private void OnPixelChanged(ActionEventArgs e)
         {
             if (SelectedFrame == null)
                 return;
 
-            PixelChanged?.Invoke(this, e);
+            Action?.Invoke(this, e);
             FrameBuffer = SelectedFrame.GetBytes();
             Invalidate();
         }
@@ -44,8 +46,22 @@ namespace mPanel.Controls
             Invalidate();
         }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            KeyArgs = e;
+            base.OnKeyDown(e);
+        }
+
+        protected override void OnKeyUp(KeyEventArgs e)
+        {
+            KeyArgs = e;
+            base.OnKeyUp(e);
+        }
+
         protected override void OnMouseMove(MouseEventArgs e)
         {
+            Focus();
+
             if (e.X < 0 || e.Y < 0 || e.X >= Width || e.Y >= Height)
             {
                 SelectedIndex = -1;
@@ -58,7 +74,7 @@ namespace mPanel.Controls
 
             SelectedIndex = index;
 
-            OnPixelChanged(new ChangeArgs(e.Button, new Point(x, y)));
+            OnPixelChanged(new ActionEventArgs(e, KeyArgs, new Point(x, y)));
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -109,14 +125,16 @@ namespace mPanel.Controls
             }
         }
 
-        public class ChangeArgs : EventArgs
+        public class ActionEventArgs : EventArgs
         {
-            public MouseButtons Button { get; }
+            public MouseEventArgs Mouse { get; }
+            public KeyEventArgs Keys { get; }
             public Point Pixel { get; }
 
-            public ChangeArgs(MouseButtons button, Point pixel)
+            public ActionEventArgs(MouseEventArgs mouse, KeyEventArgs keys, Point pixel)
             {
-                Button = button;
+                Mouse = mouse;
+                Keys = keys;
                 Pixel = pixel;
             }
         }

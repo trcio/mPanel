@@ -40,6 +40,11 @@
             this.saveAnimationButton = new System.Windows.Forms.Button();
             this.clearAllButton = new System.Windows.Forms.Button();
             this.importButton = new System.Windows.Forms.Button();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.rightAltColorButton = new mPanel.Controls.ColorButton();
+            this.leftAltColorButton = new mPanel.Controls.ColorButton();
+            this.rightColorButton = new mPanel.Controls.ColorButton();
+            this.leftColorButton = new mPanel.Controls.ColorButton();
             this.editor = new mPanel.Controls.FrameEditor();
             ((System.ComponentModel.ISupportInitialize)(this.delayUpDown)).BeginInit();
             this.SuspendLayout();
@@ -189,6 +194,54 @@
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
+            // rightAltColorButton
+            // 
+            this.rightAltColorButton.BackColor = System.Drawing.Color.Blue;
+            this.rightAltColorButton.ForeColor = System.Drawing.Color.Black;
+            this.rightAltColorButton.Location = new System.Drawing.Point(581, 196);
+            this.rightAltColorButton.Name = "rightAltColorButton";
+            this.rightAltColorButton.SelectedColor = System.Drawing.Color.Blue;
+            this.rightAltColorButton.Size = new System.Drawing.Size(45, 45);
+            this.rightAltColorButton.TabIndex = 22;
+            this.rightAltColorButton.Text = "RA";
+            this.rightAltColorButton.UseVisualStyleBackColor = false;
+            // 
+            // leftAltColorButton
+            // 
+            this.leftAltColorButton.BackColor = System.Drawing.Color.Green;
+            this.leftAltColorButton.ForeColor = System.Drawing.Color.Black;
+            this.leftAltColorButton.Location = new System.Drawing.Point(526, 196);
+            this.leftAltColorButton.Name = "leftAltColorButton";
+            this.leftAltColorButton.SelectedColor = System.Drawing.Color.Green;
+            this.leftAltColorButton.Size = new System.Drawing.Size(45, 45);
+            this.leftAltColorButton.TabIndex = 21;
+            this.leftAltColorButton.Text = "LA";
+            this.leftAltColorButton.UseVisualStyleBackColor = false;
+            // 
+            // rightColorButton
+            // 
+            this.rightColorButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.rightColorButton.ForeColor = System.Drawing.Color.Black;
+            this.rightColorButton.Location = new System.Drawing.Point(581, 141);
+            this.rightColorButton.Name = "rightColorButton";
+            this.rightColorButton.SelectedColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.rightColorButton.Size = new System.Drawing.Size(45, 45);
+            this.rightColorButton.TabIndex = 20;
+            this.rightColorButton.Text = "R";
+            this.rightColorButton.UseVisualStyleBackColor = false;
+            // 
+            // leftColorButton
+            // 
+            this.leftColorButton.BackColor = System.Drawing.Color.White;
+            this.leftColorButton.ForeColor = System.Drawing.Color.Black;
+            this.leftColorButton.Location = new System.Drawing.Point(526, 141);
+            this.leftColorButton.Name = "leftColorButton";
+            this.leftColorButton.SelectedColor = System.Drawing.Color.White;
+            this.leftColorButton.Size = new System.Drawing.Size(45, 45);
+            this.leftColorButton.TabIndex = 19;
+            this.leftColorButton.Text = "L";
+            this.leftColorButton.UseVisualStyleBackColor = false;
+            // 
             // editor
             // 
             this.editor.BackColor = System.Drawing.Color.White;
@@ -202,11 +255,16 @@
             this.editor.Size = new System.Drawing.Size(390, 390);
             this.editor.TabIndex = 1;
             this.editor.Text = "ss";
+            this.editor.KeyDown += new System.Windows.Forms.KeyEventHandler(this.editor_KeyDown);
             // 
             // AnimatorForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(638, 414);
+            this.Controls.Add(this.rightAltColorButton);
+            this.Controls.Add(this.leftAltColorButton);
+            this.Controls.Add(this.rightColorButton);
+            this.Controls.Add(this.leftColorButton);
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.clearAllButton);
             this.Controls.Add(this.saveAnimationButton);
@@ -251,5 +309,10 @@
         private System.Windows.Forms.Button saveAnimationButton;
         private System.Windows.Forms.Button clearAllButton;
         private System.Windows.Forms.Button importButton;
+        private System.Windows.Forms.ColorDialog colorDialog1;
+        private Controls.ColorButton leftColorButton;
+        private Controls.ColorButton rightColorButton;
+        private Controls.ColorButton leftAltColorButton;
+        private Controls.ColorButton rightAltColorButton;
     }
 }

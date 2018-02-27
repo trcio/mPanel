@@ -38,8 +38,7 @@ namespace mPanel.Matrix
 
         public byte[] GetBytes()
         {
-            var rect = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
-            var data = Bitmap.LockBits(rect, ImageLockMode.ReadOnly, Bitmap.PixelFormat);
+            var data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadOnly, Bitmap.PixelFormat);
 
             byte[] bytes;
 

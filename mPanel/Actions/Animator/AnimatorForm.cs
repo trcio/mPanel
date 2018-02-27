@@ -54,6 +54,13 @@ namespace mPanel.Actions.Animator
             editor.SetFrame(frame);
         }
 
+        private void AddFrame(Image image)
+        {
+            var b = new Bitmap(MatrixPanel.Width, MatrixPanel.Height, PixelFormat.Format24bppRgb);
+            b.ScaleCopy(image);
+            AddFrame(new Frame(b));
+        }
+
         private void SaveAnimation(string file)
         {
             var bitmaps = new List<Bitmap>();
@@ -85,7 +92,6 @@ namespace mPanel.Actions.Animator
 
             foreach (var bitmap in file.Bitmaps)
                 AddFrame(new Frame(bitmap));
-
         }
 
         private Frame GetSelectedFrame()
@@ -119,7 +125,7 @@ namespace mPanel.Actions.Animator
 
         private void AnimatorForm_Load(object sender, EventArgs e)
         {
-            editor.PixelChanged += editor_PixelChanged;
+            editor.Action += editor_Action;
 
             AddFrame(new Frame());
         }
@@ -130,26 +136,35 @@ namespace mPanel.Actions.Animator
             Matrix.Clear();
         }
 
-        private void editor_PixelChanged(object sender, FrameEditor.ChangeArgs e)
+        private void editor_Action(object sender, FrameEditor.ActionEventArgs e)
         {
             var frame = GetSelectedFrame();
 
-            switch (e.Button)
-            {
-                case MouseButtons.Left:
-                    frame.SetPixel(e.Pixel, Color.Blue);
-                break;
-                case MouseButtons.Right:
-                    frame.SetPixel(e.Pixel, Color.Black);
-                break;
-                case MouseButtons.Middle:
-                    frame.Clear(Color.Black);
-                break;
-                default:
-                    return;
-            }
+            var left = e.Mouse.Button.HasFlag(MouseButtons.Left);
+            var right = e.Mouse.Button.HasFlag(MouseButtons.Right);
+            var ctrl = e.Keys.Modifiers.HasFlag(Keys.Control);
+            var alt = e.Keys.Modifiers.HasFlag(Keys.Alt);
+
+            if (left && ctrl)
+                frame.SetPixel(e.Pixel, Color.Black);
+            else if (right && ctrl)
+                frame.Clear(Color.Black);
+            else if (left && alt)
+                frame.SetPixel(e.Pixel, leftAltColorButton.SelectedColor);
+            else if (right && alt)
+                frame.SetPixel(e.Pixel, rightAltColorButton.SelectedColor);
+            else if (left)
+                frame.SetPixel(e.Pixel, leftColorButton.SelectedColor);
+            else if (right)
+                frame.SetPixel(e.Pixel, rightColorButton.SelectedColor);
 
             Matrix.SendFrame(frame);
+        }
+
+        private void editor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.C && e.Modifiers == Keys.Control)
+                AddFrame(editor.SelectedFrame.Bitmap);
         }
 
         private void treeView_AfterSelect(object sender, TreeViewEventArgs e)
@@ -169,6 +184,33 @@ namespace mPanel.Actions.Animator
         {
             if (treeView.Nodes.Count > 1)
                 treeView.Nodes.Remove(treeView.SelectedNode);
+        }
+
+        private void upFrameButton_Click(object sender, EventArgs e)
+        {
+            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == 0)
+                return;
+
+            var node = treeView.SelectedNode;
+            var index = treeView.Nodes.IndexOf(node);
+            var other = treeView.Nodes[index - 1];
+
+            treeView.Nodes.Remove(other);
+            treeView.Nodes.Insert(index, other);
+            treeView.SelectedNode = node;
+        }
+
+        private void downFrameButton_Click(object sender, EventArgs e)
+        {
+            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == treeView.Nodes.Count - 1)
+                return;
+
+            var node = treeView.SelectedNode;
+            var index = treeView.Nodes.IndexOf(node);
+
+            treeView.Nodes.Remove(node);
+            treeView.Nodes.Insert(index + 1, node);
+            treeView.SelectedNode = node;
         }
 
         private void clearAllButton_Click(object sender, EventArgs e)
@@ -210,12 +252,9 @@ namespace mPanel.Actions.Animator
                 var dim = new FrameDimension(image.FrameDimensionsList[0]);
                 var frames = image.GetFrameCount(dim);
 
-                // TODO complete implementation
                 for (var i = 1; i <= frames; i++)
                 {
-                    var b = new Bitmap(MatrixPanel.Width, MatrixPanel.Height, PixelFormat.Format24bppRgb);
-                    b.Extract(image);
-                    AddFrame(new Frame(b));
+                    AddFrame(image);
 
                     if (i < frames)
                         image.SelectActiveFrame(dim, i);
@@ -236,33 +275,6 @@ namespace mPanel.Actions.Animator
 
                 SaveAnimation(fd.FileName);
             }
-        }
-
-        private void upFrameButton_Click(object sender, EventArgs e)
-        {
-            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == 0)
-                return;
-
-            var node = treeView.SelectedNode;
-            var index = treeView.Nodes.IndexOf(node);
-            var other = treeView.Nodes[index - 1];
-
-            treeView.Nodes.Remove(other);
-            treeView.Nodes.Insert(index, other);
-            treeView.SelectedNode = node;
-        }
-
-        private void downFrameButton_Click(object sender, EventArgs e)
-        {
-            if (treeView.Nodes.Count < 2 || treeView.Nodes.IndexOf(treeView.SelectedNode) == treeView.Nodes.Count - 1)
-                return;
-
-            var node = treeView.SelectedNode;
-            var index = treeView.Nodes.IndexOf(node);
-
-            treeView.Nodes.Remove(node);
-            treeView.Nodes.Insert(index + 1, node);
-            treeView.SelectedNode = node;
         }
 
         private void loadAnimationButton_Click(object sender, EventArgs e)

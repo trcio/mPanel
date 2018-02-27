@@ -94,6 +94,9 @@
     <Compile Include="Actions\Weather\WeatherForm.Designer.cs">
       <DependentUpon>WeatherForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\ColorButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\FrameEditor.cs">
       <SubType>Component</SubType>
     </Compile>

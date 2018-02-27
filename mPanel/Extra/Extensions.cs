@@ -31,14 +31,17 @@ namespace mPanel.Extra
             {
                 t.Invoke(action, new object[] {t});
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
-        public static void Extract(this Bitmap b, Image other)
+        public static void ScaleCopy(this Bitmap b, Image other)
         {
             using (var g = Graphics.FromImage(b))
             {
-                g.DrawImage(other, 0, 0);
+                g.DrawImage(other, new Rectangle(0, 0, b.Width, b.Height), new Rectangle(0, 0, other.Width, other.Height), GraphicsUnit.Pixel);
             }
         }
     }
