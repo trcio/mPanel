@@ -32,7 +32,7 @@
             this.treeView = new System.Windows.Forms.TreeView();
             this.label1 = new System.Windows.Forms.Label();
             this.delayUpDown = new System.Windows.Forms.NumericUpDown();
-            this.timerButton = new System.Windows.Forms.Button();
+            this.enableButton = new System.Windows.Forms.Button();
             this.removeFrameButton = new System.Windows.Forms.Button();
             this.upFrameButton = new System.Windows.Forms.Button();
             this.downFrameButton = new System.Windows.Forms.Button();
@@ -105,17 +105,18 @@
             0,
             0,
             0});
+            this.delayUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.delayUpDown_KeyDown);
             // 
-            // timerButton
+            // enableButton
             // 
-            this.timerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.timerButton.Location = new System.Drawing.Point(526, 56);
-            this.timerButton.Name = "timerButton";
-            this.timerButton.Size = new System.Drawing.Size(100, 30);
-            this.timerButton.TabIndex = 7;
-            this.timerButton.Text = "Enable";
-            this.timerButton.UseVisualStyleBackColor = true;
-            this.timerButton.Click += new System.EventHandler(this.timerButton_Click);
+            this.enableButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.enableButton.Location = new System.Drawing.Point(526, 56);
+            this.enableButton.Name = "enableButton";
+            this.enableButton.Size = new System.Drawing.Size(100, 30);
+            this.enableButton.TabIndex = 7;
+            this.enableButton.Text = "Enable";
+            this.enableButton.UseVisualStyleBackColor = true;
+            this.enableButton.Click += new System.EventHandler(this.enableButton_Click);
             // 
             // removeFrameButton
             // 
@@ -272,7 +273,7 @@
             this.Controls.Add(this.downFrameButton);
             this.Controls.Add(this.upFrameButton);
             this.Controls.Add(this.removeFrameButton);
-            this.Controls.Add(this.timerButton);
+            this.Controls.Add(this.enableButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.delayUpDown);
             this.Controls.Add(this.treeView);
@@ -301,7 +302,7 @@
         private System.Windows.Forms.TreeView treeView;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown delayUpDown;
-        private System.Windows.Forms.Button timerButton;
+        private System.Windows.Forms.Button enableButton;
         private System.Windows.Forms.Button removeFrameButton;
         private System.Windows.Forms.Button upFrameButton;
         private System.Windows.Forms.Button downFrameButton;

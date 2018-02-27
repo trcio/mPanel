@@ -131,7 +131,7 @@ namespace mPanel
         private void portComboBox_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-                connectToolStripMenuItem_Click(sender, e);
+                connectToolStripMenuItem.PerformClick();
         }
 
         #endregion

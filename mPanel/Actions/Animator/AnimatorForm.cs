@@ -144,19 +144,40 @@ namespace mPanel.Actions.Animator
             var right = e.Mouse.Button.HasFlag(MouseButtons.Right);
             var ctrl = e.Keys.Modifiers.HasFlag(Keys.Control);
             var alt = e.Keys.Modifiers.HasFlag(Keys.Alt);
+            var shift = e.Keys.Modifiers.HasFlag(Keys.Shift);
 
             if (left && ctrl)
                 frame.SetPixel(e.Pixel, Color.Black);
             else if (right && ctrl)
                 frame.Clear(Color.Black);
             else if (left && alt)
-                frame.SetPixel(e.Pixel, leftAltColorButton.SelectedColor);
+            {
+                if (shift)
+                    frame.Clear(leftAltColorButton.SelectedColor);
+                else
+                    frame.SetPixel(e.Pixel, leftAltColorButton.SelectedColor);
+            }
             else if (right && alt)
-                frame.SetPixel(e.Pixel, rightAltColorButton.SelectedColor);
+            {
+                if (shift)
+                    frame.Clear(rightAltColorButton.SelectedColor);
+                else
+                    frame.SetPixel(e.Pixel, rightAltColorButton.SelectedColor);
+            }
             else if (left)
-                frame.SetPixel(e.Pixel, leftColorButton.SelectedColor);
+            {
+                if (shift)
+                    frame.Clear(leftColorButton.SelectedColor);
+                else
+                    frame.SetPixel(e.Pixel, leftColorButton.SelectedColor);
+            }
             else if (right)
-                frame.SetPixel(e.Pixel, rightColorButton.SelectedColor);
+            {
+                if (shift)
+                    frame.Clear(rightColorButton.SelectedColor);
+                else
+                    frame.SetPixel(e.Pixel, rightColorButton.SelectedColor);
+            }
 
             Matrix.SendFrame(frame);
         }
@@ -207,9 +228,10 @@ namespace mPanel.Actions.Animator
 
             var node = treeView.SelectedNode;
             var index = treeView.Nodes.IndexOf(node);
+            var other = treeView.Nodes[index + 1];
 
-            treeView.Nodes.Remove(node);
-            treeView.Nodes.Insert(index + 1, node);
+            treeView.Nodes.Remove(other);
+            treeView.Nodes.Insert(index, other);
             treeView.SelectedNode = node;
         }
 
@@ -219,13 +241,22 @@ namespace mPanel.Actions.Animator
             AddFrame(new Frame());
         }
 
-        private void timerButton_Click(object sender, EventArgs e)
+        private void delayUpDown_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            e.Handled = true;
+            enableButton.PerformClick();
+        }
+
+        private void enableButton_Click(object sender, EventArgs e)
         {
             if (FrameTimer.Enabled)
             {
                 FrameTimer.Stop();
                 ToggleControls(true);
-                timerButton.Text = "Enable";
+                enableButton.Text = "Enable";
             }
             else
             {
@@ -233,7 +264,7 @@ namespace mPanel.Actions.Animator
                 FrameTimer.Interval = (double) delayUpDown.Value;
                 FrameTimer.Start();
                 ToggleControls(false);
-                timerButton.Text = "Disable";
+                enableButton.Text = "Disable";
             }
         }
 
