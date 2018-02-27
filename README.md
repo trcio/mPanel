@@ -64,6 +64,7 @@ Controls
 * Endless mode automatically adds food to your tail
 
 Key presses are only captured when the Snake form is in focus
+
 The number in the title of the form is the length of your tail
 
 ### Pong
@@ -84,6 +85,7 @@ Key presses are only captured when the Pong form is in focus
 <img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/visualizer.gif">
 
 This is a sound visualizer implemented using <a href="https://github.com/filoe/cscore">CSCore</a>
+It reacts to the default system sound output
 
 Options
 * Use average smooths the bars, make it less jumpy
