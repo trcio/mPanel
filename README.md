@@ -3,17 +3,17 @@
 mPanel is a multi-function control panel for my homemade LED matrix
 
 The hardware is comprised of an arduino nano clone controlling 225 Neopixel LEDs in a 15x15 grid
+ * The arduino is running the sketch located in Arduino/matrix
 
-The arduino is running the sketch located in Arduino/matrix
+To connect to a matrix, you select the appropriate serial port from the dropdown (or you can select GUI for no device)
+ * Once connected, you can begin to use all of the Actions available
 
-You can connect to an arduino, or connect to the GUI as a preview mode
-
-Once connected, you can begin to use all of the Actions available
+All dynamic actions have an Enable/Disable button
+ * When an action is enabled, it begins sending frames to the matrix
 
 ## Actions
-
 ### Preview and Basic Actions
-<img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/preview.png">
+<img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/preview.gif">
 
 While you are connected to a matrix, Preview and Basic Actions will always stay open
 
@@ -26,7 +26,7 @@ The Basic Actions form allows you to
 * Make the matrix go into standby mode
 
 ### Animator
-<img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/animator.png">
+<img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/animator.gif">
 
 The animator allows you to quickly draw things onto the matrix using your mouse cursor
 
@@ -44,7 +44,7 @@ Coloring
   * R is right click
   * LA is Alt + left click
   * RA is Alt + right click
-* Shift + any option above clears the entire panel with that color
+* Shift + any option above sets the entire panel with that color
 * Control + left click clears the selected pixel
 * Control + right click clears the entire frame
 
@@ -63,9 +63,9 @@ Controls
 * WASD keys to change direction
 * Endless mode automatically adds food to your tail
 
-Key presses are only captured when the Snake form is in focus
-
 The number in the title of the form is the length of your tail
+
+Key presses are only captured when the Snake form is in focus
 
 ### Pong
 <img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/pong.gif">
@@ -85,6 +85,7 @@ Key presses are only captured when the Pong form is in focus
 <img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/visualizer.gif">
 
 This is a sound visualizer implemented using <a href="https://github.com/filoe/cscore">CSCore</a>
+
 It reacts to the default system sound output
 
 Options
@@ -94,3 +95,12 @@ Options
 * Amplifier value is multiplied with the calculated bar height to make the bars taller
 
 ### Weather
+<img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/weather.gif">
+
+This uses the Yahoo API to retrieve weather details
+
+It is very flexible with the input, you can input a location or a zip code (not limited to the US)
+
+As of now, it simply shows the current temperature onto the matrix
+
+In the future, the background will dynamically change with the forecast (gray for cloudy, blue dots for rain, etc)
