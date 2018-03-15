@@ -5,6 +5,7 @@ using System.IO.Ports;
 using System.Windows.Forms;
 using mPanel.Matrix;
 using mPanel.Actions;
+using mPanel.Actions.Scripter;
 using mPanel.Actions.Animator;
 using mPanel.Actions.Snake;
 using mPanel.Actions.Pong;
@@ -25,6 +26,7 @@ namespace mPanel
 
             ActionForms = new Dictionary<string, Type>
             {
+                { "Scripter", typeof(ScripterForm) },
                 { "Animator", typeof(AnimatorForm) },
                 { "Snake", typeof(SnakeForm) },
                 { "Pong", typeof(PongForm) },
@@ -71,9 +73,7 @@ namespace mPanel
             }
 
             portComboBox.Items.Add(new GuiPanel(15, 15));
-
-            if (portComboBox.Items.Count > 0)
-                portComboBox.SelectedIndex = 0;
+            portComboBox.SelectedIndex = 0;
 
             foreach (var action in ActionForms)
             {
@@ -110,9 +110,6 @@ namespace mPanel
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(portComboBox.Text))
-                    return;
-
                 Matrix = (MatrixPanel) portComboBox.SelectedItem;
 
                 if (Matrix == null)

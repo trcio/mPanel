@@ -40,6 +40,12 @@
       <HintPath>..\packages\CSCore.1.2.1.2\lib\net35-client\CSCore.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="FastColoredTextBox, Version=2.16.21.0, Culture=neutral, PublicKeyToken=fb8aa12b994ef61b, processorArchitecture=MSIL">
+      <HintPath>..\packages\FCTB.2.16.21.0\lib\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="MoonSharp.Interpreter, Version=2.0.0.0, Culture=neutral, PublicKeyToken=921e73ce94aa17f8, processorArchitecture=MSIL">
+      <HintPath>..\packages\MoonSharp.2.0.0.0\lib\net40-client\MoonSharp.Interpreter.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
@@ -76,6 +82,14 @@
     </Compile>
     <Compile Include="Actions\PreviewForm.Designer.cs">
       <DependentUpon>PreviewForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\Scripter\LuaFunctions.cs" />
+    <Compile Include="Actions\Scripter\MatrixScript.cs" />
+    <Compile Include="Actions\Scripter\ScripterForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Scripter\ScripterForm.Designer.cs">
+      <DependentUpon>ScripterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Actions\Visualizer\BasicSpectrumProvider.cs" />
     <Compile Include="Actions\Visualizer\LineSpectrum.cs" />
@@ -147,6 +161,9 @@
     <EmbeddedResource Include="Actions\PreviewForm.resx">
       <DependentUpon>PreviewForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Scripter\ScripterForm.resx">
+      <DependentUpon>ScripterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\Snake\SnakeForm.resx">
       <DependentUpon>SnakeForm.cs</DependentUpon>
