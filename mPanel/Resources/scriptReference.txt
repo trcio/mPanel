@@ -1,0 +1,42 @@
+General
+------------------------
+- All scripts must contain a global number named 'fps'
+-- (frames per second)
+
+- All scripts must contain a function named 'draw'
+-- This function will be called 'fps' times per second
+-- All frame drawing occurs here
+
+Objects
+------------------------
+- g
+-- Graphics object that draws on the frame
+
+- width
+-- An integer representing the width of the matrix
+
+- height
+-- An integer representing the height of the matrix
+
+- black
+-- The color black
+
+- white
+-- The color white
+
+Functions
+------------------------
+- rgb(byte, byte, byte)
+-- Returns a color based on the input RGB components
+
+- hsv(byte)
+-- Returns a color based on the input HSV hue
+
+- point(int, int)
+-- Returns a point based on the input coordinates
+
+- pen(color)
+-- Returns a pen based on the input color
+
+- brush(color)
+-- Returns a brush based on the input color

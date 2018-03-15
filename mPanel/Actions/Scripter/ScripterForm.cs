@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 using System.Media;
+using System.Text;
 using System.Windows.Forms;
 using System.Timers;
 using Timer = System.Timers.Timer;
 using mPanel.Matrix;
 using mPanel.Extra;
+using mPanel.Properties;
 
 namespace mPanel.Actions.Scripter
 {
@@ -12,19 +16,23 @@ namespace mPanel.Actions.Scripter
     {
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
-        private readonly Frame Frame;
         private readonly Timer FrameTimer;
         private MatrixScript Script;
+
+        private int FrameCount;
+        private bool FreshFile;
 
         public ScripterForm()
         {
             InitializeComponent();
 
-            Frame = new Frame();
-
             FrameTimer = new Timer();
             FrameTimer.Elapsed += FrameTimer_Elapsed;
+
+            FreshFile = true;
         }
+
+        #region Methods
 
         private void FrameTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
@@ -32,6 +40,7 @@ namespace mPanel.Actions.Scripter
             {
                 Script.ExecuteDraw();
                 Matrix?.SendFrame(Script.Frame);
+                FrameCount++;
             }
             catch (Exception ex)
             {
@@ -42,16 +51,28 @@ namespace mPanel.Actions.Scripter
             }
         }
 
+        private void OpenLuaFile(string file)
+        {
+            scriptTextBox.Text = File.ReadAllText(file);
+            ChangeFileTitle(Path.GetFileName(file));
+        }
+
+        private void SaveLuaFile(string file)
+        {
+            File.WriteAllText(file, scriptTextBox.Text, Encoding.UTF8);
+            ChangeFileTitle(Path.GetFileName(file));
+        }
+
         private void RunScript()
         {
-            scriptTextBox.Enabled = false;
-            runToolStripMenuItem.Text = "Stop";
-            statusLabel.Text = "Running";
+            ToggleControls(false);
 
             try
             {
                 Script = new MatrixScript();
                 Script.LoadString(scriptTextBox.Text);
+
+                FrameCount = 0;
 
                 FrameTimer.Interval = Script.FrameInterval;
                 FrameTimer.Start();
@@ -66,9 +87,7 @@ namespace mPanel.Actions.Scripter
         {
             FrameTimer.Stop();
 
-            scriptTextBox.Enabled = true;
-            runToolStripMenuItem.Text = "Run";
-            statusLabel.Text = "Idle";
+            ToggleControls(true);
         }
 
         private void NotifyException(Exception ex)
@@ -80,6 +99,73 @@ namespace mPanel.Actions.Scripter
             statusLabel.Text = $"Exception: {ex.Message}";
         }
 
+        private void ChangeFileTitle(string title)
+        {
+            FreshFile = true;
+            Text = $"Scripter - {title}";
+        }
+
+        private void ToggleControls(bool state)
+        {
+            openToolStripMenuItem.Enabled = state;
+            saveToolStripMenuItem.Enabled = state;
+            scriptTextBox.Enabled = state;
+            runToolStripMenuItem.Text = state ? "Run" : "Stop";
+            statusLabel.Text = state ? $"Idle | Frame Count: {FrameCount}" : "Running";
+        }
+
+        private void ShowReference()
+        {
+            Show();
+            scriptTextBox.Text = Resources.scriptReference;
+            scriptTextBox.ReadOnly = true;
+            openToolStripMenuItem.Enabled = false;
+            saveToolStripMenuItem.Enabled = false;
+            runToolStripMenuItem.Enabled = false;
+            referenceToolStripMenuItem.Enabled = false;
+            statusLabel.Text = "Reference";
+            Text = "Scripter Reference";
+        }
+
+        #endregion
+
+        #region Form Events
+
+        private void ScripterForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            FrameTimer.Stop();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var fd = new OpenFileDialog())
+            {
+                fd.CheckFileExists = true;
+                fd.Filter = "Lua script file (*.lua)|*.lua";
+                fd.Title = "Open script file";
+
+                if (fd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                OpenLuaFile(fd.FileName);
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var fd = new SaveFileDialog())
+            {
+                fd.OverwritePrompt = true;
+                fd.Filter = "Lua script file (*.lua)|*.lua";
+                fd.Title = "Save script file";
+
+                if (fd.ShowDialog() != DialogResult.OK)
+                    return;
+
+                SaveLuaFile(fd.FileName);
+            }
+        }
+
         private void runToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             if (FrameTimer.Enabled)
@@ -87,5 +173,38 @@ namespace mPanel.Actions.Scripter
             else
                 RunScript();
         }
+
+        private void scriptTextBox_TextChanged(object sender, FastColoredTextBoxNS.TextChangedEventArgs e)
+        {
+            if (!FreshFile)
+                return;
+
+            Text += "*";
+            FreshFile = false;
+        }
+
+        private void increaseFontSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (scriptTextBox.Font.Size.CompareTo(20) >= 0)
+                return;
+
+            scriptTextBox.Font = new Font(scriptTextBox.Font.FontFamily, scriptTextBox.Font.Size + 0.5f);
+        }
+
+        private void decreaseFontSizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (scriptTextBox.Font.Size.CompareTo(5) <= 0)
+                return;
+
+            scriptTextBox.Font = new Font(scriptTextBox.Font.FontFamily, Math.Max(5, scriptTextBox.Font.Size - 0.5f));
+        }
+
+        private void referenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var form = new ScripterForm {MdiParent = MdiParent};
+            form.ShowReference();
+        }
+
+        #endregion
     }
 }

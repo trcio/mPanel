@@ -207,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mPanel.ico" />
+    <None Include="Resources\scriptReference.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

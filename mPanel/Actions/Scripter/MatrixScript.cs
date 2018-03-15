@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mPanel.Matrix;
 using MoonSharp.Interpreter;
 
@@ -23,8 +20,8 @@ namespace mPanel.Actions.Scripter
         static MatrixScript()
         {
             UserData.RegisterType<Graphics>();
-            UserData.RegisterType<Color>();
             UserData.RegisterType<Point>();
+            UserData.RegisterType<Color>();
             UserData.RegisterType<Pen>();
             UserData.RegisterType<Brush>();
         }
@@ -39,6 +36,10 @@ namespace mPanel.Actions.Scripter
             Lua.Globals["g"] = Frame.Graphics;
             Lua.Globals["width"] = Frame.Width;
             Lua.Globals["height"] = Frame.Height;
+
+            Lua.Globals["black"] = Color.Black;
+            Lua.Globals["white"] = Color.White;
+
             Lua.Globals["rgb"] = (Func<byte, byte, byte, Color>) LuaFunctions.Rgb;
             Lua.Globals["hsv"] = (Func<byte, Color>) LuaFunctions.Hsv;
             Lua.Globals["point"] = (Func<int, int, Point>) LuaFunctions.Point;

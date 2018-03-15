@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="scriptTextBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <data name="scriptTextBox.ServiceColors" mimetype="application/x-microsoft.net.object.binary.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFdGYXN0Q29sb3JlZFRleHRCb3gsIFZlcnNpb249Mi4xNi4yMS4w
@@ -134,28 +137,6 @@
         AAAAlgABAAH7/////P///woAAAAAAAAAAKQAAQAB+v////z///8KAAAAAAAAAACWAAEAAfn////8////
         CgAAAAAAAAAAjQABAAH4/////P///woAAAAAAAAAAKQAAQAB9/////z///8KAAAAAAAAAACWAAEACw==
 </value>
-  </data>
-  <data name="scriptTextBox.Text" xml:space="preserve">
-    <value>fps = 110
-p   = 0
-inc = 1
-
-function draw()
-    g.Clear(rgb(0,0,0))
-    g.DrawLine(pen(rgb(255,255,255)), p, 0, p, width - 1)
-    g.DrawLine(pen(rgb(255,255,255)), 0, p, height - 1, p)
-    changeP()
-end
-
-function changeP()
-    if p &gt; width - 2 then
-        inc = -1
-    elseif p &lt; 1 then
-       inc = 1 
-    end
-    
-    p = p + inc
-end</value>
   </data>
   <metadata name="menuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>

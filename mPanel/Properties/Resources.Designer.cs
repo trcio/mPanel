@@ -59,5 +59,20 @@ namespace mPanel.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All scripts must contain a global number named &apos;fps&apos;
+        ///
+        ///All scripts must contain a function named &apos;draw&apos;
+        ///- This function will be called multiple times per second according to &apos;fps&apos;
+        ///- All frame drawing occurs here
+        ///
+        ///.
+        /// </summary>
+        internal static string scriptReference {
+            get {
+                return ResourceManager.GetString("scriptReference", resourceCulture);
+            }
+        }
     }
 }
