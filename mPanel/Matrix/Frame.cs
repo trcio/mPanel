@@ -16,7 +16,7 @@ namespace mPanel.Matrix
 
         public Frame()
         {
-            Bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            Bitmap = new Bitmap(Width, Height, PixelFormat.Format32bppArgb);
             Graphics = Graphics.FromImage(Bitmap);
         }
 
@@ -43,7 +43,7 @@ namespace mPanel.Matrix
 
             try
             {
-                data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadOnly, Bitmap.PixelFormat);
+                data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
                 bytes = new byte[data.Width * data.Height * PixelDataLength];
 
                 for (var y = 0; y < data.Height; y++)

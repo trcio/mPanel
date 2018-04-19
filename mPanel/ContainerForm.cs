@@ -11,6 +11,7 @@ using mPanel.Actions.Snake;
 using mPanel.Actions.Pong;
 using mPanel.Actions.Visualizer;
 using mPanel.Actions.Weather;
+using mPanel.Actions.Dots;
 
 namespace mPanel
 {
@@ -31,7 +32,8 @@ namespace mPanel
                 { "Snake", typeof(SnakeForm) },
                 { "Pong", typeof(PongForm) },
                 { "Visualizer", typeof(VisualizerForm) },
-                { "Weather", typeof(WeatherForm) }
+                { "Weather", typeof(WeatherForm) },
+                { "Dots", typeof(DotsForm) }
             };
         }
 

@@ -17,7 +17,7 @@ namespace mPanel.Actions.Scripter
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
         private readonly Timer FrameTimer;
-        private MatrixScript Script;
+        private Script Script;
 
         private int FrameCount;
         private bool FreshFile;
@@ -69,7 +69,7 @@ namespace mPanel.Actions.Scripter
 
             try
             {
-                Script = new MatrixScript();
+                Script = new Script();
                 Script.LoadString(scriptTextBox.Text);
 
                 FrameCount = 0;
@@ -111,7 +111,8 @@ namespace mPanel.Actions.Scripter
             saveToolStripMenuItem.Enabled = state;
             scriptTextBox.Enabled = state;
             runToolStripMenuItem.Text = state ? "Run" : "Stop";
-            statusLabel.Text = state ? $"Idle | Frame Count: {FrameCount}" : "Running";
+            statusLabel.Text = state ? "Idle" : "Running";
+            frameLabel.Text = state ? $"{FrameCount} frames sent" : string.Empty;
         }
 
         private void ShowReference()
@@ -119,6 +120,7 @@ namespace mPanel.Actions.Scripter
             Show();
             scriptTextBox.Text = Resources.scriptReference;
             scriptTextBox.ReadOnly = true;
+            fileToolStripMenuItem.Enabled = false;
             openToolStripMenuItem.Enabled = false;
             saveToolStripMenuItem.Enabled = false;
             runToolStripMenuItem.Enabled = false;

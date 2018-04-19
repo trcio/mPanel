@@ -42,6 +42,8 @@
             this.referenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.springLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.frameLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.scriptTextBox)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -176,7 +178,9 @@
             // statusStrip
             // 
             this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
+            this.statusLabel,
+            this.springLabel,
+            this.frameLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 389);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(634, 22);
@@ -188,6 +192,17 @@
             this.statusLabel.Name = "statusLabel";
             this.statusLabel.Size = new System.Drawing.Size(26, 17);
             this.statusLabel.Text = "Idle";
+            // 
+            // springLabel
+            // 
+            this.springLabel.Name = "springLabel";
+            this.springLabel.Size = new System.Drawing.Size(593, 17);
+            this.springLabel.Spring = true;
+            // 
+            // frameLabel
+            // 
+            this.frameLabel.Name = "frameLabel";
+            this.frameLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // ScripterForm
             // 
@@ -202,7 +217,7 @@
             this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(550, 350);
+            this.MinimumSize = new System.Drawing.Size(650, 450);
             this.Name = "ScripterForm";
             this.ShowIcon = false;
             this.Text = "Scripter - untitled";
@@ -231,5 +246,7 @@
         private System.Windows.Forms.ToolStripMenuItem increaseFontSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem decreaseFontSizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem referenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel springLabel;
+        private System.Windows.Forms.ToolStripStatusLabel frameLabel;
     }
 }

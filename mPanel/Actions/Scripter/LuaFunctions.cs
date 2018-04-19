@@ -15,6 +15,11 @@ namespace mPanel.Actions.Scripter
             return ColorHelper.HsvToColor(hue);
         }
 
+        public static Color Alpha(byte a, Color c)
+        {
+            return Color.FromArgb(a, c);
+        }
+
         public static Point Point(int x, int y)
         {
             return new Point(x, y);

@@ -6,18 +6,18 @@ using MoonSharp.Interpreter;
 
 namespace mPanel.Actions.Scripter
 {
-    public class MatrixScript
+    public class Script
     {
         private const string FpsNumberName = "fps";
         private const string DrawFunctionName = "draw";
 
-        private Script Lua;
+        private MoonSharp.Interpreter.Script Lua;
         private DynValue DrawHandle;
 
         public Frame Frame { get; set; }
         public double FrameInterval { get; set; }
 
-        static MatrixScript()
+        static Script()
         {
             UserData.RegisterType<Graphics>();
             UserData.RegisterType<Point>();
@@ -26,7 +26,7 @@ namespace mPanel.Actions.Scripter
             UserData.RegisterType<Brush>();
         }
 
-        public MatrixScript()
+        public Script()
         {
             Frame = new Frame();
         }
@@ -42,6 +42,7 @@ namespace mPanel.Actions.Scripter
 
             Lua.Globals["rgb"] = (Func<byte, byte, byte, Color>) LuaFunctions.Rgb;
             Lua.Globals["hsv"] = (Func<byte, Color>) LuaFunctions.Hsv;
+            Lua.Globals["alpha"] = (Func<byte, Color, Color>) LuaFunctions.Alpha;
             Lua.Globals["point"] = (Func<int, int, Point>) LuaFunctions.Point;
             Lua.Globals["pen"] = (Func<Color, Pen>) LuaFunctions.Pen;
             Lua.Globals["brush"] = (Func<Color, Brush>) LuaFunctions.Brush;
@@ -54,7 +55,7 @@ namespace mPanel.Actions.Scripter
 
         public void LoadString(string code)
         {
-            Lua = new Script {Options = {CheckThreadAccess = false}};
+            Lua = new MoonSharp.Interpreter.Script {Options = {CheckThreadAccess = false}};
             SetGlobals();
 
             Lua.DoString(code);
@@ -65,8 +66,8 @@ namespace mPanel.Actions.Scripter
             if (!MemberExists(DrawFunctionName, DataType.Function))
                 throw new Exception($"'{DrawFunctionName}' function must be declared");
 
-            FrameInterval = 1000 / Lua.Globals.Get("fps").Number;
-            DrawHandle = Lua.Globals.Get("draw");
+            FrameInterval = 1000 / Lua.Globals.Get(FpsNumberName).Number;
+            DrawHandle = Lua.Globals.Get(DrawFunctionName);
         }
 
         public void ExecuteDraw()

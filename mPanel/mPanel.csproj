@@ -69,6 +69,13 @@
     <Compile Include="Actions\BasicForm.Designer.cs">
       <DependentUpon>BasicForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Actions\Dots\Dot.cs" />
+    <Compile Include="Actions\Dots\DotsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Dots\DotsForm.Designer.cs">
+      <DependentUpon>DotsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Actions\Pong\Ball.cs" />
     <Compile Include="Actions\Pong\Paddle.cs" />
     <Compile Include="Actions\Pong\PongForm.cs">
@@ -84,7 +91,7 @@
       <DependentUpon>PreviewForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Actions\Scripter\LuaFunctions.cs" />
-    <Compile Include="Actions\Scripter\MatrixScript.cs" />
+    <Compile Include="Actions\Scripter\Script.cs" />
     <Compile Include="Actions\Scripter\ScripterForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -153,6 +160,9 @@
     <EmbeddedResource Include="Actions\BasicForm.resx">
       <DependentUpon>BasicForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Dots\DotsForm.resx">
+      <DependentUpon>DotsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\Pong\PongForm.resx">
       <DependentUpon>PongForm.cs</DependentUpon>
