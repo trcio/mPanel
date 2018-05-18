@@ -55,7 +55,7 @@ namespace mPanel.Actions.Scripter
 
         public void LoadString(string code)
         {
-            Lua = new MoonSharp.Interpreter.Script {Options = {CheckThreadAccess = false}};
+            Lua = new MoonSharp.Interpreter.Script { Options = { CheckThreadAccess = false } };
             SetGlobals();
 
             Lua.DoString(code);
@@ -65,6 +65,9 @@ namespace mPanel.Actions.Scripter
 
             if (!MemberExists(DrawFunctionName, DataType.Function))
                 throw new Exception($"'{DrawFunctionName}' function must be declared");
+
+            if (Lua.Globals.Get(FpsNumberName).Number <= 0)
+                throw new Exception($"'{FpsNumberName}' number must be greater than 0");
 
             FrameInterval = 1000 / Lua.Globals.Get(FpsNumberName).Number;
             DrawHandle = Lua.Globals.Get(DrawFunctionName);

@@ -45,7 +45,7 @@ namespace mPanel.Actions.Dots
         {
             Dots = new List<Dot>();
 
-            for (var i = 0; i < 8; i++)
+            for (var i = 0; i < 4; i++)
             {
                 Dots.Add(new ChaseDot(Frame, ColorHelper.HsvToColor((byte) (i * 20 % 255))));
 //                Dots.Add(new Dot(Frame, ColorHelper.HsvToColor((byte) (i * 30 % 255))));
