@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using mPanel.Matrix;
 using MoonSharp.Interpreter;
+using MoonScript = MoonSharp.Interpreter.Script;
 
 namespace mPanel.Actions.Scripter
 {
@@ -11,7 +12,7 @@ namespace mPanel.Actions.Scripter
         private const string FpsNumberName = "fps";
         private const string DrawFunctionName = "draw";
 
-        private MoonSharp.Interpreter.Script Lua;
+        private MoonScript Lua;
         private DynValue DrawHandle;
 
         public Frame Frame { get; set; }
@@ -55,7 +56,7 @@ namespace mPanel.Actions.Scripter
 
         public void LoadString(string code)
         {
-            Lua = new MoonSharp.Interpreter.Script { Options = { CheckThreadAccess = false } };
+            Lua = new MoonScript { Options = { CheckThreadAccess = false } };
             SetGlobals();
 
             Lua.DoString(code);

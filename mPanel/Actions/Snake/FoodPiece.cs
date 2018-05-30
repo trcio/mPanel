@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using mPanel.Matrix;
-using mPanel.Extra;
+using mPanel.Extra.Color;
 
 namespace mPanel.Actions.Snake
 {

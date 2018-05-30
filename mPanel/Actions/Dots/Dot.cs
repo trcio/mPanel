@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using mPanel.Matrix;
-using mPanel.Extra;
+using mPanel.Extra.Color;
 
 namespace mPanel.Actions.Dots
 {

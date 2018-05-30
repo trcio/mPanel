@@ -36,6 +36,11 @@ namespace mPanel.Matrix
             Bitmap.SetPixel(pixel.X, pixel.Y, color);
         }
 
+        public void SetPixel(int x, int y, Color color)
+        {
+            Bitmap.SetPixel(x, y, color);
+        }
+
         public byte[] GetBytes()
         {
             BitmapData data = null;

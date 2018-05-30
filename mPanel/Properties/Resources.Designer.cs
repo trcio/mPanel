@@ -61,17 +61,35 @@ namespace mPanel.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All scripts must contain a global number named &apos;fps&apos;
+        ///   Looks up a localized string similar to General
+        ///------------------------
+        ///- All scripts must contain a global number named &apos;fps&apos;
+        ///-- (frames per second)
         ///
-        ///All scripts must contain a function named &apos;draw&apos;
-        ///- This function will be called multiple times per second according to &apos;fps&apos;
-        ///- All frame drawing occurs here
+        ///- All scripts must contain a function named &apos;draw&apos;
+        ///-- This function will be executed &apos;fps&apos; times per second
+        ///-- Draw to the matrix here
         ///
-        ///.
+        ///Objects
+        ///------------------------
+        ///- g
+        ///-- Graphics object that draws on the frame
+        ///
+        ///- width
+        ///-- An integer representing the width of the matrix
+        ///
+        ///- height
+        ///-- An integer representing the height of the matrix
+        ///
+        ///- black
+        ///-- The color black
+        ///
+        ///- white
+        ///- [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string scriptReference {
+        internal static string ScriptReference {
             get {
-                return ResourceManager.GetString("scriptReference", resourceCulture);
+                return ResourceManager.GetString("ScriptReference", resourceCulture);
             }
         }
     }

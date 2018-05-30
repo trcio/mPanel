@@ -1,16 +1,16 @@
 ﻿using System;
-using System.Drawing;
+using SystemColor = System.Drawing.Color;
 
-namespace mPanel.Extra
+namespace mPanel.Extra.Color
 {
     public class ColorHelper
     {
-        public static Color HsvToColor(byte hue)
+        public static SystemColor HsvToColor(byte hue)
         {
             return HsvToColor(hue / 255.0, 1.0, 1.0);
         }
 
-        public static Color HsvToColor(double hue, double saturation, double value)
+        public static SystemColor HsvToColor(double hue, double saturation, double value)
         {
             if (hue > 0.999)
                 hue = 0.0;
@@ -66,7 +66,7 @@ namespace mPanel.Extra
                     break;
             }
 
-            return Color.FromArgb((int) (r * 255), (int) (g * 255), (int) (b * 255));
+            return SystemColor.FromArgb((int) (r * 255), (int) (g * 255), (int) (b * 255));
         }
     }
 }

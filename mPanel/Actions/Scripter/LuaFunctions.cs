@@ -1,5 +1,5 @@
 ﻿using System.Drawing;
-using mPanel.Extra;
+using mPanel.Extra.Color;
 
 namespace mPanel.Actions.Scripter
 {

@@ -121,9 +121,12 @@
     <Compile Include="Controls\FrameEditor.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extra\Color\ColorPalette.cs" />
     <Compile Include="Extra\JsonUtil.cs" />
     <Compile Include="Extra\Extensions.cs" />
     <Compile Include="Extra\NativeMethods.cs" />
+    <Compile Include="Extra\Noise\PaletteNoise.cs" />
+    <Compile Include="Extra\Noise\SimplexNoise.cs" />
     <Compile Include="Extra\Yahoo\WeatherResponse.cs" />
     <Compile Include="Extra\Yahoo\YahooProvider.cs" />
     <Compile Include="Extra\Direction.cs" />
@@ -138,7 +141,7 @@
     <Compile Include="Controls\ColorComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Extra\ColorHelper.cs" />
+    <Compile Include="Extra\Color\ColorHelper.cs" />
     <Compile Include="ContainerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -217,7 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="mPanel.ico" />
-    <None Include="Resources\scriptReference.txt" />
+    <None Include="Resources\ScriptReference.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -118,7 +118,7 @@ namespace mPanel.Actions.Scripter
         private void ShowReference()
         {
             Show();
-            scriptTextBox.Text = Resources.scriptReference;
+            scriptTextBox.Text = Resources.ScriptReference;
             scriptTextBox.ReadOnly = true;
             fileToolStripMenuItem.Enabled = false;
             openToolStripMenuItem.Enabled = false;
@@ -168,7 +168,7 @@ namespace mPanel.Actions.Scripter
             }
         }
 
-        private void runToolStripMenuItem_Click(object sender, System.EventArgs e)
+        private void runToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (FrameTimer.Enabled)
                 StopScript();
@@ -203,7 +203,7 @@ namespace mPanel.Actions.Scripter
 
         private void referenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = new ScripterForm {MdiParent = MdiParent};
+            var form = new ScripterForm { MdiParent = MdiParent };
             form.ShowReference();
         }
 

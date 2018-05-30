@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using System.Timers;
 using Timer = System.Timers.Timer;
 using mPanel.Matrix;
-using mPanel.Extra;
+using mPanel.Extra.Color;
 
 namespace mPanel.Actions.Dots
 {
