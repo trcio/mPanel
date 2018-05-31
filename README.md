@@ -23,7 +23,7 @@ The Basic Actions form allows you to
 * Set global LED brightness
 * Set all LEDs to a certain color
 * Clear the matrix
-* Make the matrix go into standby mode
+* Toggle the Simplex noise based standby mode
 
 ### Animator
 <img src="https://raw.githubusercontent.com/PatPositron/mPanel/master/images/animator.gif">

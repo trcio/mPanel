@@ -58,7 +58,7 @@ namespace mPanel.Actions
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(279, 302);
+            this.MinimumSize = new System.Drawing.Size(284, 306);
             this.Name = "PreviewForm";
             this.Text = "Preview";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PreviewForm_FormClosing);
