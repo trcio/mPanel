@@ -41,7 +41,7 @@ namespace mPanel.Actions
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel.BackColor = System.Drawing.SystemColors.Control;
             this.panel.GapSize = 1;
-            this.panel.Location = new System.Drawing.Point(12, 12);
+            this.panel.Location = new System.Drawing.Point(14, 15);
             this.panel.MinimumSize = new System.Drawing.Size(239, 239);
             this.panel.Name = "panel";
             this.panel.PixelSize = 15;
@@ -51,7 +51,7 @@ namespace mPanel.Actions
             // PreviewForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(263, 263);
+            this.ClientSize = new System.Drawing.Size(268, 267);
             this.ControlBox = false;
             this.Controls.Add(this.panel);
             this.DoubleBuffered = true;

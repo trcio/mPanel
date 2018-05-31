@@ -15,8 +15,8 @@ namespace mPanel.Actions
             if (!zoom)
                 return;
 
-            Width = 504;
-            Height = 528;
+            Width = 494;
+            Height = 517;
         }
 
         #region Form Events

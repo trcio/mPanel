@@ -69,6 +69,7 @@ namespace mPanel.Extra.Noise
             var index = (byte) (NoiseBytes[y, x] + ColorOffset);
             var alpha = NoiseBytes[x, y];
 
+            alpha = alpha > 127 ? (byte) 255 : alpha;
             // alpha = alpha > 127 ? (byte) 255 : QDim((byte) (alpha * 2));
 
             return palette[index, alpha];

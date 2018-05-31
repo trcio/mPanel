@@ -6,15 +6,15 @@ namespace mPanel.Extra.Color
 {
     public class ColorPalette
     {
-        public static readonly ColorPalette StandbyRainbow = new ColorPalette(new ColorBlend
-        {
-            Positions = new[] { 0, 8 / 32f, 12 / 32f, 16 / 32f, 22 / 32f, 28 / 32f, 1 },
-            Colors = new[]
+        public static readonly ColorPalette StandbyRainbow = new ColorPalette
+        (
+            new [] { 0, 32, 64, 96, 128, 160, 192, 224, 255 },
+            new []
             {
-                SystemColor.Red, SystemColor.Orange, SystemColor.Yellow, SystemColor.Green,
-                SystemColor.Blue, SystemColor.Indigo, SystemColor.Red
+                SystemColor.Red, SystemColor.DarkOrange, SystemColor.Yellow, SystemColor.FromArgb(0, 255, 0), SystemColor.Aqua,
+                SystemColor.Blue, SystemColor.FromArgb(85, 0, 171), SystemColor.FromArgb(171, 0, 85), SystemColor.Red
             }
-        });
+        );
 
         private const int Resolution = 256;
         private readonly SystemColor[] Colors;
@@ -22,10 +22,21 @@ namespace mPanel.Extra.Color
         public Bitmap Bitmap { get; }
         public SystemColor this[byte index, byte alpha] => SystemColor.FromArgb(alpha, Colors[index]);
 
-        public ColorPalette(ColorBlend blend)
+        public ColorPalette(int[] positions, SystemColor[] colors)
         {
             Colors = new SystemColor[Resolution];
             Bitmap = new Bitmap(Resolution, 1);
+
+            var blend = new ColorBlend
+            {
+                Colors = colors,
+                Positions = new float[positions.Length]
+            };
+
+            for (var i = 0; i < positions.Length; i++)
+            {
+                blend.Positions[i] = positions[i] / 255f;
+            }
 
             MapColors(blend);
         }

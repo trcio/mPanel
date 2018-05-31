@@ -60,12 +60,10 @@ namespace mPanel
             actionsToolStripMenuItem.Visible = true;
         }
 
-        #endregion
-
-        #region Form Events
-
-        private void ContainerForm_Load(object sender, EventArgs e)
+        private void LoadConnections()
         {
+            portComboBox.Items.Clear();
+
             foreach (var port in SerialPort.GetPortNames())
             {
                 portComboBox.Items.Add(new SerialPanel(15, 15)
@@ -76,6 +74,15 @@ namespace mPanel
 
             portComboBox.Items.Add(new GuiPanel(15, 15));
             portComboBox.SelectedIndex = 0;
+        }
+
+        #endregion
+
+        #region Form Events
+
+        private void ContainerForm_Load(object sender, EventArgs e)
+        {
+            LoadConnections();
 
             foreach (var action in ActionForms)
             {
@@ -104,6 +111,8 @@ namespace mPanel
             if (Matrix != null)
             {
                 ClearActions();
+                LoadConnections();
+
                 Matrix.Disconnect();
                 Matrix = null;
 

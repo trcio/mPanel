@@ -31,14 +31,14 @@ namespace mPanel.Matrix
             Graphics.Clear(color);
         }
 
-        public void SetPixel(Point pixel, Color color)
-        {
-            Bitmap.SetPixel(pixel.X, pixel.Y, color);
-        }
-
         public void SetPixel(int x, int y, Color color)
         {
             Bitmap.SetPixel(x, y, color);
+        }
+
+        public void SetPixel(Point pixel, Color color)
+        {
+            SetPixel(pixel.X, pixel.Y, color);
         }
 
         public byte[] GetBytes()
