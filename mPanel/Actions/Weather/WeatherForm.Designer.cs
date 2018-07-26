@@ -60,7 +60,7 @@
             this.findButton.Name = "findButton";
             this.findButton.Size = new System.Drawing.Size(150, 30);
             this.findButton.TabIndex = 4;
-            this.findButton.Text = "Find Weather";
+            this.findButton.Text = "Display Weather";
             this.findButton.UseVisualStyleBackColor = true;
             this.findButton.Click += new System.EventHandler(this.findButton_Click);
             // 

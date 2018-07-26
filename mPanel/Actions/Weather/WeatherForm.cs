@@ -1,18 +1,24 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Timers;
 using mPanel.Matrix;
 using mPanel.Extra;
+using mPanel.Extra.Color;
 using mPanel.Extra.Yahoo;
+using Timer = System.Timers.Timer;
 
 namespace mPanel.Actions.Weather
 {
     public partial class WeatherForm : Form
     {
+        private const int FramesPerSecond = 30;
+
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
         private readonly Frame Frame;
-        private readonly NumberSegment Digit1, Digit2;
+        private readonly Timer FrameTimer;
+        private readonly TemperatureDisplay TemperatureDisplay;
         private readonly YahooProvider Yahoo;
 
         public WeatherForm()
@@ -21,13 +27,31 @@ namespace mPanel.Actions.Weather
 
             Frame = new Frame();
 
-            Digit1 = new NumberSegment { Location = new Point(4, 5) };
-            Digit2 = new NumberSegment { Location = new Point(8, 5) };
-            
+            FrameTimer = new Timer(1000.0 / FramesPerSecond);
+            FrameTimer.Elapsed += FrameTimer_Elapsed;
+
+            TemperatureDisplay = new TemperatureDisplay(Frame);            
             Yahoo = new YahooProvider();
         }
 
         #region Methods
+
+        private void FrameTimer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            // Noise.FillNoise();
+            //
+            // Frame.Clear(Color.Black);
+            //
+            // for (var x = 0; x < MatrixPanel.Width; x++)
+            // for (var y = 0; y < MatrixPanel.Height; y++)
+            // {
+            //     Frame.SetPixel(x, y, Noise.GetColorFromPalette(ColorPalette.StandbyRainbow, x, y));
+            // }
+            //
+            // Noise.ColorOffset++;
+            //
+            // Matrix.SendFrame(Frame);
+        }
 
         private async void UpdateWeather()
         {
@@ -38,13 +62,10 @@ namespace mPanel.Actions.Weather
                 if (!UpdateUi(data))
                     return;
 
-                var temp = int.Parse(data.Query.Results.Channel.Item.Condition.Temp);
+                Frame.Clear(Color.Black);
 
-                Digit1.SetDigit(temp / 10);
-                Digit2.SetDigit(temp % 10);
-
-                Digit1.Draw(Frame.Graphics);
-                Digit2.Draw(Frame.Graphics);
+                TemperatureDisplay.SetTemperature(int.Parse(data.Query.Results.Channel.Item.Condition.Temp));
+                TemperatureDisplay.Draw();
 
                 Matrix.SendFrame(Frame);
             }
@@ -57,8 +78,6 @@ namespace mPanel.Actions.Weather
 
         private bool UpdateUi(WeatherResponse data)
         {
-            locationTextBox.SelectAll();
-
             if (data == null || data.Query?.Count < 1)
             {
                 locationLabel.Text = countryLabel.Text = conditionLabel.Text = dateLabel.Text = "not found";
@@ -91,7 +110,7 @@ namespace mPanel.Actions.Weather
                 return;
 
             e.SuppressKeyPress = true;
-            UpdateWeather();
+            findButton_Click(sender, e);
         }
 
         private void locationTextBox_Click(object sender, EventArgs e)
@@ -102,6 +121,17 @@ namespace mPanel.Actions.Weather
         private void findButton_Click(object sender, EventArgs e)
         {
             UpdateWeather();
+
+            if (FrameTimer.Enabled)
+            {
+                FrameTimer.Stop();
+                findButton.Text = "Display Weather";
+            }
+            else
+            {
+                FrameTimer.Start();
+                findButton.Text = "Stop";
+            }
         }
 
         #endregion

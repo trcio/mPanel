@@ -60,7 +60,7 @@ namespace mPanel
             actionsToolStripMenuItem.Visible = true;
         }
 
-        private void LoadConnections()
+        private void ReloadConnections()
         {
             portComboBox.Items.Clear();
 
@@ -82,7 +82,7 @@ namespace mPanel
 
         private void ContainerForm_Load(object sender, EventArgs e)
         {
-            LoadConnections();
+            ReloadConnections();
 
             foreach (var action in ActionForms)
             {
@@ -111,7 +111,7 @@ namespace mPanel
             if (Matrix != null)
             {
                 ClearActions();
-                LoadConnections();
+                ReloadConnections();
 
                 Matrix.Disconnect();
                 Matrix = null;
