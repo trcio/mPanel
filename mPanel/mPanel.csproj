@@ -98,6 +98,13 @@
     <Compile Include="Actions\Scripter\ScripterForm.Designer.cs">
       <DependentUpon>ScripterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Actions\Tetris\TetrisForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Actions\Tetris\TetrisForm.Designer.cs">
+      <DependentUpon>TetrisForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Actions\Tetris\TetrisGame.cs" />
     <Compile Include="Actions\Visualizer\BasicSpectrumProvider.cs" />
     <Compile Include="Actions\Visualizer\LineSpectrum.cs" />
     <Compile Include="Actions\Visualizer\Spectrum.cs" />
@@ -181,6 +188,9 @@
     <EmbeddedResource Include="Actions\Snake\SnakeForm.resx">
       <DependentUpon>SnakeForm.cs</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Actions\Tetris\TetrisForm.resx">
+      <DependentUpon>TetrisForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Actions\Visualizer\VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>

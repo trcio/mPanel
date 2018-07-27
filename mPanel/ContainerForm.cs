@@ -12,6 +12,7 @@ using mPanel.Actions.Pong;
 using mPanel.Actions.Visualizer;
 using mPanel.Actions.Weather;
 using mPanel.Actions.Dots;
+using mPanel.Actions.Tetris;
 
 namespace mPanel
 {
@@ -33,7 +34,8 @@ namespace mPanel
                 { "Pong", typeof(PongForm) },
                 { "Visualizer", typeof(VisualizerForm) },
                 { "Weather", typeof(WeatherForm) },
-                { "Dots", typeof(DotsForm) }
+                { "Dots", typeof(DotsForm) },
+                { "Tetris", typeof(TetrisForm) }
             };
         }
 
