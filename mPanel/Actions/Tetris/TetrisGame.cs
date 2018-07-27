@@ -11,43 +11,81 @@ namespace mPanel.Actions.Tetris
 {
     public class TetrisGame
     {
-        private readonly List<Keys> ActiveKeys;
+        private readonly HashSet<Keys> ActiveKeys;
+
+        private long FrameCount;
 
         public List<TetrisBlock> Blocks;
-        public TetrisBlock Falling;
+        public TetrisBlock ActiveBlock;
 
         public bool[][] Grid;
+        public bool GameOver { get; private set; }
 
         public TetrisGame()
         {
-            ActiveKeys = new List<Keys>();
+            FrameCount = 0;
+            ActiveKeys = new HashSet<Keys>();
             Blocks = new List<TetrisBlock>();
-            Falling = new TetrisBlockI();
+            ActiveBlock = new TetrisBlockI();
         }
 
-        public void KeyDown(KeyEventArgs e)
+        public void KeyDown(Keys key)
         {
-            ActiveKeys.Add(e.KeyCode);
+            ActiveKeys.Add(key);
         }
 
-        public void KeyUp(KeyEventArgs e)
+        public void KeyUp(Keys key)
         {
-            ActiveKeys.RemoveAll(k => k == e.KeyCode);
+            ActiveKeys.Remove(key);
         }
 
         public void Loop(Frame frame)
         {
-            foreach (var t in Blocks)
-            {
-                t.Draw(frame.Graphics);
-            }
+            FrameCount++;
 
-            Falling.Draw(frame.Graphics);
+            ReloadGrid();
+            RemoveCompleteRows();              
+
+            ActiveBlock.Draw(frame.Graphics);
+
+            foreach (var t in Blocks)
+                t.Draw(frame.Graphics);
+
+            DrawBorders(frame.Graphics);
 
             HandleInput();
-            // MoveFalling();
-            // CollideFalling();
+
+            if (FrameCount % 10 == 0)
+                MoveFalling();
+
+            if (CheckOverflow())
+            {
+                GameOver = true;
+                return;
+            }
+
+            if (IsActiveBlockColliding())
+                ChangeActiveBlock();
+        }
+
+        private void DrawBorders(Graphics g)
+        {
+            g.FillRectangle(Brushes.White, 10, 0, 1, 15);
+            g.FillRectangle(Brushes.White, 10, 4, 5, 1);
+            g.FillRectangle(Brushes.White, 10, 9, 5, 1);
+        }
+
+        private void ReloadGrid()
+        {
+            Grid = new bool[15][];
+
+            for (var i = 0; i < Grid.Length; i++)
+                Grid[i] = new bool[10];
             
+            foreach (var p in Blocks.SelectMany(t => t.ObjectivePoints))
+            {
+                Grid[p.Y][p.X] = true;
+            }
         }
 
         private void HandleInput()
@@ -57,68 +95,116 @@ namespace mPanel.Actions.Tetris
                 switch (e)
                 {
                     case Keys.W:
-                        Falling.Orientation++;
-
-                        if ((int) Falling.Orientation > 3)
-                            Falling.Orientation = Orientation.Up;
-
+                        RotateActiveBlock();
                         break;
                     case Keys.S:
-                        Falling.Origin.Y++;
+                        ActiveBlock.Origin.Y++;
+
+                        if (IsActiveBlockColliding())
+                            ActiveBlock.Origin.Y--;
                         break;
                     case Keys.A:
-                        Falling.Origin.X--;
+                        ActiveBlock.Origin.X--;
+
+                        if (IsActiveBlockColliding())
+                            ActiveBlock.Origin.X++;
                         break;
                     case Keys.D:
-                        Falling.Origin.X++;
+                        ActiveBlock.Origin.X++;
+
+                        if (IsActiveBlockColliding())
+                            ActiveBlock.Origin.X--;
                         break;
                     case Keys.N:
-                        Falling = TetrisBlock.StandardSet[new Random().Next(TetrisBlock.StandardSet.Count)];
-
+                        ActiveBlock = TetrisBlock.StandardSet[new Random().Next(TetrisBlock.StandardSet.Count)];
                         break;
                 }
             }
+        }
+
+        private void RotateActiveBlock()
+        {
+            ActiveBlock.Orientation++;
+
+            // cycle through values
+            if ((int) ActiveBlock.Orientation > 3)
+                ActiveBlock.Orientation = Orientation.Up;
+
+            // continue if all is good
+            if (!IsActiveBlockColliding())
+                return;
+
+            var max = 0;
+
+            // find max block offset and compensate (wall kick)
+            foreach (var p in ActiveBlock.ObjectivePoints)
+            {
+                if (p.X < 0 && 0 - p.X > max)
+                    max = 0 - p.X;
+                else if (p.X > 9 && 9 - p.X < max)
+                    max = 9 - p.X;
+            }
+
+            ActiveBlock.Origin.X += max;
+
+            // continue if all is good
+            if (!IsActiveBlockColliding())
+                return;
+
+            // undo modifications if rotation is not possible here
+            ActiveBlock.Origin.X -= max;
+
+            if (ActiveBlock.Orientation == Orientation.Up)
+                ActiveBlock.Orientation = Orientation.Right;
+            else
+                ActiveBlock.Orientation--;
         }
 
         private void MoveFalling()
         {
-            Falling.Origin.Y++;
+            ActiveBlock.Origin.Y++;
         }
 
-        private void CollideFalling()
+        private bool IsActiveBlockColliding()
         {
-            CreateGrid();
+            return ActiveBlock.ObjectivePoints.Any(p => p.X < 0 || p.X > 9 || p.Y > 14 || Grid[p.Y][p.X]);
+        }
 
-            foreach (var p in Falling.ObjectivePoints)
+        private void ChangeActiveBlock()
+        {
+            ActiveBlock.Origin.Y--;
+
+            Blocks.Add(ActiveBlock);
+
+            // assign new tetromino
+            ActiveBlock = TetrisBlock.StandardSet[new Random().Next(TetrisBlock.StandardSet.Count)];
+        }
+
+        private void RemoveCompleteRows()
+        {
+            for (var row = 0; row < Grid.Length; row++)
             {
-                if (p.X < 0 || p.Y < 0 || p.Y > 14 || p.X > 9 || Grid[p.X][p.Y])
+                if (Grid[row].All(b => b))
                 {
-                    Falling.Origin.Y--;
-
-                    Blocks.Add(Falling);
-
-                    // assign new tetromino
-                    Falling = TetrisBlock.StandardSet[new Random().Next(TetrisBlock.StandardSet.Count)];
-                    Falling.Origin.X -= 2;
-
-                    break;
+                    foreach (var block in Blocks)
+                    {
+                        for (var i = 0; i < block.RelativePoints[block.Orientation].Length; i++)
+                        {
+                            if (block.RelativePoints[block.Orientation][i].Y + block.Origin.Y == row)
+                            {
+                                block.RelativePoints[block.Orientation][i] = Point.Empty;
+                            }
+                        }
+                    }
                 }
             }
         }
 
-        private void CreateGrid()
+        private bool CheckOverflow()
         {
-            Grid = new bool[10][];
-
-            for (var i = 0; i < Grid.Length; i++)
-                Grid[i] = new bool[15];
-
-
-            foreach (var p in Blocks.SelectMany(t => t.ObjectivePoints))
-            {
-                Grid[p.X][p.Y] = true;
-            }
+            return Blocks.SelectMany(b => b.ObjectivePoints).Any(p => p.Y <= 0);
         }
+        
     }
     public enum Orientation
     {
@@ -130,15 +216,15 @@ namespace mPanel.Actions.Tetris
 
     public class TetrisBlock
     {
-        public static List<TetrisBlock> StandardSet = new List<TetrisBlock>
+        public static List<TetrisBlock> StandardSet => new List<TetrisBlock>
         {
-            new TetrisBlockI { Orientation = Orientation.Up },
-            new TetrisBlockJ { Orientation = Orientation.Up },
-            new TetrisBlockL { Orientation = Orientation.Up },
-            new TetrisBlockO() { Orientation = Orientation.Up },
-            new TetrisBlockS() { Orientation = Orientation.Up },
-            new TetrisBlockT() { Orientation = Orientation.Up },
-            new TetrisBlockZ() { Orientation = Orientation.Up }
+            new TetrisBlockI(),
+            // new TetrisBlockJ(),
+            // new TetrisBlockL(),
+            // new TetrisBlockO(),
+            // new TetrisBlockS(),
+            // new TetrisBlockT(),
+            // new TetrisBlockZ()
             // new Tetromino { Fill = Brushes.Blue, RelativePoints = new [] { new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(2, 1) } },
             // new Tetromino { Fill = Brushes.Orange, RelativePoints = new [] { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(2, 0) } },
             // new Tetromino { Fill = Brushes.Yellow, RelativePoints = new [] { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) } },

@@ -47,40 +47,40 @@
             // 
             // rightButton
             // 
-            this.rightButton.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rightButton.Location = new System.Drawing.Point(117, 49);
+            this.rightButton.Font = new System.Drawing.Font("Consolas", 8F);
+            this.rightButton.Location = new System.Drawing.Point(116, 48);
             this.rightButton.Name = "rightButton";
-            this.rightButton.Size = new System.Drawing.Size(48, 30);
+            this.rightButton.Size = new System.Drawing.Size(45, 30);
             this.rightButton.TabIndex = 14;
             this.rightButton.Text = "RIGHT";
             this.rightButton.UseVisualStyleBackColor = true;
             // 
             // leftButton
             // 
-            this.leftButton.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.leftButton.Location = new System.Drawing.Point(9, 49);
+            this.leftButton.Font = new System.Drawing.Font("Consolas", 8F);
+            this.leftButton.Location = new System.Drawing.Point(14, 48);
             this.leftButton.Name = "leftButton";
-            this.leftButton.Size = new System.Drawing.Size(48, 30);
+            this.leftButton.Size = new System.Drawing.Size(45, 30);
             this.leftButton.TabIndex = 13;
             this.leftButton.Text = "LEFT";
             this.leftButton.UseVisualStyleBackColor = true;
             // 
             // downButton
             // 
-            this.downButton.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.downButton.Location = new System.Drawing.Point(63, 49);
+            this.downButton.Font = new System.Drawing.Font("Consolas", 8F);
+            this.downButton.Location = new System.Drawing.Point(65, 48);
             this.downButton.Name = "downButton";
-            this.downButton.Size = new System.Drawing.Size(48, 30);
+            this.downButton.Size = new System.Drawing.Size(45, 30);
             this.downButton.TabIndex = 12;
             this.downButton.Text = "DOWN";
             this.downButton.UseVisualStyleBackColor = true;
             // 
             // upButton
             // 
-            this.upButton.Font = new System.Drawing.Font("Segoe UI", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.upButton.Location = new System.Drawing.Point(63, 13);
+            this.upButton.Font = new System.Drawing.Font("Consolas", 8F);
+            this.upButton.Location = new System.Drawing.Point(65, 12);
             this.upButton.Name = "upButton";
-            this.upButton.Size = new System.Drawing.Size(48, 30);
+            this.upButton.Size = new System.Drawing.Size(45, 30);
             this.upButton.TabIndex = 11;
             this.upButton.Text = "UP";
             this.upButton.UseVisualStyleBackColor = true;

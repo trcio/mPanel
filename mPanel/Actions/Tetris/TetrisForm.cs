@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Timers;
+using mPanel.Extra;
 using mPanel.Matrix;
 using Timer = System.Timers.Timer;
 
@@ -10,7 +11,7 @@ namespace mPanel.Actions.Tetris
 {
     public partial class TetrisForm : Form
     {
-        private const int FramesPerSecond = 10;
+        private const int FramesPerSecond = 15;
 
         private MatrixPanel Matrix => ((ContainerForm) MdiParent)?.Matrix;
 
@@ -40,6 +41,9 @@ namespace mPanel.Actions.Tetris
 
             // push frame to matrix
             Matrix.SendFrame(Frame);
+
+            if (Game.GameOver)
+                startButton.ExInvoke(b => b.PerformClick());
         }
 
         #endregion
@@ -48,12 +52,12 @@ namespace mPanel.Actions.Tetris
 
         private void TetrisForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Game.KeyDown(e);
+            Game.KeyDown(e.KeyCode);
         }
 
         private void TetrisForm_KeyUp(object sender, KeyEventArgs e)
         {
-            Game.KeyUp(e);
+            Game.KeyUp(e.KeyCode);
         }
 
         private void startButton_Click(object sender, EventArgs e)
