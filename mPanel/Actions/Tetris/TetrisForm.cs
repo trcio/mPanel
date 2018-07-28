@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Timers;
@@ -52,12 +51,12 @@ namespace mPanel.Actions.Tetris
 
         private void TetrisForm_KeyDown(object sender, KeyEventArgs e)
         {
-            Game.KeyDown(e.KeyCode);
+            Game?.KeyDown(e.KeyCode);
         }
 
         private void TetrisForm_KeyUp(object sender, KeyEventArgs e)
         {
-            Game.KeyUp(e.KeyCode);
+            Game?.KeyUp(e.KeyCode);
         }
 
         private void startButton_Click(object sender, EventArgs e)

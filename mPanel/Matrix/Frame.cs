@@ -48,6 +48,7 @@ namespace mPanel.Matrix
 
             try
             {
+                // TODO: get rid of double loop
                 data = Bitmap.LockBits(new Rectangle(0, 0, Bitmap.Width, Bitmap.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
                 bytes = new byte[data.Width * data.Height * PixelDataLength];
 

@@ -11,22 +11,36 @@ namespace mPanel.Actions.Tetris
 {
     public class TetrisGame
     {
-        private readonly HashSet<Keys> ActiveKeys;
+        private static readonly Random Random;
 
         private long FrameCount;
 
-        public List<TetrisBlock> Blocks;
-        public TetrisBlock ActiveBlock;
-
-        public bool[][] Grid;
+        private readonly HashSet<Keys> ActiveKeys;
+        private readonly Queue<TetrisBlock> BlockBag;
+        private readonly Color[][] ColorGrid;
+        private TetrisBlock ActiveBlock, NextBlock;
+        
         public bool GameOver { get; private set; }
+
+        static TetrisGame()
+        {
+            Random = new Random();
+        }
 
         public TetrisGame()
         {
             FrameCount = 0;
             ActiveKeys = new HashSet<Keys>();
-            Blocks = new List<TetrisBlock>();
-            ActiveBlock = new TetrisBlockI();
+            BlockBag = new Queue<TetrisBlock>();
+            
+            FillBlockBag();
+            NextBlock = BlockBag.Dequeue();
+            AssignNextActiveBlock();
+
+            ColorGrid = new Color[15][];
+
+            for (var i = 0; i < ColorGrid.Length; i++)
+                ColorGrid[i] = new Color[10];
         }
 
         public void KeyDown(Keys key)
@@ -43,29 +57,34 @@ namespace mPanel.Actions.Tetris
         {
             FrameCount++;
 
-            ReloadGrid();
-            RemoveCompleteRows();              
+            RemoveFirstCompleteRow();
+
+            for (var y = 0; y < ColorGrid.Length; y++)
+                for (var x = 0; x < ColorGrid[y].Length; x++)
+                    frame.SetPixel(x, y, ColorGrid[y][x]);
 
             ActiveBlock.Draw(frame.Graphics);
-
-            foreach (var t in Blocks)
-                t.Draw(frame.Graphics);
+            NextBlock.Draw(frame.Graphics);
 
             DrawBorders(frame.Graphics);
 
             HandleInput();
 
-            if (FrameCount % 10 == 0)
-                MoveFalling();
-
-            if (CheckOverflow())
-            {
-                GameOver = true;
-                return;
-            }
+            if (FrameCount % 8 == 0)
+                MoveActiveBlock();
 
             if (IsActiveBlockColliding())
-                ChangeActiveBlock();
+            {
+                SolidifyActiveBlock();
+                AssignNextActiveBlock();
+            }
+
+            // Game over
+            if (!CheckOverflow())
+                return;
+
+            GameOver = true;
+            frame.Graphics.FillRectangle(Brushes.Red, 11, 10, 4, 5);
         }
 
         private void DrawBorders(Graphics g)
@@ -75,27 +94,18 @@ namespace mPanel.Actions.Tetris
             g.FillRectangle(Brushes.White, 10, 9, 5, 1);
         }
 
-        private void ReloadGrid()
-        {
-            Grid = new bool[15][];
-
-            for (var i = 0; i < Grid.Length; i++)
-                Grid[i] = new bool[10];
-            
-            foreach (var p in Blocks.SelectMany(t => t.ObjectivePoints))
-            {
-                Grid[p.Y][p.X] = true;
-            }
-        }
-
         private void HandleInput()
         {
-            foreach (var e in ActiveKeys)
+            Keys[] keys = new Keys[ActiveKeys.Count];
+            ActiveKeys.CopyTo(keys);
+
+            foreach (var e in keys)
             {
                 switch (e)
                 {
                     case Keys.W:
                         RotateActiveBlock();
+                        KeyUp(Keys.W);
                         break;
                     case Keys.S:
                         ActiveBlock.Origin.Y++;
@@ -160,52 +170,73 @@ namespace mPanel.Actions.Tetris
                 ActiveBlock.Orientation--;
         }
 
-        private void MoveFalling()
+        private void MoveActiveBlock()
         {
             ActiveBlock.Origin.Y++;
         }
 
         private bool IsActiveBlockColliding()
         {
-            return ActiveBlock.ObjectivePoints.Any(p => p.X < 0 || p.X > 9 || p.Y > 14 || Grid[p.Y][p.X]);
-        }
-
-        private void ChangeActiveBlock()
-        {
-            ActiveBlock.Origin.Y--;
-
-            Blocks.Add(ActiveBlock);
-
-            // assign new tetromino
-            ActiveBlock = TetrisBlock.StandardSet[new Random().Next(TetrisBlock.StandardSet.Count)];
-        }
-
-        private void RemoveCompleteRows()
-        {
-            for (var row = 0; row < Grid.Length; row++)
-            {
-                if (Grid[row].All(b => b))
-                {
-                    foreach (var block in Blocks)
-                    {
-                        for (var i = 0; i < block.RelativePoints[block.Orientation].Length; i++)
-                        {
-                            if (block.RelativePoints[block.Orientation][i].Y + block.Origin.Y == row)
-                            {
-                                block.RelativePoints[block.Orientation][i] = Point.Empty;
-                            }
-                        }
-                    }
-                }
-            }
+            return ActiveBlock.ObjectivePoints.Any(p => p.X < 0 || p.X > 9 || p.Y > 14 || ColorGrid[p.Y][p.X] != Color.Empty);
         }
 
         private bool CheckOverflow()
         {
-            return Blocks.SelectMany(b => b.ObjectivePoints).Any(p => p.Y <= 0);
+            // return ActiveBlock.ObjectivePoints.Any(p => p.Y < 0) || ColorGrid[0].Any(c => c != Color.Empty);
+            return ColorGrid[0].Any(c => c != Color.Empty);
         }
-        
+
+        private void SolidifyActiveBlock()
+        {
+            if (ActiveBlock.Origin.Y > 0)
+                ActiveBlock.Origin.Y--;
+
+            foreach (var p in ActiveBlock.ObjectivePoints)
+                ColorGrid[p.Y][p.X] = ActiveBlock.Fill.Color;
+        }
+
+        private void FillBlockBag()
+        {
+            foreach (var block in TetrisBlock.StandardSet.OrderBy(x => Random.Next()))
+                BlockBag.Enqueue(block);
+        }
+
+        private void AssignNextActiveBlock()
+        {
+            // assign new tetromino
+            if (BlockBag.Count < 1)
+                FillBlockBag();
+
+            ActiveBlock = NextBlock;
+            NextBlock = BlockBag.Dequeue();
+
+            // set random location
+            ActiveBlock.Origin.Y = 0;
+            ActiveBlock.Origin.X = Random.Next(6);
+
+            NextBlock.Origin.Y = 0;
+            NextBlock.Origin.X = 11;
+        }
+
+        private bool RemoveFirstCompleteRow()
+        {
+            for (var row = 0; row < ColorGrid.Length; row++)
+            {
+                if (ColorGrid[row].Any(b => b == Color.Empty))
+                    continue;
+
+                for (var i = row; i > 0; i--)
+                    ColorGrid[i] = ColorGrid[i - 1];
+                
+                ColorGrid[0] = new Color[ColorGrid[row].Length];
+
+                return true;
+            }
+
+            return false;
+        }
     }
+
     public enum Orientation
     {
         Up,
@@ -219,12 +250,12 @@ namespace mPanel.Actions.Tetris
         public static List<TetrisBlock> StandardSet => new List<TetrisBlock>
         {
             new TetrisBlockI(),
-            // new TetrisBlockJ(),
-            // new TetrisBlockL(),
-            // new TetrisBlockO(),
-            // new TetrisBlockS(),
-            // new TetrisBlockT(),
-            // new TetrisBlockZ()
+            new TetrisBlockJ(),
+            new TetrisBlockL(),
+            new TetrisBlockO(),
+            new TetrisBlockS(),
+            new TetrisBlockT(),
+            new TetrisBlockZ()
             // new Tetromino { Fill = Brushes.Blue, RelativePoints = new [] { new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(2, 1) } },
             // new Tetromino { Fill = Brushes.Orange, RelativePoints = new [] { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(2, 0) } },
             // new Tetromino { Fill = Brushes.Yellow, RelativePoints = new [] { new Point(0, 0), new Point(0, 1), new Point(1, 0), new Point(1, 1) } },
@@ -235,7 +266,7 @@ namespace mPanel.Actions.Tetris
 
         public Point Origin;
         public Dictionary<Orientation, Point[]> RelativePoints { get; set; }
-        public Brush Fill { get; set; }
+        public SolidBrush Fill { get; set; }
         public Orientation Orientation { get; set; }
         public IEnumerable<Point> ObjectivePoints => RelativePoints[Orientation].Select(p => new Point(Origin.X + p.X, Origin.Y + p.Y));
 
@@ -252,7 +283,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockI()
         {
-            Fill = Brushes.Cyan;
+            Fill = new SolidBrush(Color.Cyan);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(3, 1) } },
@@ -267,7 +298,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockJ()
         {
-            Fill = Brushes.Blue;
+            Fill = new SolidBrush(Color.Blue);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 0), new Point(0, 1), new Point(1, 1), new Point(2, 1) } },
@@ -282,7 +313,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockL()
         {
-            Fill = Brushes.Orange;
+            Fill = new SolidBrush(Color.Orange);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 1), new Point(1, 1), new Point(2, 1), new Point(2, 0) } },
@@ -297,7 +328,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockO()
         {
-            Fill = Brushes.Yellow;
+            Fill = new SolidBrush(Color.Yellow);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 0), new Point(1, 0), new Point(0, 1), new Point(1, 1) } },
@@ -312,7 +343,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockS()
         {
-            Fill = Brushes.Green;
+            Fill = new SolidBrush(Color.Green);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 1), new Point(1, 1), new Point(1, 0), new Point(2, 0) } },
@@ -327,7 +358,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockT()
         {
-            Fill = Brushes.Purple;
+            Fill = new SolidBrush(Color.Purple);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(1, 0), new Point(0, 1), new Point(1, 1), new Point(2, 1) } },
@@ -342,7 +373,7 @@ namespace mPanel.Actions.Tetris
     {
         public TetrisBlockZ()
         {
-            Fill = Brushes.Red;
+            Fill = new SolidBrush(Color.Red);
             RelativePoints = new Dictionary<Orientation, Point[]>
             {
                 { Orientation.Up, new[] { new Point(0, 0), new Point(1, 0), new Point(1, 1), new Point(2, 1) } },
