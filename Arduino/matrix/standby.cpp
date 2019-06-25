@@ -11,7 +11,7 @@ static uint16_t z;
 uint16_t speed = 2;
 uint16_t scale = 10;
 
-byte noise[15][15];
+byte noise[WIDTH][HEIGHT];
 
 CRGBPalette16 currentPalette( RainbowColors_p );
 
@@ -33,11 +33,11 @@ void rainbowPulse()
 {
     static byte offset = 128;
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < WIDTH; i++)
     {
-        for (int j = 0; j < 15; j++)
+        for (int j = 0; j < HEIGHT; j++)
         {
-            byte index = noise[j][i] + offset;
+            byte index = noise[i][j] + offset;
             byte bright = noise[i][j];
             
             if (bright > 127)
@@ -59,10 +59,10 @@ void fillNoise()
     if (speed < 50)
         dataSmoothing = 200 - (speed * 4);
     
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < WIDTH; i++)
     {
         int ioffset = scale * i;
-        for (int j = 0; j < 15; j++)
+        for (int j = 0; j < HEIGHT; j++)
         {
             int joffset = scale * j;
             

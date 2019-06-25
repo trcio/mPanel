@@ -1,7 +1,9 @@
 #define DATA_PIN 3
-#define LED_COUNT 225
+#define WIDTH 3
+#define HEIGHT 1
+#define LED_COUNT WIDTH*HEIGHT
 #define BAUD_RATE 1000000
-#define BRIGHTNESS 32
+#define BRIGHTNESS 255
 
 #define STANDBY_HEADER 0xC0
 #define CLEAR_HEADER 0xC1
